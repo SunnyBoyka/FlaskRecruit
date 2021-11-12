@@ -1,0 +1,130 @@
+<html>
+ <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../static/csscode/login.css">
+  <style>
+  
+#body
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+   background-color: white;
+    background-size: cover;
+}
+
+</style>
+    </head>
+	 <body>
+	  <nav id="man">
+  <div class="container-fluid">
+    <div class="navbar-header" style="float:left";>
+    
+    </div>
+	<div>
+    
+	</div>
+  </div>
+</nav>
+<center>
+  <label style="text-align:center;font-size:30px;color:cyan;padding-top:50px" > Welcome </label>
+  </center>
+        <div class="box">
+				<h2>Login</h2>
+				
+					<div class="inputbox">
+				<input type="text" id="eid"  >
+				<label >Emplyee ID</label>
+			</div>
+			
+			<div class="inputbox" style="padding-bottom: 10%;">
+				
+				<select required="username" id='typeofuser' style="width:180px;height:30px" >
+					
+					<option value="">select type of users</option>
+					{% if data is defined %}
+					{% for i in data %}
+					<option value="{{i[0]}}">{{i[0]}}</option>
+					{% endfor %}
+					{% endif %}
+				</select>
+				
+			</div>
+			
+			<div class="inputbox" >
+					<input type="password" id="pass" required="">
+					<label> Password</label>  
+			</div>
+		 
+			 
+			  <div id="data">
+				 <input type="submit" onclick="submit()" value="Submit">
+
+			  </div>
+    
+            
+		<div style="display: none;">
+			<input type="text" id="data" value="{{mesge}}">
+		</div>
+		
+		</div>
+		<script>
+		function myFunction()
+		{
+		var firstname=document.getElementById('eid').value;
+		localStorage.setItem("textvalues",firstname);
+		return false;
+		}
+	   function submit()
+		{
+		debugger;
+		var name=document.getElementById('eid').value;
+		var pass=document.getElementById('pass').value;
+		var typeofusers=document.getElementById('typeofuser').value;
+		if(name=="admin"&&pass=="admin")
+		{
+			window.location='masters'
+
+		}
+		else
+		{
+			window.location='loginss?name='+name+'&pass='+pass+'&typeofusers='+typeofusers;
+			
+			/* $.ajax({
+                     type: 'GET',
+                    url: '/loginss',
+                                        
+                    contentType: 'application/json;charset=UTF-8',
+                    data: {
+                                        
+                         'name':name,
+						 'pass':pass,
+						 'typeofusers':typeofusers
+
+                        },
+                                        
+                    dataType:"json",
+                     success: function(data)
+					  {
+                        
+                         window.location='login'
+                     },
+                    
+					 error: function(data) {
+                                           
+                                        
+					}
+             });  */
+		}
+		var data=document.getElementById('data').value;
+		alert(data);
+		}
+		 
+		
+		</script>
+		
+	</body>
+	</html>
+	

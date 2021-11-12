@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" />
+	         
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+          
+        
+    </head>
+    <body>
+        
+
+                                      <div class="col-sm-12">
+                                        <label for="target_date" class="form-label">Language</label>
+                                        <select id="jobroles" name="jobroles"  class="multi_select3 col-sm-12"  multiple data-live-search="true">
+                                          <option value="csr">CSR</option>
+                                          <option value="tl">TL</option>
+                                          <option value="supervisor">Supervisor</option>
+                                          <option value="ast.Manager">Assistant Manager</option>
+                                          <option value="Manager">Manager</option>
+                                          <option value="MIS">MIS</option>
+                                      </select>
+                                      <input type="submit" onclick="checkval()">
+                                      </div>  
+                                      <div class="col-sm-12">
+                                      <div class="col-sm-6" >
+                                        <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="CSR" placeholder="CSR Head Count" style="display:none"/>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="regular" id="regular" placeholder="Regular Head Count" style="display:none"/>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="buffer" id="buffer" placeholder="Buffer Head Count" style="display:none"/>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="astmgr" placeholder="Assistant Manager Head Count" style="display:none" />
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="mgr" placeholder="Manager Head Count" style="display:none"/>
+                                      
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1"><input type="text" class="form-control shadow-sm" name="overall_budget" id="mis" placeholder="MIS Head Count" style="display:none"/>
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="Supervisor" placeholder="Sup Head Count" style="display:none"/>
+                                      
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="mis" placeholder="MIS Head Count" style="display:none"/>
+                                      </div>
+                                      <div class="col-sm-10 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm" name="overall_budget" id="tl" placeholder="TL Head Count"  style="display:none"/>
+                                      
+                                    </div>
+                                  
+                                    </div>
+                                    <div class="col-sm-6" style="padding-top: 2%;" >
+
+
+                                      <div class="col-sm-10 col-10 mb-1">
+                                      
+                                        <div class="col-lg-6 col-10 mb-1">
+                                          <input type="text" class="form-control shadow-sm" name="minimum_salary1" id="csrminimum_salary1" placeholder="CSR Minimum Salary" style="display:none" />
+                                      </div>
+                                      <div class="col-lg-6 col-6 mb-1">
+                                      
+                                        <input type="text" class="form-control shadow-sm"  name="csrmaximum_salary1" id="csrmaximum_salary1" placeholder="CSR Maximum Salary" style="display:none"/>
+                                      </div>
+                                      </div>
+                             
+                                    <div class="col-sm-10 col-10 mb-1">
+
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="minimum_salary2" id="supminimum_salary2" placeholder="Sup Minimum Salary" style="display:none" />
+                                    </div>
+                                    <div class="col-lg-6 col-6 mb-1">
+                                    
+                                      <input type="text" class="form-control shadow-sm"  name="maximum_salary2" id="supmaximum_salary2" placeholder="Sup Maximum Salary" style="display:none"/>
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="minimum_salary3" id="tlminimum_salary3" placeholder="TL Minimum Salary" style="display:none"/>
+                                   </div>
+                                   <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"   name="maximum_salary3" id="tlmaximum_salary3"   placeholder="TL Maximum Salary" style="display:none" />
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="minimum_salary3" id="astmgrminimum_salary3" placeholder="Assistant Manager Minimum Salary" style="display:none" />
+                                      </div>
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"   name="maximum_salary3" id="astmgrmaximum_salary3"   placeholder="Assistant Manager Maximum Salary" style="display:none" />
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="minimum_salary3" id="mgrminimum_salary3" placeholder=" Manager Minimum Salary" style="display:none" />
+                                   </div>
+                                   <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"   name="maximum_salary3" id="mgrmaximum_salary3"   placeholder=" Manager Maximum Salary" style="display:none" />
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10 col-10 mb-1">
+                                      <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"  name="minimum_salary3" id="MISminimum_salary3" placeholder=" MIS  Minimum Salary" style="display:none" />
+                                     </div>
+                                     <div class="col-lg-6 col-10 mb-1">
+                                      <input type="text" class="form-control shadow-sm"   name="maximum_salary3" id="MISmaximum_salary3"   placeholder=" MIS Maximum Salary" style="display:none" />
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                  
+        
+        
+        
+        <script>
+ 
+         
+          $(document).ready(function(){
+              $('.multi_select3').selectpicker();  
+          })
+          
+                            function checkval()
+                            {
+                              debugger;
+                              var checked3 = document.querySelectorAll('#jobroles :checked');
+                              var selected3 = [...checked3].map(option => option.value);
+                              
+                             
+                               
+
+                                for (var j=0;j<selected3.length;j++)
+                                {
+
+                                
+
+                                if(selected3[j]=="csr")
+                                {
+                                  document.getElementById('CSR').style.display='block'
+                                  document.getElementById('regular').style.display='block'
+                                  document.getElementById('buffer').style.display='block'
+                                  document.getElementById('csrminimum_salary1').style.display='block'
+                                  document.getElementById('csrmaximum_salary1').style.display='block'
+                                  
+                                   
+                                }
+                  
+                                else if(selected3[j]=="tl")
+                                {
+                                  document.getElementById('tl').style.display='block'
+                                  document.getElementById('tlminimum_salary3').style.display='block'
+                                  document.getElementById('tlmaximum_salary3').style.display='block'
+                                  
+                  
+                                }
+                  
+                                else if (selected3[j]=="supervisor")
+                                {
+                                  document.getElementById('Supervisor').style.display='block'
+                                  document.getElementById('supminimum_salary2').style.display='block'
+                                  document.getElementById('supmaximum_salary2').style.display='block'
+                                  
+                                 
+                                }
+                                else if (selected3[j]=="ast.Manager")
+                                {
+                                  document.getElementById('astmgr').style.display='block'
+                                  document.getElementById('astmgrminimum_salary3').style.display='block'
+                                  document.getElementById('astmgrmaximum_salary3').style.display='block'
+                                  
+                                 
+                                }
+                                else if (selected3[j]=="Manager")
+                                {
+                                  document.getElementById('mgr').style.display='block'
+                                  document.getElementById('mgrminimum_salary3').style.display='block'
+                                  document.getElementById('mgrmaximum_salary3').style.display='block'
+                                  
+                                 
+                                }
+                                else if (selected3[j]=="MIS")
+                                {
+                                  document.getElementById('mis').style.display='block'
+                                  document.getElementById('MISminimum_salary3').style.display='block'
+                                  document.getElementById('MISmaximum_salary3').style.display='block'
+                                  
+                                }
+                                
+                                else
+                                {
+                                  document.getElementById('CSR').style.display='none'
+                                  document.getElementById('regular').style.display='none'
+                                  document.getElementById('buffer').style.display='none'
+                                  document.getElementById('csrminimum_salary1').style.display='none'
+                                  document.getElementById('csrmaximum_salary1').style.display='none'
+                                  document.getElementById('tl').style.display='none'
+                                  document.getElementById('tlminimum_salary3').style.display='none'
+                                  document.getElementById('tlmaximum_salary3').style.display='none'
+                                  document.getElementById('Supervisor').style.display='none'
+                                  document.getElementById('supminimum_salary2').style.display='none'
+                                  document.getElementById('supmaximum_salary2').style.display='none'
+                                  document.getElementById('astmgr').style.display='none'
+                                  document.getElementById('astmgrminimum_salary3').style.display='none'
+                                  document.getElementById('astmgrmaximum_salary3').style.display='none'
+                                  document.getElementById('mgr').style.display='none'
+                                  document.getElementById('mgrminimum_salary3').style.display='none'
+                                  document.getElementById('mgrmaximum_salary3').style.display='none'
+                                  document.getElementById('mis').style.display='none'
+                                  document.getElementById('MISminimum_salary3').style.display='none'
+                                  document.getElementById('MISmaximum_salary3').style.display='none'
+                                  
+                                }
+                              }
+                            }
+        
+        </script>
+      
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script  type="text/javaScript" src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+
+    </body>
+</html>

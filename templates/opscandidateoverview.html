@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <!-- Default-JavaScript-File -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" />
+	          <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+          <!-- //Default-JavaScript-File -->
+        <style>
+            #wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -16rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 16rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -16rem;
+  }
+}
+.multi_selection_box{
+    width: 100%;
+    margin: 800px auto;
+
+
+}
+
+.multi_selection_box select{
+    width:15%
+}
+label{
+    font-size:15px
+}
+
+                    
+                    
+.active, .btn:hover {
+        background-color: rgb(18, 19, 18);
+        color: white;
+                    }
+ table, th, td {
+              border:2px solid black;
+              text-align: center;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+           
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm">
+                    <div class="container-fluid">
+                        <!-- <button class="btn btn-transparent shadow-none" id="sidebarToggle"><i class="fas fa-bars"></i></button> -->
+                        
+
+                        <div  style="float: left;padding-right: 1400px;">
+                          <button class="btn"><a href='./recruitermanagerpage'>Home</a></button> 
+                         
+                      </div>
+                    </div>
+                </nav> 
+                <!-- Page content-->
+                
+                <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-6">
+                                      <h4 class="mt-4 text-center" style="padding-top: 2%;">
+                                        Candidate Information</h4>
+                                      <br>
+                                      <div class="row justify-content-around mt-2">
+                                    <div class="col-sm-12">
+                                        <div style="
+                                        top: 20%;
+                                        width:90%;
+                                        height: 95%;
+                                        background: rgba(240, 234, 234, 0.8);
+                                        box-shadow: 0 15px 25px rgb(0 0 0 / 50%);
+                                        margin: 0% 8%">
+                                        <div class="row">
+                                            {% if data is defined %}
+                                      <div class="col-lg-12 " style="padding-top: 10px;">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                        <label for="client_name" class="form-label">Operation Manager Name</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="intname" class="form-label" value="{{datanew}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                    </div>
+
+                                    </div>
+                                          <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                        <label for="client_name" class="form-label">First Name</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="fname" class="form-label" value="{{data[0][0]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                    </div>
+
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                        <label for="client_name" class="form-label">Last Name</label> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="lname"  class="form-label" value="{{data[0][1]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"/> 
+                                    </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                        <label for="target_date" class="form-label"> Date Of Birth</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">{{data[0][2]}}</label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="target_date" class="form-label">Age</label>
+                                        </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][3]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="target_date" class="form-label">Gender</label>
+                                        </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">{{data[0][4]}}</label>  
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="target_date" class="form-label">Current Address</label>
+                                        </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="target_date" class="form-label col-lg-12"  >{{data[0][5]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="target_date" class="form-label">Street Address</label>
+                                        </div>
+
+                                        
+                                        <div class="col-lg-6">
+                                            <label  for="target_date" class="form-label col-lg-12"  >{{data[0][6]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">City</label>
+                                        </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label col-lg-12">{{data[0][7]}}</label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">Pincode</label>
+                                        </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][8]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="client_name" class="form-label">state</label>
+                                            </div>
+                                            
+                                            <div class="col-lg-6">
+                                                <label for="client_name" class="form-label">{{data[0][9]}}</label> 
+                                            </div>
+                                            </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Email Address</label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][10]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Mobile Number</label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">{{data[0][11]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Aadhar Number</label>
+                                            </div>
+                                       
+                                        <div class="col-lg-6">
+                                           <input type="text"  id="aadhar_num" class="form-label" value="{{data[0][12]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"> 
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Qualification</label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">{{data[0][13]}}</label> 
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Experience</label>
+                                            </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][14]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">How did you hear about us </label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name" class="form-label">{{data[0][16]}}</label> 
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Preferable Shift Timing </label>
+                                            </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][17]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Language</label>
+                                            </div>
+                                       
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][18]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label"> Available Start Date</label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][19]}}</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <label for="target_date" class="form-label">Cover Letter </label>
+                                            </div>
+                                        
+                                        <div class="col-lg-6">
+                                            <label for="client_name"  class="form-label"> {{data[0][21]}}</label>
+                                        </div>
+                                       </div>
+                                      </div>
+                                      <div class="col-lg-6"  style="padding-top: 10px;">
+                                        
+
+                                      </div>   
+                                     
+                                      <br><br>
+                                     
+                                        
+                                    </div> 
+
+                                </div>    
+                            </div >
+                                
+                                    </div>
+                                  
+
+                        </div>
+
+
+                        
+                    
+       
+
+
+
+       
+            <div class="col-lg-6">
+                            <h4 class="mt-4 text-center" style="padding-top: 2%;">
+                                Candidate Interview Schedule Form</h4>
+                            <br>
+                            <div class="row justify-content-around mt-2">
+                          <div class="col-sm-12">
+                              <div style="
+                              top: 20%;
+                              width:100%;
+                              height: 120%;
+                              background: rgba(240, 234, 234, 0.8);
+                              box-shadow: 0 15px 25px rgb(0 0 0 / 50%);
+                              margin: 0% 8%">
+                              <div class="row">
+                                
+                                <iframe src="../static/resumes/{{data[0][20]}}" width="100%" height="450px">
+                                </iframe>
+             
+                                  </div> 
+                                  {% endif %}
+                          </div> 
+                          
+                      </div>    
+                  </div >
+                      
+                          </div>
+                          <div class="col-lg-6 " style="padding-top: 4%;float:left" >
+                            <h4 class="mt-4 text-center" style="padding-top: 2%;">
+                                Assessment Form</h4>
+                            <br>
+                            <div class="row justify-content-around mt-2">
+                          <div class="col-sm-12">
+                              <div style="
+                              top: 20%;
+                              width:90%;
+                              height: 105%;
+                              background: rgba(240, 234, 234, 0.8);
+                              box-shadow: 0 15px 25px rgb(0 0 0 / 50%);
+                              margin: 0% 8%">
+                        
+                         
+                        <div >
+                            <div>
+                                
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Understands the process requirements</label>
+                                          <input type="text" class="form-control shadow-sm" name="Understands" id="Understands"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label"> Job Knowledge / Work Experience </label>
+                                          <input type="text" class="form-control shadow-sm" name="workexperience" id="workexperience"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Result Oriented/ Initiative</label>
+                                          <input type="text" class="form-control shadow-sm" name="initiative" id="initiative"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Languages Known and fluency</label>
+                                          <input type="text" class="form-control shadow-sm" name="language" id="language"/>
+                                  </div> 
+                        
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Communication Skills (Speaking/Presenting)</label>
+                                          <input type="text" class="form-control shadow-sm" name="Communicationskills" id="Communicationskills"/>
+                                  </div> 
+                        
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Personality, Listening/Empathy</label>
+                                          <input type="text" class="form-control shadow-sm" name="Personality" id="Personality"/>
+                                  </div> 
+                        
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Thinks Strategically</label>
+                                          <input type="text" class="form-control shadow-sm" name="Strategically" id="Strategically"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Team Player</label>
+                                          <input type="text" class="form-control shadow-sm" name="teamplayer" id="teamplayer"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1">
+                                    <label for="client_name" class="form-label">Flexibility to work in shifts</label>
+                                          <input type="text" class="form-control shadow-sm" name="shifts_flexibility" id="shifts_flexibility"/>
+                                  </div> 
+                                  <div class="col-sm-10 col-10 mb-1" id="reject" style="padding-top: 3%;display:none">
+                                    <textarea rows="4" cols="50" id="comments" placeholder="Type the Reason For Rejection "></textarea>
+                        
+                                      </textarea>
+                                      <button type="submit" class="btn btn-success col-2" onclick="submit()">submit</button> 
+                                  </div>
+                        </div>
+                          <div class="col-sm-10 col-10 mb-1" style="padding-top: 5%;">
+                          <button type="submit" class="btn btn-success col-2" onclick="save()">Save</button> 
+                          <button type="submit" class="btn btn-primary col-2" onclick="pass()">Pass</button> 
+                          <button type="submit" class=" btn btn-danger col-2" onclick="reject()">Reject</button>
+                          
+                        </div>
+                        </div>
+                          
+                            
+                        </div>    
+                        </div >
+                        
+                        
+                          </div>
+                         
+                        
+                        </div>
+                        
+                        </div>
+                         </div>
+                           </div>
+              </div>
+
+<script>
+               
+           function reject()
+        {
+            debugger;
+            document.getElementById('reject').style.display='block'
+        }   
+
+
+        function submit()
+
+    {
+        debugger;
+       
+        var adharnumb=document.getElementById('aadhar_num').value;
+        var interviewer=document.getElementById('intname').value;
+        var Understanding=document.getElementById('Understands').value;
+        var workexperience=document.getElementById('workexperience').value;
+        var initiative=document.getElementById('initiative').value;
+        var language=document.getElementById('language').value;
+        var Communicationskills=document.getElementById('Communicationskills').value;
+        var Personality=document.getElementById('Personality').value;
+        var Strategically=document.getElementById('Strategically').value;
+        var teamplayer=document.getElementById('teamplayer').value;
+        var shifts_flexibility=document.getElementById('shifts_flexibility').value;
+        var rejectcomments=document.getElementById('comments').value;
+
+
+
+        $.ajax({
+           type: 'GET',
+           url: '/statusupload',
+     
+       contentType: 'application/json;charset=UTF-8',
+           data: {
+           
+            'adharnumb':adharnumb,
+            'interviewer':interviewer,
+            'Understanding':Understanding,
+            'workexperience':workexperience,
+            'initiative':initiative,
+            'language':language,
+            'Communicationskills':Communicationskills,
+            'Personality':Personality,
+            'Strategically':Strategically,
+            'teamplayer':teamplayer,
+            'shifts_flexibility':shifts_flexibility,
+            'rejectcomments': rejectcomments
+
+       },
+           
+       dataType:"json",
+           success: function(data) {
+            alert(data);
+            window.location='operationinterviewcandidate'
+       
+           },
+       });
+    }
+
+
+
+    function pass()
+
+{
+    debugger;
+   
+    var adharnumb=document.getElementById('aadhar_num').value;
+    var interviewer=document.getElementById('intname').value;
+    var Understanding=document.getElementById('Understands').value;
+    var workexperience=document.getElementById('workexperience').value;
+    var initiative=document.getElementById('initiative').value;
+    var language=document.getElementById('language').value;
+    var Communicationskills=document.getElementById('Communicationskills').value;
+    var Personality=document.getElementById('Personality').value;
+    var Strategically=document.getElementById('Strategically').value;
+    var teamplayer=document.getElementById('teamplayer').value;
+    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
+
+
+
+    $.ajax({
+       type: 'GET',
+       url: '/statusuploadpass',
+ 
+   contentType: 'application/json;charset=UTF-8',
+       data: {
+       
+        'adharnumb':adharnumb,
+        'interviewer':interviewer,
+        'Understanding':Understanding,
+        'workexperience':workexperience,
+        'initiative':initiative,
+        'language':language,
+        'Communicationskills':Communicationskills,
+        'Personality':Personality,
+        'Strategically':Strategically,
+        'teamplayer':teamplayer,
+        'shifts_flexibility':shifts_flexibility
+   },
+       
+   dataType:"json",
+       success: function(data) {
+        alert(data);
+        window.location='operationinterviewcandidate'
+   
+       },
+   });
+}
+
+
+function save()
+
+{
+    debugger;
+   
+    var adharnumb=document.getElementById('aadhar_num').value;
+    var interviewer=document.getElementById('intname').value;
+    var Understanding=document.getElementById('Understands').value;
+    var workexperience=document.getElementById('workexperience').value;
+    var initiative=document.getElementById('initiative').value;
+    var language=document.getElementById('language').value;
+    var Communicationskills=document.getElementById('Communicationskills').value;
+    var Personality=document.getElementById('Personality').value;
+    var Strategically=document.getElementById('Strategically').value;
+    var teamplayer=document.getElementById('teamplayer').value;
+    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
+
+
+
+    $.ajax({
+       type: 'GET',
+       url: '/statusuploadsave',
+ 
+   contentType: 'application/json;charset=UTF-8',
+       data: {
+       
+        'adharnumb':adharnumb,
+        'interviewer':interviewer,
+        'Understanding':Understanding,
+        'workexperience':workexperience,
+        'initiative':initiative,
+        'language':language,
+        'Communicationskills':Communicationskills,
+        'Personality':Personality,
+        'Strategically':Strategically,
+        'teamplayer':teamplayer,
+        'shifts_flexibility':shifts_flexibility
+   },
+       
+   dataType:"json",
+       success: function(data) {
+        alert(data);
+        window.location='operationinterviewcandidate'
+   
+       },
+   });
+}
+   
+  
+</script>
+    
+</body>
+</html>

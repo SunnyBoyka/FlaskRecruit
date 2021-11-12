@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+        
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+        <style>
+            #wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -16rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 16rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -16rem;
+  }
+}
+
+.btn {
+padding: 10px 16px;
+background-color: #ada7a7;
+border: #080808;
+cursor: pointer;
+font-size: 18px;
+}
+                    
+                    
+.active, .btn:hover {
+        background-color: rgb(18, 19, 18);
+        color: white;
+                    }
+                    table, th, td {
+             
+              text-align: center;
+            }
+            th{
+              background-color: rgb(54, 139, 236);
+              color:white;
+              width:70px
+            }
+            
+
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+                  <div class="container-fluid">
+                  
+                   
+                    <div id="myDIV" style="float: left;">
+                      <button class="btn btn-primary" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      <button class="btn btn-primary" ><a href='./recruiterpage' >New Recruitement</a></button>
+                      <button class="btn btn-primary" ><a href='./selectedcandidates'>Selected Candidate</a></button>
+                      <button class="btn btn-primary" ><a href='./savedcandidates'>Approved Candidates</a></button>
+                      <button class="btn btn-primary" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                    </div>
+
+                  </div>
+              </nav>
+                <!-- Page content-->
+            </div>
+            </div>
+                <div class="container-fluid">
+                    
+                    <h4 class="mt-4 text-center">New Process Candidates Requirements List</h4>
+                    <hr>
+                   
+                    <table id="myTable" style="width: 100%;">
+                        <tr >
+                         <!--  <th colspan="2">Client Name</th>  -->
+                          <th colspan="2">Process Name</th>
+                          <th colspan="2">Process ID</th>
+                          <th colspan="2">Operations Manager</th> 
+                          <th colspan="2">Total CSR</th>
+                          <th colspan="2">Total supervisors</th>
+                          <th colspan="2">Total Team Leader</th>
+                          <th colspan="4">Total Assistant Manager</th>
+                          <th colspan="2">Total  Manager</th>
+                          <th colspan="2">Total  MIS</th>
+                          <th colspan="2">view</th>
+                         
+                          
+                        </tr>
+                        {% for item in data %}
+                        <tr>
+                          <!-- <td colspan="2">{{item[0]}}</td> -->
+                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2">{{item[1]}}</td>
+                          <td colspan="2">{{item[2]}}</td>
+                          <td colspan="2">{{item[3]}}</td>
+                          <td colspan="2">{{item[4]}}</td>
+                          <td colspan="2">{{item[5]}}</td>
+                          <td colspan="4">{{item[6]}}</td>
+                          <td colspan="2">{{item[7]}}</td>
+                          <td colspan="2">{{item[8]}}</td>
+                          
+                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="fas fa-pen"></i>     ...View</buttion></td>
+                          
+                          
+                        </tr>
+                        {% endfor %}
+                        </table>
+
+
+
+
+
+                        <script>
+                           
+                            var pname=""
+                            var pid=""
+                            var opsmgr=""
+                            var totalcsr=""
+                            var totalsup=""
+                            var totaltl=""
+                            var totalastmgr=""
+                            var totalmgr=""
+                            var totalmis=""
+                            debugger;
+                            $(document).ready(function(){
+                            
+                                
+                                $("#myTable").on('click','#btnSelect',function(){
+                                    debugger;
+                                     var currentRow=$(this).closest("tr"); 
+                                     
+                                     var col2=currentRow.find("td:eq(0)").text();
+                                     var col3=currentRow.find("td:eq(1)").text();
+                                     var col4=currentRow.find("td:eq(2)").text();
+                                     var col5=currentRow.find("td:eq(3)").text();
+                                     var col6=currentRow.find("td:eq(4)").text();
+                                     var col7=currentRow.find("td:eq(5)").text(); 
+                                     var col8=currentRow.find("td:eq(6)").text();
+                                     var col9=currentRow.find("td:eq(7)").text();
+                                     var col10=currentRow.find("td:eq(8)").text(); 
+                                     /* var data=col1+"\n"+col2+"\n"+col3+"\n"+col4+"\n"+col5+"\n"+col6+"\n"+col7 */
+                                     
+                                     
+                                    
+                                     pname=col2;
+                                     pid =col3;
+                                     opsmgr =col4;
+                                     totalcsr =col5;
+                                     totalsup =col6;
+                                     totaltl=col7;
+                                     totalastmgr=col8;
+                                     totalmgr=col9;
+                                     totalmis=col10;
+                                    
+ 
+
+                                     
+                                     /* window.location='newrequisitions?cname='+cname+'&pname='+pname+'&opsmgr='+opsmgr+'&tdate='+tdate; */
+                                   
+                                      $.ajax({
+                                        type: 'GET',
+                                        url: '/viewcandidate',
+                                        
+                                    contentType: 'application/json;charset=UTF-8',
+                                        data: {
+                                       
+                                        'pname': pname,
+                                        'pid' :pid,
+                                        'opsmgr':opsmgr,
+                                        'totalcsr':totalcsr,
+                                        'totalsup':totalsup,
+                                        'totaltl':totaltl,
+                                        'totalastmgr':totalastmgr,
+                                        'totalmgr':totalmgr,
+                                        'totalmis':totalmis
+
+                                    },
+                                        
+                                    dataType:"json",
+                                        success: function(data) {
+                                            //alert("Data Deleted Successfully");
+
+
+                
+                                            window.location='searchcandidates'
+                                        },
+                                         error: function(data) {
+                                           
+                                        }
+                                    }); 
+                                });
+                            });
+                            
+                            
+                            </script>
+                      
+                      
+    </body>
+</html>

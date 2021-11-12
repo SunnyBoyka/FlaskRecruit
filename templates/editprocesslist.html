@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+        
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+        <style>
+            #wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -16rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 16rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -16rem;
+  }
+}
+
+.btn {
+padding: 10px 16px;
+background-color: #ada7a7;
+border: #080808;
+cursor: pointer;
+font-size: 18px;
+}
+                    
+                    
+.active, .btn:hover {
+        background-color: rgb(18, 19, 18);
+        color: white;
+                    }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+                  <div class="container-fluid">
+                      
+                    <div id="myDIV" >
+                      <button class="btn" ><a href='./home'>Home</a></button>
+                    </div>
+                  </div>
+              </nav>
+                <!-- Page content-->
+            </div>
+            </div>
+                <div class="container-fluid">
+                    
+                    <h4 class="mt-4 text-center">Process Setup</h4>
+                    <hr>
+                    <div class="row justify-content-evenly mt-4">
+                        
+                      
+                        
+                      </div>  
+
+                    <div class="row justify-content-around mt-2" style="padding-left:20%">
+                     
+                      <div class="col-lg-6" >
+                      <div class="col">
+                        <h5 class="mb-2 text-center" style="padding-right:68%" >Process Information</h5>
+                      <div class="col-lg-3 col-sm-12 col-10 mb-1">
+                        <label for="client_name" class="form-label">Client Name</label>
+                        {% if data is defined %}
+                        <input type="text" class="form-control shadow-sm" name="client_name" id="client_name" value="{{data[0][0]}}">
+                      </div>
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="client_name" class="form-label">Process Name</label>
+                        <input type="text" class="form-control shadow-sm" name="process_name" id="process_name" value="{{data[0][1]}}">
+                      </div>  
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="client_name" class="form-label">Process ID</label>
+                        <input type="text" class="form-control shadow-sm" name="process_name" id="process_ID" value="{{data[0][2]}}">
+                      </div>  
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="ops_manager" class="form-label">OPS Manager</label>
+
+                        <input type="text" class="form-control shadow-sm" name="ops_manager" id="ops_manager" value="{{data[0][3]}}">
+                        
+                      </div>
+                    </div> 
+                    <div class="col-sm-4 col-10 mb-1">
+                      <label for="target_date" class="form-label">Target Date</label>
+                      <input type="date" class="form-control shadow-sm" value="{{data[0][4]}}" name="target_date" id="target_date">
+                    </div>   
+                  </div>   
+                  <div class="col-lg-6">
+                    <div class="row justify-content-evenly mt-4">                    
+                      <h5 class="mb-2 text-center" style="padding-right: 68%;">Budget Information</h5>
+                    </div>    
+                      <div class="col">
+                    <div class=" justify-content-around mt-3">
+                      <div class="col-sm-4 col-10 mb-1">
+                        <label for="client_name" class="form-label">Overall Budget</label>
+                        <input type="text" class="form-control shadow-sm" onchange="overallbudget()" value="{{data[0][5]}}"  name="overall_budget" id="overall_budget"  >
+                      </div> 
+                      <div class="col-sm-4 col-10 mb-1">
+                        <label for="client_name" class="form-label">Salary Budget</label>
+                        <input type="text" class="form-control shadow-sm" name="salary_budget" onchange="salarybudget()" id="salary_budget" value="{{data[0][6]}}" >
+                      </div>                         
+                      </div>  
+                    </div>
+                  </div>                                   
+                    </div>
+
+
+                      
+
+                    <div class="justify-content-around mt-2" style="padding-top: 5%;padding-left: 10%;">
+                     <div class="row">
+                      <div class="col-lg-5" >
+                      <div class="col">
+                        <h5 class="mb-2 text-center" style="padding-right:40%" >Resource Requirement Information</h5>
+                        <div class="col-sm-4 col-10 mb-1">
+                         
+                            <label for="client_name" class="form-label">Customer Service Rep</label>
+                            <input type="text" class="form-control shadow-sm" onchange="csrtotal()" name="overall_budget" id="CSR" value="{{data[0][7]}}" >
+                        
+                        </div>
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm" onchange="regular()" name="regular" id="regular" value="{{data[0][8]}}" >
+                        </div>   
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm"  name="buffer" onchange="buffer()" id="buffer" value="{{data[0][9]}}" >
+                        </div> 
+                     
+                    <div class="col-sm-4 col-10 mb-1">
+                      <label for="client_name" class="form-label">Supervisor</label>
+                            <input type="text" class="form-control shadow-sm" name="overall_budget" id="Supervisor" value="{{data[0][10]}}" >
+                    </div> 
+                    <div class="col-sm-4 col-10 mb-1">
+                      <label for="client_name" class="form-label">Team Leader</label>
+                            <input type="text" class="form-control shadow-sm" name="overall_budget" id="tl" value="{{data[0][11]}}" >
+                    </div> 
+                    
+                  </div>
+                </div>
+                    <div class="col-lg-7" >
+                      <div class="row">
+                        <h5 >Salary Range Setup</h5>
+                        <div class="row" style="padding-top:3%;">
+                        <div class="col-sm-4 col-10 mb-1" >
+                          
+                          <input type="text" class="form-control shadow-sm" name="minimum_salary1" id="minimum_salary1" value="{{data[0][12]}}" >
+                        </div>                                      
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm"  name="maximum_salary1" id="maximum_salary1" value="{{data[0][13]}}" >
+                        </div>
+                      </div>  
+                      </div> 
+                      <div class="row" style="padding-top: 15%;">
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm"  name="minimum_salary2" id="minimum_salary2" value="{{data[0][14]}}" >
+                        </div>                                      
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm"  name="maximum_salary2" id="maximum_salary2" value="{{data[0][15]}}" >
+                        </div>  
+                      </div>
+                      <div class="row" style="padding-top: 5%;">
+                        <div class="col-sm-4 col-10 mb-1">
+                          
+                          <input type="text" class="form-control shadow-sm"  name="minimum_salary3" id="minimum_salary3" value="{{data[0][16]}}" >
+                        </div>                                      
+                        <div class="col-sm-4 col-10 mb-1">
+                         
+                          <input type="text" class="form-control shadow-sm"   name="maximum_salary3" id="maximum_salary3" value="{{data[0][17]}}" >
+                        </div>  
+                      </div>
+                    </div>  
+                  </div>   
+                  </div>   
+                                             
+                   
+                    
+                      
+                
+
+                   
+                    <div class="row justify-content-evenly mt-4">                    
+                      <h5 class="mb-2 text-center" style="padding-right:85% ;">Shared Resources</h5>
+                    </div>  
+                    </div>
+
+                    <div class="row justify-content-around mt-2">
+                      <div class="col">
+                      <div class="col-sm-4 col-10 mb-1">
+                        <label for="training" class="form-label">Training</label>
+                        <input type="text" class="form-control shadow-sm"   name="" id="training" value="{{data[0][18]}}" >
+                        
+                      </div>   
+                      <div class="col-sm-4 col-10 mb-1">
+                        <label for="quality" class="form-label">Quality</label>
+
+                        <input type="text" class="form-control shadow-sm"   name="" id="quality" value="{{data[0][19]}}" >
+                        
+                       {% endif %} 
+                      </div> 
+                    </div>                                    
+                    </div>
+
+                    
+                    <div class="row">
+                    <div class="col-lg-6">
+                      
+                    </div>
+                    <div class="col-lg-6" style="padding-top: 8%;">
+                      <div class="row">
+                      <div class="col-lg-4">
+                      <button type="submit"  onclick="submit()" class="btn btn-primary col-12">Save</button>
+                    </div>
+                    <!-- <div class="col-lg-4">
+                      <button type="submit" onclick="edit()" class="btn btn-primary col-12">Edit</button>
+                    </div> -->
+                    <div class="col-lg-4">
+                      <button type="submit" onclick="deletelist()" class="btn btn-primary col-12">Delete</button>
+                    </div>
+                    </div>
+                  </div>
+                 
+                   <!--  <div class="my-3 text-center">
+                      <button type="submit" onclick="edit()" class="btn btn-primary col-4">Edit</button>
+                    </div>
+
+                    <div class="my-3 text-center">
+                      <button type="submit" onclick="deletelist()" class="btn btn-primary col-4">Delete</button>
+                    </div> -->
+
+                  </div>
+
+                </div>
+                <!-- <div class="my-5"></div> -->
+            </div>
+        </div>
+       
+        <script>
+          function ageCalculator() {  
+    var userinput = document.getElementById("DOB").value;  
+    var dob = new Date(userinput);  
+    if(userinput==null || userinput=='') {  
+      document.getElementById("message").innerHTML = "**Choose a date please!";    
+      return false;   
+    } else {  
+      
+    //calculate month difference from current date in time  
+    var month_diff = Date.now() - dob.getTime();  
+      
+    //convert the calculated difference in date format  
+    var age_dt = new Date(month_diff);   
+      
+    //extract year from date      
+    var year = age_dt.getUTCFullYear();  
+      
+    //now calculate the age of the user  
+    var age = Math.abs(year - 1970);  
+      
+    //display the calculated age  
+    return document.getElementById("result").innerHTML =    
+             "Age is: " + age + " years. ";  
+    }  
+}  
+        </script>
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script>
+            window.addEventListener('DOMContentLoaded', event => {
+
+// Toggle the side navigation
+const sidebarToggle = document.body.querySelector('#sidebarToggle');
+if (sidebarToggle) {
+    
+    if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+        document.body.classList.toggle('sb-sidenav-toggled');
+    }
+    sidebarToggle.addEventListener('click', event => {
+        event.preventDefault();
+        document.body.classList.toggle('sb-sidenav-toggled');
+        localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+    });
+}
+
+});
+        </script>
+
+<script>
+  function submit()
+  
+          {
+
+
+    
+            var oberallbudgetofprocess=document.getElementById('overall_budget').value;
+            var salarybudgetofprocess=document.getElementById('salary_budget').value;
+            if(oberallbudgetofprocess<salarybudgetofprocess)
+            {
+              alert('please make sure that salary budget should be lesser than over all budget')
+              document.getElementById('salary_budget').value=""
+              
+            }
+
+            var carsal=document.getElementById('maximum_salary1').value;
+            var supsal=document.getElementById('maximum_salary2').value;
+            var tlsal=document.getElementById('maximum_salary3').value;
+            var newcsrsal= carsal*12
+            var newsupsal=supsal*12
+            var newtlsal=tlsal*12
+            var totalsal=newcsrsal+newsupsal+newtlsal
+            alert(totalsal);
+            var newtotalsalarybudject = document.getElementById('salary_budget').value;
+            if(newtotalsalarybudject<totalsal)
+            {
+              alert('over all salary budget is exceed please change the salary')
+              document.getElementById('maximum_salary1').value=""
+              document.getElementById('maximum_salary2').value=""
+              document.getElementById('maximum_salary3').value=""
+            
+
+            }
+ debugger;
+ var cname=document.getElementById('client_name').value;
+ var pname=document.getElementById('process_name').value;
+ var opsmgr=document.getElementById('ops_manager').value;
+ var targetdate=document.getElementById('target_date').value;
+ var overallbudget=document.getElementById('overall_budget').value;
+ var salarybudget=document.getElementById('salary_budget').value;
+ var opsmgr1=document.getElementById('CSR').value;
+ var regular=document.getElementById('regular').value;
+ var buffer=document.getElementById('buffer').value;
+ var opsmgr2=document.getElementById('Supervisor').value;
+ var opsmgr3=document.getElementById('tl').value;
+ var minsal1=document.getElementById('minimum_salary1').value;
+ var maxsal1=document.getElementById('maximum_salary1').value;
+ var minsal2=document.getElementById('minimum_salary2').value;
+ var maxsal2=document.getElementById('maximum_salary2').value;
+ var minsal3=document.getElementById('minimum_salary3').value;
+ var maxsal3=document.getElementById('maximum_salary3').value;
+ var training=document.getElementById('training').value;
+ var quality=document.getElementById('quality').value;
+ 
+   if (document.getElementById('client_name').value =='' && document.getElementById('process_name').value =='' &&
+       document.getElementById('ops_manager').value =='' && document.getElementById('target_date').value =='' &&
+       document.getElementById('overall_budget').value =='' && document.getElementById('salary_budget').value =='' &&
+       document.getElementById('ops_manager1').value =='' && document.getElementById('ops_manager2').value =='' &&
+       document.getElementById('ops_manager3').value =='' && document.getElementById('minimum_salary1').value =='' &&
+       document.getElementById('maximum_salary1').value =='' && document.getElementById('minimum_salary2').value =='' &&
+       document.getElementById('maximum_salary2').value =='' && document.getElementById('minimum_salary3').value =='' &&
+       document.getElementById('maximum_salary3').value =='' && document.getElementById('training').value =='' &&
+       document.getElementById('quality').value =='' )
+
+         {
+             alert('Please Fill All Fields');
+             window.location='newprocess'
+         }
+         
+ else{
+
+
+ $.ajax({
+           type: 'GET',
+           url: '/newprocess',
+     
+       contentType: 'application/json;charset=UTF-8',
+           data: {
+           'cname': cname,
+           'pname': pname,
+           'opsmgr': opsmgr,
+           'targetdate': targetdate,
+           'overallbudget': overallbudget,
+           'salarybudget': salarybudget,
+           'opsmgr1':opsmgr1,
+           'opsmgr2':opsmgr2,
+           'opsmgr3':opsmgr3,
+           'regular':regular,
+           'buffer':buffer,
+           'minsal1':minsal1,
+           'maxsal1':maxsal1,
+           'minsal2':minsal2,
+           'maxsal2':maxsal2,
+           'minsal3':minsal3,
+           'maxsal3':maxsal3,
+           'training':training,
+           'quality':quality
+     
+
+       },
+           
+       dataType:"json",
+           success: function(data) {
+       //alert('Data saved Successfully');
+      
+       window.location='ceoprocesspage';
+             // window.location='register';
+           },
+       });
+ 
+     }
+    }
+</script>
+
+
+
+
+
+<script>
+   function deletelist()
+   {
+     debugger;
+    var process_id=document.getElementById('process_ID').value;
+    $.ajax({
+            type: 'GET',
+            url: '/deletprocesslist',
+      
+        contentType: 'application/json;charset=UTF-8',
+            data: {
+            'process_id': process_id
+        },
+            
+        dataType:"json",
+            success: function(data)
+             {
+              alert('Data saved Successfully');
+       
+             window.location='ceopage';
+              
+            },
+        });
+   }
+  </script>
+
+    </body>
+</html>

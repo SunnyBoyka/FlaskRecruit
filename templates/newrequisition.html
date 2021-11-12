@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" />
+        
+
+
+
+
+
+        <style>
+            #wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -16rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 16rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -16rem;
+  }
+}
+
+.multi_selection_box{
+    width: 80%;
+    margin: 40px auto;
+
+
+}
+
+.multi_selection_box select{
+    width:15%
+}
+
+
+
+.btn {
+padding: 10px 16px;
+background-color: #ada7a7;
+border: #080808;
+cursor: pointer;
+font-size: 18px;
+}
+
+
+.active, .btn:hover {
+        background-color: rgb(7, 6, 6);
+        color: white;
+                    }
+
+        </style>
+    </head>
+    <body>
+    <!-- <body onload="today = new Date(); today.setDate(today.getDate()+3); document.getElementById('target_date').value = today;"> -->
+        <div class="d-flex" id="wrapper">
+           
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm">
+                  <div class="container-fluid">
+                      
+                    <div id="myDIV" >
+                     <button class="btn" ><a href='./operations'>Home</a></button>
+                     <button class="btn" ><a href='./processlist'> Process List</a></button>
+                      <!--<button class="btn active"><a href='./newrequisition'>Process List </a></button> -->
+                    </div>
+                  </div>
+              </nav>
+                <!-- Page content-->
+            </div>
+            </div>
+            <div class="container-fluid">
+                    <h4 class="mt-4 text-center">New Job Requisition SetUp</h4>
+                    <hr>
+                    <div class="row justify-content-evenly mt-4">
+                        <h5 class="mb-2 text-center">Process Information</h5>
+                      
+                        <!-- <h5 class="mb-4 text-center">Budget Information</h5> -->
+                      </div>  
+
+                    <div class="row justify-content-around mt-2">
+                      <!-- <div class="col-sm-3 col-10 mb-1">
+                        <label for="client_name" class="form-label">Client Name</label>
+                        <select class="form-control shadow-sm" name="qualification" id="cname">
+                          
+                          {% for i in data %}
+                          <option value="{{i[0]}}">{{i[0]}}</option>
+                          {% endfor %}
+                         
+                         </select>
+                      </div>
+                       -->
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="client_name" class="form-label">Process Name</label>
+                        <select class="form-control shadow-sm" name="qualification" id="pname">
+                          {% if data is defined %}
+                         
+                        {% for i in data %}
+                        <option value="{{i[1]}}">{{i[1]}}</option>
+                        {% endfor %}
+                        
+                        </select>
+                      </div> 
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="target_date" class="form-label">Process ID</label>
+                        <select class="form-control shadow-sm" name="processid" id="processid">
+                          
+                          {% for i in data %}
+                          <option value="{{i[2]}}">{{i[2]}}</option>
+                          {% endfor %}
+                         
+                          </select>
+                          
+                          
+                      </div>    
+                      <div class="col-sm-3 col-10 mb-1">
+                        <label for="target_date" class="form-label">Target Date</label>
+                        <select class="form-control shadow-sm" name="qualification" id="tdate">
+                          
+                          {% for i in data %}
+                          <option value="{{i[4]}}">{{i[4]}}</option>
+                          {% endfor %}
+                         
+                          </select>
+                          {% endif %}
+                          
+                      </div>                                       
+                    </div>
+
+                     
+                      <div class="row justify-content-evenly mt-4">                    
+                        <h5 class="mb-2 text-center">Resource Requirement</h5>
+                      </div> 
+                      
+                    <div class="row justify-content-around mt-2">
+                      <div class="col-lg-4">
+                        <div  class="row">
+                      <div class="col-sm-6  mb-1">
+                        <label for="Job Name" class="form-label">Job Name</label>
+                        </div>
+                        <div class="col-sm-6  mb-1">
+                        <select class="form-control shadow-sm" name="Job Name" id="job_type" onchange='checkval(this.value)'>
+                         <option hidden selected>Choose an Option</option>
+                         {% for i in data3 %}
+                         <option value="{{i[3]}}">{{i[3]}}</option>
+                         {% endfor %}
+                         
+                        </select>
+                      </div> 
+                      <div class="col-sm-6  col-10 mb-1">
+                        <label for="qualification" class="form-label">Qualification</label>
+                        </div>
+                        <div class="col-sm-6 col-10 mb-1">
+                        <select class="form-control shadow-sm" name="qualification" id="qualification">
+                         <option hidden selected>Choose an Option</option>
+                         {% for i in data3 %}
+                         <option value="{{i[1]}}">{{i[1]}}</option>
+                         {% endfor %}
+                        </select>
+                      </div>   
+                      <div class="col-sm-6 col-10 mb-1">
+                        <label for="qualification" class="form-label">Experience</label>
+                        </div>
+                        <div class="col-sm-6 col-10 mb-1">
+                        <select class="form-control shadow-sm" name="qualification" id="experience">
+                         <option hidden selected>Choose an Option</option>
+                         {% for i in data3 %}
+                         <option value="{{i[2]}}">{{i[2]}}</option>
+                         {% endfor %}
+                        </select>
+                      </div>  
+                      
+                      <div>
+                        <div id='csr' style='display:none' >
+                        <div class="col-sm-6 col-10 mb-1">
+                          <label for="qualification" class="form-label">CSR Required</label>
+                          </div>
+                          <div class="col-sm-6 col-10 mb-1">
+                            <input type="text" class="form-label"  id="csrreq" value="{{totalcsr}}" />
+                            </div>
+                          <div class="col-sm-6 col-10 mb-1">
+                            Buffer :<input type="text" class="form-label"  id="bufferreq" value="{{buffer}}" />
+                            </div>
+                            <div class="col-sm-6 col-10 mb-1">
+                              Regular :<input type="text" class="form-label"  id="regularreq" value="{{reguler}}" />
+                              </div>
+                          </div>
+                          <div id='supr' style='display:none' >
+                            <div class="col-sm-6 col-10 mb-1">
+                              <label for="qualification" class="form-label">Supervisor Required </label>
+                              </div>
+                              <div class="col-sm-6 col-10 mb-1">
+                                <input type="text" class="form-label"  id="superreq"  value="{{Supervisor}}"/>
+                                </div>
+                                
+                              </div>
+
+                              <div id='tl' style='display:none' >
+                                <div class="col-sm-6 col-10 mb-1">
+                                  <label for="qualification" class="form-label">Team Leader Required </label>
+                                  </div>
+                                  <div class="col-sm-6 col-10 mb-1">
+                                    <input type="text" class="form-label"  id="tlreq" value="{{tl}}" />
+                                    </div>
+                                    
+                                  </div>
+
+                                  <div id='visastmgr' style='display:none' >
+                                    <div class="col-sm-6 col-10 mb-1">
+                                      <label for="qualification" class="form-label">Assitent Manager Required </label>
+                                      </div>
+                                      <div class="col-sm-6 col-10 mb-1">
+                                        <input type="text" class="form-label"  id="astmge" value="{{astmgr}}" />
+                                        </div>
+                                        
+                                      </div>
+
+                                      <div id='vismgr' style='display:none' >
+                                        <div class="col-sm-6 col-10 mb-1">
+                                          <label for="qualification" class="form-label"> Manager Required </label>
+                                          </div>
+                                          <div class="col-sm-6 col-10 mb-1">
+                                            <input type="text" class="form-label"  id="mgr" value="{{mgr}}" />
+                                            </div>
+                                            
+                                          </div>
+
+
+                                          <div id='vismis' style='display:none' >
+                                            <div class="col-sm-6 col-10 mb-1">
+                                              <label for="qualification" class="form-label">MIS Required </label>
+                                              </div>
+                                              <div class="col-sm-6 col-10 mb-1">
+                                                <input type="text" class="form-label"  id="mis" value="{{mis}}" />
+                                                </div>
+                                                
+                                              </div>
+
+
+
+
+                                
+                      </div>
+                      </div>
+                    </div>
+                      <div class="col-lg-8">
+                       
+                            <div class="multi_selection_box">
+                                <div class="row">
+                        <div class="col-sm-4  mb-1">
+                          <label for="supervisor" class="form-label">Skills</label>
+                          <select id="Skills" class="multi_select" multiple data-live-search="true">
+                            {% for i in  data3 %}
+                            <option value="{{i[0]}}">{{i[0]}}</option>
+                            {% endfor %}
+                           
+                        </select>
+                        </div>  
+                        
+                        <div class="col-sm-4  mb-1">
+                          <label for="supervisor" class="form-label">Shift Timing </label>
+                          <select id="Shift_Timing" class="multi_select2" multiple data-live-search="true">
+                            {% for i in  data3 %}
+                            <option value="{{i[4]}}">{{i[4]}}</option>
+                            {% endfor %}
+                        </select>
+                        </div>   
+
+
+
+                        <div class="col-sm-4 mb-1">
+                          <label for="supervisor" class="form-label">Language</label>
+                           
+                          <select id="Language" class="multi_select3" multiple data-live-search="true">
+                            {% for i in  data3 %}
+                            <option value="{{i[6]}}">{{i[6]}}</option>
+                            {% endfor %}
+                        </select>
+                        </div>  
+
+
+                        <div class="col-sm-4  mb-1">
+                          <label for="supervisor" class="form-label">Gender</label>
+                          <select id="Gender" class="multi_select3" >
+                            <option value=""> Select Options</option> 
+                            <option value="Male">Male only</option>
+                            <option value="Any_Gender">Any Gender</option>
+                            <option value="Female">Female Only</option>
+                        </select>
+                        </div>   
+                        
+
+                            
+
+                            
+                            
+                        </div>
+
+                      </div>
+                    </div>
+                    </div>
+
+                      
+
+             
+                                       
+                    <div class="row justify-content-around mt-2" style="padding-top: 3%;">
+                      <div class="col-sm-6 col-10 mb-1">
+                        <label for="detail_job" class="form-label">Detailed Job Description</label>
+                        <textarea type="text" class="form-control shadow-sm" name="detail_job" rows="4" id="description" placeholder="Type Here..."></textarea>
+                      </div>                                                       
+                    </div>
+
+                   
+                   
+
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fetcrs" >
+                      <button type="submit"  id="submit" onclick="fetchdatacsr()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fetsup" >
+                      <button type="submit"  id="submit" onclick="fetchdatasup()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fettl" >
+                      <button type="submit"  id="submit" onclick="fetchdatatl()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fetastmgr" >
+                      <button type="submit"  id="submit" onclick="fetchdataasmgr()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fetmgr" >
+                      <button type="submit"  id="submit" onclick="fetchdatamgr()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                    <div class="my-3 text-center" style="padding-top: 3%; display:none;" id="fetmis" >
+                      <button type="submit"  id="submit" onclick="fetchdatamis()" class="btn btn-primary col-4">Submit</button>
+                    </div>
+                   
+
+                </div>
+                <!-- <div class="my-5"></div> -->
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+
+          function checkval(val)
+          {
+              if(val==="Customer Service Representative")
+              {
+                document.getElementById('fetcrs').style.display='block'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='none'
+                 document.getElementById('csr').style.display='block';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='none';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='none'
+
+              }
+
+              else if(val==="Supervisor")
+              {
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='block'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='none'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='block'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='none';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='none'
+
+              }
+
+              else if (val==="Team Leader")
+              {
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='block'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='none'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='block'
+                 document.getElementById('visastmgr').style.display='none';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='none'
+              }
+
+
+              else if (val==="Assistant Operations Manager")
+              {
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='block'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='none'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='block';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='none'
+              }
+              
+
+              else if (val==="Operations Manager")
+              {
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='block'
+                document.getElementById('fetmis').style.display='none'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='none ';
+                 document.getElementById('vismgr').style.display='block'
+                 document.getElementById('vismis').style.display='none'
+              }
+              else if (val==="MIS")
+              {
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='block'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='none ';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='block'
+              }
+              
+
+              else
+              {
+                
+                document.getElementById('fetcrs').style.display='none'
+                document.getElementById('fetsup').style.display='none'
+                document.getElementById('fettl').style.display='none'
+                document.getElementById('fetastmgr').style.display='none'
+                document.getElementById('fetmgr').style.display='none'
+                document.getElementById('fetmis').style.display='none'
+                document.getElementById('csr').style.display='none';
+                 document.getElementById('supr').style.display='none'
+                 document.getElementById('tl').style.display='none'
+                 document.getElementById('visastmgr').style.display='none ';
+                 document.getElementById('vismgr').style.display='none'
+                 document.getElementById('vismis').style.display='none'
+              }
+          }
+          </script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script  type="text/javaScript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.js"></script>
+        <script  type="text/javaScript" src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+
+
+        <script>
+            $(document).ready(function(){
+                $('.multi_select').selectpicker();
+            })
+
+            $(document).ready(function(){
+                $('.multi_select2').selectpicker();
+            })
+
+            $(document).ready(function(){
+                $('.multi_select3').selectpicker();  
+            })
+            
+
+        </script>
+
+
+
+
+        <script>
+           
+    function fetchdatacsr() 
+    {
+        debugger;
+    var checked = document.querySelectorAll('#Skills :checked');
+    var selected = [...checked].map(option => option.value);
+    var checked2 = document.querySelectorAll('#Shift_Timing :checked');
+    var selected2 = [...checked2].map(option => option.value);
+    var checked3 = document.querySelectorAll('#Language :checked');
+    var selected3 = [...checked3].map(option => option.value);
+    
+
+
+ 
+ var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+ var job_type=document.getElementById('job_type').value;
+ var qualification=document.getElementById('qualification').value;
+ var experience=document.getElementById('experience').value;
+ var description=document.getElementById('description').value;
+ var totalcsr=document.getElementById('csrreq').value;
+ var buffer=document.getElementById('bufferreq').value
+ var reguler=document.getElementById('regularreq').value
+var pid=document.getElementById('processid').value
+
+
+ var sel_skills="";
+ for(var i=0;i<selected.length;i++)
+ {
+  sel_skills=sel_skills+selected[i]+",";
+ }
+ sel_skills=sel_skills.substring(0,sel_skills.length-1);
+
+ 
+
+
+ var shift_timing="";
+ for(var i=0;i<selected2.length;i++)
+ {
+  shift_timing=shift_timing+selected2[i]+",";
+ }
+ shift_timing=shift_timing.substring(0,shift_timing.length-1);
+ 
+
+
+
+ var language="";
+
+ for(var i=0;i<selected3.length;i++)
+ {
+  language=language+selected3[i]+",";
+ }
+ language=language.substring(0,language.length-1);
+ 
+
+
+
+
+ var gender=document.getElementById('Gender').value;
+
+ 
+   if ( document.getElementById('pname').value =='' &&
+   document.getElementById('tdate').value =='' && document.getElementById('job_type').value =='' &&
+   document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+   document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+   document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+   document.getElementById('discription').value =='')
+
+         {
+             alert('Please Fill All Fields');
+         }
+         
+ 
+ $.ajax({
+           type: 'GET',
+           url: '/recruit',
+     
+       contentType: 'application/json;charset=UTF-8',
+           data: {
+           
+           'pname': pname,
+           'pid':pid,
+           'tdate': tdate,
+           'job_type':job_type,
+           'total_csr':totalcsr,
+           'buffer':buffer,
+           'reguler':reguler,
+           'qualification':qualification,
+           'experience':experience,
+           'skills':sel_skills,
+           'shift_timing':shift_timing,
+           'language':language,
+           'gender':gender,
+          'description':description
+
+       },
+           
+       dataType:"json",
+           success: function(data) {
+       alert(data);
+      
+       window.location='newrequisition';
+             
+           },
+       });
+ 
+     }
+</script>
+
+
+
+
+
+<script>
+     function fetchdatasup()
+     {
+        debugger;
+    var supchecked = document.querySelectorAll('#Skills :checked');
+    var supselected = [...supchecked].map(option => option.value);
+    var supchecked2 = document.querySelectorAll('#Shift_Timing :checked');
+    var supselected2 = [...supchecked2].map(option => option.value);
+    var supchecked3 = document.querySelectorAll('#Language :checked');
+    var supselected3 = [...supchecked3].map(option => option.value);
+    
+
+
+    var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+          var pid=document.getElementById('processid').value
+          var supjob_type=document.getElementById('job_type').value;
+          var supqualification=document.getElementById('qualification').value;
+          var supexperience=document.getElementById('experience').value;
+          var supdescription=document.getElementById('description').value;
+          var totalsup=document.getElementById('superreq').value;
+
+
+
+          var supsel_skills="";
+          for(var i=0;i<supselected.length;i++)
+          {
+            supsel_skills=supsel_skills+supselected[i]+",";
+          }
+          supsel_skills=supsel_skills.substring(0,supsel_skills.length-1);
+
+          
+
+
+          var supshift_timing="";
+          for(var i=0;i<supselected2.length;i++)
+          {
+            supshift_timing=supshift_timing+supselected2[i]+",";
+          }
+          supshift_timing=supshift_timing.substring(0,supshift_timing.length-1);
+          
+
+
+
+          var suplanguage="";
+
+          for(var i=0;i<supselected3.length;i++)
+          {
+            suplanguage=suplanguage+supselected3[i]+",";
+          }
+          suplanguage=suplanguage.substring(0,suplanguage.length-1);
+          
+
+
+
+
+          var supgender=document.getElementById('Gender').value;
+
+          
+            if (document.getElementById('job_type').value =='' &&
+            document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+            document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+            document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+            document.getElementById('discription').value =='')
+
+                  {
+                      alert('Please Fill All Fields');
+                  }
+                  
+          
+          $.ajax({
+                    type: 'GET',
+                    url: '/recruitsup',
+                    
+              
+                    contentType: 'application/json;charset=UTF-8',
+
+                    data: {
+                    'pid':pid , 
+                    'pname': pname,
+                    'tdate': tdate,
+                    'totalsup':totalsup,
+                    'job_type':supjob_type,
+                    'qualification':supqualification,
+                    'experience':supexperience,
+                    'skills':supsel_skills,
+                    'shift_timing':supshift_timing,
+                    'language':suplanguage,
+                    'gender':supgender,
+                    'description':supdescription
+
+                },
+                    
+                dataType:"json",
+                    success: function(data) {
+               // alert('Data saved Successfully');
+                
+                window.location='newrequisition';
+                      
+                    },
+                });
+          
+              }
+
+</script>
+
+
+
+<script>
+
+    function fetchdatatl() 
+    {
+        debugger;
+    var checked = document.querySelectorAll('#Skills :checked');
+    var selected = [...checked].map(option => option.value);
+    var checked2 = document.querySelectorAll('#Shift_Timing :checked');
+    var selected2 = [...checked2].map(option => option.value);
+    var checked3 = document.querySelectorAll('#Language :checked');
+    var selected3 = [...checked3].map(option => option.value);
+    
+
+
+
+    var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+          var pid=document.getElementById('processid').value
+          var job_type=document.getElementById('job_type').value;
+          var qualification=document.getElementById('qualification').value;
+          var experience=document.getElementById('experience').value;
+          var description=document.getElementById('description').value;
+          var tl=document.getElementById('tlreq').value;
+
+
+
+          var sel_skills="";
+          for(var i=0;i<selected.length;i++)
+          {
+            sel_skills=sel_skills+selected[i]+",";
+          }
+          sel_skills=sel_skills.substring(0,sel_skills.length-1);
+
+          
+
+
+          var shift_timing="";
+          for(var i=0;i<selected2.length;i++)
+          {
+            shift_timing=shift_timing+selected2[i]+",";
+          }
+          shift_timing=shift_timing.substring(0,shift_timing.length-1);
+          
+
+
+
+          var language="";
+
+          for(var i=0;i<selected3.length;i++)
+          {
+            language=language+selected3[i]+",";
+          }
+          language=language.substring(0,language.length-1);
+          
+
+
+
+
+          var gender=document.getElementById('Gender').value;
+
+
+
+          
+            if (document.getElementById('job_type').value =='' &&
+            document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+            document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+            document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+            document.getElementById('discription').value =='')
+
+                  {
+                      alert('Please Fill All Fields');
+                  }
+                  
+          
+          $.ajax({
+                    type: 'GET',
+                    url: '/recruittl',
+                    
+                contentType: 'application/json;charset=UTF-8',
+                    data: {
+                      'pid':pid , 
+                    'pname': pname,
+                    'tdate': tdate,
+                    'totletl':tl,
+                    'job_type':job_type,
+                    'qualification':qualification,
+                    'experience':experience,
+                    'skills':sel_skills,
+                    'shift_timing':shift_timing,
+                    'language':language,
+                    'gender':gender,
+                    'description':description
+
+                },
+                    
+                dataType:"json",
+                    success: function(data) {
+               // alert('Data saved Successfully');
+                
+                window.location='newrequisition';
+                      
+                    },
+                });
+          
+              }
+
+        </script>
+
+
+<script>
+
+  function fetchdataasmgr() 
+  {
+      debugger;
+  var checked = document.querySelectorAll('#Skills :checked');
+  var selected = [...checked].map(option => option.value);
+  var checked2 = document.querySelectorAll('#Shift_Timing :checked');
+  var selected2 = [...checked2].map(option => option.value);
+  var checked3 = document.querySelectorAll('#Language :checked');
+  var selected3 = [...checked3].map(option => option.value);
+  
+
+
+
+  var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+        var pid=document.getElementById('processid').value
+        var job_type=document.getElementById('job_type').value;
+        var qualification=document.getElementById('qualification').value;
+        var experience=document.getElementById('experience').value;
+        var description=document.getElementById('description').value;
+        var countofastmgr=document.getElementById('astmge').value;
+
+
+
+        var sel_skills="";
+        for(var i=0;i<selected.length;i++)
+        {
+          sel_skills=sel_skills+selected[i]+",";
+        }
+        sel_skills=sel_skills.substring(0,sel_skills.length-1);
+
+        
+
+
+        var shift_timing="";
+        for(var i=0;i<selected2.length;i++)
+        {
+          shift_timing=shift_timing+selected2[i]+",";
+        }
+        shift_timing=shift_timing.substring(0,shift_timing.length-1);
+        
+
+
+
+        var language="";
+
+        for(var i=0;i<selected3.length;i++)
+        {
+          language=language+selected3[i]+",";
+        }
+        language=language.substring(0,language.length-1);
+        
+
+
+
+
+        var gender=document.getElementById('Gender').value;
+
+
+
+        
+          if (document.getElementById('job_type').value =='' &&
+          document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+          document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+          document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+          document.getElementById('discription').value =='')
+
+                {
+                    alert('Please Fill All Fields');
+                }
+                
+        
+        $.ajax({
+                  type: 'GET',
+                  url: '/recruitastmgr',
+                  
+              contentType: 'application/json;charset=UTF-8',
+                  data: {
+                    'pid':pid , 
+                    'pname': pname,
+                    'tdate': tdate,
+                  'job_type':job_type,
+                  'countofastmgr':countofastmgr,
+                  'qualification':qualification,
+                  'experience':experience,
+                  'skills':sel_skills,
+                  'shift_timing':shift_timing,
+                  'language':language,
+                  'gender':gender,
+                  'description':description
+
+              },
+                  
+              dataType:"json",
+                  success: function(data) {
+             // alert('Data saved Successfully');
+              
+              window.location='newrequisition';
+                    
+                  },
+              });
+        
+            }
+
+      </script>
+
+
+
+
+<script>
+
+  function fetchdatamgr() 
+  {
+      debugger;
+  var checked = document.querySelectorAll('#Skills :checked');
+  var selected = [...checked].map(option => option.value);
+  var checked2 = document.querySelectorAll('#Shift_Timing :checked');
+  var selected2 = [...checked2].map(option => option.value);
+  var checked3 = document.querySelectorAll('#Language :checked');
+  var selected3 = [...checked3].map(option => option.value);
+  
+
+
+
+  var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+        var pid=document.getElementById('processid').value
+        var job_type=document.getElementById('job_type').value;
+        var qualification=document.getElementById('qualification').value;
+        var experience=document.getElementById('experience').value;
+        var description=document.getElementById('description').value;
+        var countofmgr=document.getElementById('mgr').value;
+
+
+
+        var sel_skills="";
+        for(var i=0;i<selected.length;i++)
+        {
+          sel_skills=sel_skills+selected[i]+",";
+        }
+        sel_skills=sel_skills.substring(0,sel_skills.length-1);
+
+        
+
+
+        var shift_timing="";
+        for(var i=0;i<selected2.length;i++)
+        {
+          shift_timing=shift_timing+selected2[i]+",";
+        }
+        shift_timing=shift_timing.substring(0,shift_timing.length-1);
+        
+
+
+
+        var language="";
+
+        for(var i=0;i<selected3.length;i++)
+        {
+          language=language+selected3[i]+",";
+        }
+        language=language.substring(0,language.length-1);
+        
+
+
+
+
+        var gender=document.getElementById('Gender').value;
+
+
+
+        
+          if (document.getElementById('job_type').value =='' &&
+          document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+          document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+          document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+          document.getElementById('discription').value =='')
+
+                {
+                    alert('Please Fill All Fields');
+                }
+                
+        
+        $.ajax({
+                  type: 'GET',
+                  url: '/recruitmgr',
+                  
+              contentType: 'application/json;charset=UTF-8',
+                  data: {
+                    'pid':pid , 
+                    'pname': pname,
+                    'tdate': tdate,
+                  'job_type':job_type,
+                  'countofmgr':countofmgr,
+                  'qualification':qualification,
+                  'experience':experience,
+                  'skills':sel_skills,
+                  'shift_timing':shift_timing,
+                  'language':language,
+                  'gender':gender,
+                  'description':description
+
+              },
+                  
+              dataType:"json",
+                  success: function(data) {
+             // alert('Data saved Successfully');
+              
+              window.location='newrequisition';
+                    
+                  },
+              });
+        
+            }
+
+      </script>
+<script>
+
+  function fetchdatamis() 
+  {
+      debugger;
+  var checked = document.querySelectorAll('#Skills :checked');
+  var selected = [...checked].map(option => option.value);
+  var checked2 = document.querySelectorAll('#Shift_Timing :checked');
+  var selected2 = [...checked2].map(option => option.value);
+  var checked3 = document.querySelectorAll('#Language :checked');
+  var selected3 = [...checked3].map(option => option.value);
+  
+
+
+
+  var pname=document.getElementById('pname').value;
+ var tdate=document.getElementById('tdate').value;
+        var pid=document.getElementById('processid').value
+        var job_type=document.getElementById('job_type').value;
+        var qualification=document.getElementById('qualification').value;
+        var experience=document.getElementById('experience').value;
+        var description=document.getElementById('description').value;
+        var countofmis=document.getElementById('mis').value;
+
+
+
+        var sel_skills="";
+        for(var i=0;i<selected.length;i++)
+        {
+          sel_skills=sel_skills+selected[i]+",";
+        }
+        sel_skills=sel_skills.substring(0,sel_skills.length-1);
+
+        
+
+
+        var shift_timing="";
+        for(var i=0;i<selected2.length;i++)
+        {
+          shift_timing=shift_timing+selected2[i]+",";
+        }
+        shift_timing=shift_timing.substring(0,shift_timing.length-1);
+        
+
+
+
+        var language="";
+
+        for(var i=0;i<selected3.length;i++)
+        {
+          language=language+selected3[i]+",";
+        }
+        language=language.substring(0,language.length-1);
+        
+
+
+
+
+        var gender=document.getElementById('Gender').value;
+
+
+
+        
+          if (document.getElementById('job_type').value =='' &&
+          document.getElementById('qualification').value =='' && document.getElementById('experience').value =='' &&
+          document.getElementById('Skills').value == '' &&  document.getElementById('Shift_Timing').value =='' &&
+          document.getElementById('Language').value =='' &&  document.getElementById('Gender').value =='' &&
+          document.getElementById('discription').value =='')
+
+                {
+                    alert('Please Fill All Fields');
+                }
+                
+        
+        $.ajax({
+                  type: 'GET',
+                  url: '/recruitmis',
+                  
+              contentType: 'application/json;charset=UTF-8',
+                  data: {
+                    'pid':pid , 
+                    'pname': pname,
+                    'tdate': tdate,
+                  'job_type':job_type,
+                  'countofmis':countofmis,
+                  'qualification':qualification,
+                  'experience':experience,
+                  'skills':sel_skills,
+                  'shift_timing':shift_timing,
+                  'language':language,
+                  'gender':gender,
+                  'description':description
+
+              },
+                  
+              dataType:"json",
+                  success: function(data) {
+             // alert('Data saved Successfully');
+              
+              window.location='newrequisition';
+                    
+                  },
+              });
+        
+            }
+
+      </script>
+
+
+
+
+
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script>
+            window.addEventListener('DOMContentLoaded', event => {
+
+// Toggle the side navigation
+const sidebarToggle = document.body.querySelector('#sidebarToggle');
+if (sidebarToggle) {
+    
+    if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+        document.body.classList.toggle('sb-sidenav-toggled');
+    }
+    sidebarToggle.addEventListener('click', event => {
+        event.preventDefault();
+        document.body.classList.toggle('sb-sidenav-toggled');
+        localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+    });
+}
+
+});
+
+
+        </script>
+    </body>
+</html>
