@@ -29,21 +29,21 @@
   </div>
 </nav>
 <center>
-  <label style="text-align:center;font-size:30px;color:cyan;padding-top:50px" > Welcome </label>
+  <label style="text-align:center;font-size:30px;color:#1c4489;padding-top:50px"> Welcome </label>
   </center>
         <div class="box">
 				<h2>Login</h2>
 				
 					<div class="inputbox">
-				<input type="text" id="eid"  >
-				<label >Emplyee ID</label>
+						<input type="text" id="eid"  />
+						<label>Employee ID</label>
 			</div>
 			
 			<div class="inputbox" style="padding-bottom: 10%;">
 				
-				<select required="username" id='typeofuser' style="width:180px;height:30px" >
+				<select required="username" id='typeofuser' style="height:30px" class="form-control" >
 					
-					<option value="">select type of users</option>
+					<option value="">Select type of users</option>
 					{% if data is defined %}
 					{% for i in data %}
 					<option value="{{i[0]}}">{{i[0]}}</option>
@@ -54,7 +54,7 @@
 			</div>
 			
 			<div class="inputbox" >
-					<input type="password" id="pass" required="">
+					<input type="password" id="pass" required="" />
 					<label> Password</label>  
 			</div>
 		 

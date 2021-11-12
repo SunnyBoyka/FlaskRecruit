@@ -464,6 +464,31 @@ font-size: 20px;
           {
            
  debugger;
+ /* var totalcsr=document.getElementById('CSR').value;
+                  var totalsup=document.getElementById('Supervisor').value;
+                  var totaltl=document.getElementById('tl').value;
+                  var carsal=document.getElementById('csrmaximum_salary1').value;
+                  var supsal=document.getElementById('tlmaximum_salary3').value;
+                  var tlsal=document.getElementById('maximum_salary3').value;
+                  var totalcsradd=totalcsr*carsal
+                  var totalsupadd=totalsup*supsal
+                  var totaltladd=totaltl*tlsal
+                  var newcsrsal= totalcsradd*12
+                  var newsupsal=totalsupadd*12
+                  var newtlsal=totaltladd*12
+                  var totalsal=newcsrsal+newsupsal+newtlsal
+                  //alert(totalsal);
+                  document.getElementById("salary_budget").value = totalsal;
+                  var newtotalsalarybudject = document.getElementById('salary_budget').value;
+                  if(newtotalsalarybudject<totalsal)
+                  {
+                    alert('over all salary budget is exceed please change the salary')
+                    document.getElementById('maximum_salary1').value=""
+                    document.getElementById('maximum_salary2').value=""
+                    document.getElementById('maximum_salary3').value=""
+                  
+
+                  } */
 
  var pname=document.getElementById('process_name').value;
  var opsmgr=document.getElementById('ops_manager').value;
@@ -490,6 +515,15 @@ font-size: 20px;
  var mgr=document.getElementById('mgr').value;
  var mis=document.getElementById('mis').value;
 
+var newval=(opsmgr*maxsal1)*12
+var newval2=(opsmgr2*maxsal2)*12
+var newval3=(opsmgr3*maxsal3)*12
+var newval4=(astmgr*maxsal4)*12
+var newval5=(mgr*maxsal5)*12
+var newval6=(mis*maxsal6)*12
+var newvals=newval+newval2+newval3+newval4+newval5+newval6
+alert(newvals)
+document.getElementById("salary_budget").innerHTML = newvals;
 
   /*  if (/* document.getElementById('client_name').value =='' || document.getElementById('process_name').value =='' ||
        document.getElementById('ops_manager').value =='' || document.getElementById('target_date').value =='' ||
@@ -507,7 +541,7 @@ font-size: 20px;
          
 
 
-
+         salarybudget=newvals
  $.ajax({
            type: 'GET',
            url: '/newprocess',

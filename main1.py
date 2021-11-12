@@ -1603,22 +1603,11 @@ def selectedcandidateviewpage():
     cursor.execute(sql_Query)
     data=cursor.fetchall()
     print(data)
-    sql_Query2 = "SELECT Process_id FROM `candidate_register` where adhar_number='"+cadhar+"'"
-    print(sql_Query2) 
-    cursor.execute(sql_Query2)
-    data2=cursor.fetchall()
-    print(data2)
-    data2=data2[0][0]
-    sql_Query3 = "SELECT OPSManager FROM `proc_setup` where ProcessID='"+data2+"'"
-    print(sql_Query3) 
-    cursor.execute(sql_Query3)
-    data3=cursor.fetchall()
-    print(data3)
-    datanew=data3[0][0]
-    print(datanew)
     connection.commit() 
     connection.close()
     cursor.close()
+    global opsmgr
+    datanew=opsmgr
     return render_template('selectedcandidateviewpage.html',data=data,datanew=datanew)
  
 
@@ -1878,19 +1867,11 @@ def statusuploadsave():
     return resp
 
 
-@app.route('/savedcandidatesnew')
-def savedcandidatesnew():
-    global userid
-    interviewer=userid
+""" @app.route('/')
+def savedcandidates():
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
-    sql_Query2 = "select Ename from hrmsemployee where Eid='"+str(interviewer)+"'"
-    print(sql_Query2) 
-    cursor.execute(sql_Query2)
-    data2=cursor.fetchall()
-    print(data2)
-    data2=data2[0][0]
-    sql_Query = "select * from interviewed_candidate_list where  status='Passed'"
+    sql_Query = "select * from candidate_register where adhar_number="+aadharnum+""
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
@@ -1898,7 +1879,7 @@ def savedcandidatesnew():
     connection.commit() 
     connection.close()
     cursor.close()
-    return render_template('savedcandidatesnew.html',data=data)
+    return render_template('savedcandidates.html',data=data) """
 
 @app.route('/savedcandidates')
 def savedcandidates():
@@ -1912,7 +1893,7 @@ def savedcandidates():
     data2=cursor.fetchall()
     print(data2)
     data2=data2[0][0]
-    sql_Query = "select * from interviewed_candidate_list where  status='Saved'"
+    sql_Query = "select * from interviewed_candidate_list where  status='Passed'"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
@@ -1969,25 +1950,6 @@ def viewsavedcandidates():
     return resp
 
 
-
-@app.route('/viewsavedcandidatesnew')
-def viewsavedcandidatesnew():
-    cname = request.args['cname']
-    caadharid=request.args['caadharid']
-    interviewer=request.args['interviewer']
-    pid=request.args['pid']
-    global newadharnum
-    newadharnum=caadharid
-    global newinterviewer
-    newinterviewer=interviewer
-    global newprocessid
-    newprocessid=pid
-    msg="Data stored successfully"
-    resp = make_response(json.dumps(msg))
-    print(msg, flush=True)
-    return resp
-
-
 @app.route('/viewsavedcandidateslist')
 def viewsavedcandidateslist():
     global newadharnum
@@ -2007,47 +1969,10 @@ def viewsavedcandidateslist():
     cursor.execute(sql_Query2)
     data2=cursor.fetchall()
     print(data2)
-    sql_Query3 = "SELECT Ename FROM `hrmsemployee`"
-    print(sql_Query3) 
-    cursor.execute(sql_Query3)
-    data3=cursor.fetchall()
-    print(data3)
     connection.commit() 
     connection.close()
     cursor.close()
-    return render_template('viewsavedcandidateslist.html',data=data,interviewer=interviewer,data2=data2,data3=data3)
-
-
-
-
-@app.route('/viewsavedcandidateslistnew')
-def viewsavedcandidateslistnew():
-    global newadharnum
-    aadharnum=newadharnum
-    global newinterviewer
-    interviewer=newinterviewer
-    global newprocessid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-    cursor = connection.cursor()
-    sql_Query = "select * from candidate_register where adhar_number='"+aadharnum+"'"
-    print(sql_Query) 
-    cursor.execute(sql_Query)
-    data=cursor.fetchall()
-    print(data)
-    sql_Query2 = "SELECT * FROM `assessment` where candidateadharnum='"+aadharnum+"'"
-    print(sql_Query2) 
-    cursor.execute(sql_Query2)
-    data2=cursor.fetchall()
-    print(data2)
-    sql_Query3 = "SELECT Ename FROM `hrmsemployee`"
-    print(sql_Query3) 
-    cursor.execute(sql_Query3)
-    data3=cursor.fetchall()
-    print(data3)
-    connection.commit() 
-    connection.close()
-    cursor.close()
-    return render_template('viewsavedcandidateslistnew.html',data=data,interviewer=interviewer,data2=data2,data3=data3)
+    return render_template('viewsavedcandidateslist.html',data=data,interviewer=interviewer,data2=data2)
 
 
 
@@ -2220,6 +2145,9 @@ def moveprocess():
 
 
 
+
+if __name__=='__main__':
+    app.run()
 
 
     

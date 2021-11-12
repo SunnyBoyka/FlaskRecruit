@@ -71,11 +71,11 @@ font-size: 18px;
                     
                     
 .active, .btn:hover {
-        background-color: rgb(18, 19, 18);
+        
         color: white;
                     }
                     table, th, td {
-             
+              
               text-align: center;
             }
             th{
@@ -93,18 +93,15 @@ font-size: 18px;
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
                   <div class="container-fluid">
-                  
-                   
-                    <div id="myDIV" style="float: left;">
-                        <button class="btn btn-primary" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      
+                    <div id="myDIV" >
+                      <button class="btn btn-primary" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
                         <button class="btn btn-primary" ><a href='./recruiterpage' >New Recruitement</a></button>
                         <button class="btn btn-primary" ><a href='./selectedcandidates'>Selected Candidate</a></button>
                         <button class="btn btn-primary" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
                         <button class="btn btn-primary" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
-                        
-                       
+                     
                     </div>
-
                   </div>
               </nav>
                 <!-- Page content-->
@@ -112,30 +109,28 @@ font-size: 18px;
             </div>
                 <div class="container-fluid">
                     
-                    <h4 class="mt-4 text-center">New Process Candidates Requirements List</h4>
+                    <h4 class="mt-4 text-center">Process List</h4>
                     <hr>
                    
                     <table id="myTable" style="width: 100%;">
                         <tr >
-                         <!--  <th colspan="2">Client Name</th>  -->
-                          <th colspan="2">Candidate Name</th>
-                          <th colspan="2">Candidate Aadhaar CardNumber </th>
-                          <th colspan="2">Candidate Qualification</th> 
-                          <th colspan="2">Candidate Experience</th>
                           
+                          <th colspan="2">candidatename</th>
+                          <th colspan="2">candidateaadhaarnum</th>
+                          <th colspan="2">Interviewer</th> 
+                          <th colspan="2">process_id</th>
                           <th colspan="2">view</th>
                          
                           
                         </tr>
                         {% for item in data %}
                         <tr>
-                          <!-- <td colspan="2">{{item[0]}}</td> -->
-                          <td colspan="2">{{item[0]}}</td>
-                          <td colspan="2">{{item[12]}}</td>
-                          <td colspan="2">{{item[13]}}</td>
-                          <td colspan="2">{{item[14]}}</td>
                           
-                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="fas fa-pen"></i>     ...View</buttion></td>
+                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2">{{item[1]}}</td>
+                          <td colspan="2">{{item[2]}}</td>
+                          <td colspan="2">{{item[3]}}</td>
+                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="far fa-eye"></i>  ...View</buttion></td>
                           
                           
                         </tr>
@@ -147,12 +142,11 @@ font-size: 18px;
 
 
                         <script>
-                           
-                            
+                            /* var cname="" */
                             var cname=""
-                            var cadhar=""
-                            var cqulific=""
-                            var cexpri=""
+                            var caadharid=""
+                            var interviewer=""
+                            var pid=""
                             debugger;
                             $(document).ready(function(){
                             
@@ -161,45 +155,46 @@ font-size: 18px;
                                     debugger;
                                      var currentRow=$(this).closest("tr"); 
                                      
-                                     var col1=currentRow.find("td:eq(0)").text();
+                                     var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
                                      var col2=currentRow.find("td:eq(1)").text();
                                      var col3=currentRow.find("td:eq(2)").text();
-                                     var col4=currentRow.find("td:eq(3)").text();
+                                     var col4=currentRow.find("td:eq(3)").text(); 
                                     
-                                     /* var data=col1+"\n"+col2+"\n"+col3+"\n"+col4+"\n"+col5+"\n"+col6+"\n"+col7 */
+                                     /* var data=col1+"\n"+col2+"\n"+col3+"\n"+col4 */
                                      
                                      
-                                    
+                                     
                                      cname=col1;
-                                     cadhar =col2;
-                                     cqulific =col3;
-                                     cexpri =col4;
+                                     caadharid=col2;
+                                     interviewer=col3;
+                                     pid=col4;
                                      
-                                    
- 
+                                     /* alert(cname);
+                                     alert(pname);
+                                     alert(opsmgr);
+                                     alert(tdate);
+ */
 
                                      
                                      /* window.location='newrequisitions?cname='+cname+'&pname='+pname+'&opsmgr='+opsmgr+'&tdate='+tdate; */
                                    
                                       $.ajax({
                                         type: 'GET',
-                                        url: '/selectedcandidateview',
+                                        url: '/viewsavedcandidatesnew',
                                         
                                     contentType: 'application/json;charset=UTF-8',
                                         data: {
-                                       
-                                        'cname': cname,
-                                        'cadhar' :cadhar,
-                                        'cqulific':cqulific,
-                                        'cexpri':cexpri
                                         
+                                        'cname': cname,
+                                        'caadharid':caadharid,
+                                        'interviewer':interviewer,
+                                        'pid':pid
                                     },
                                         
                                     dataType:"json",
                                         success: function(data) {
-                                            
-
-                                            window.location='selectedcandidateviewpage'
+                                            //alert("Data Deleted Successfully");
+                                            window.location='viewsavedcandidateslistnew'
                                         },
                                          error: function(data) {
                                            
