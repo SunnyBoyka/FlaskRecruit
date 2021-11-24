@@ -20,6 +20,8 @@ $("#btn_login").click(function(){
 				
 			}
 			*/
+			
+			/*
 			$.ajax({
            type: 'GET',
            url: '/loginverify',
@@ -36,7 +38,7 @@ $("#btn_login").click(function(){
 			   
       
            },
-       });
+       });*/
 
 });
 
