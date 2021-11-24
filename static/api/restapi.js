@@ -6,6 +6,7 @@ $("#btn_login").click(function(){
 			debugger;
 			var name=document.getElementById('eid').value;
 			var pass=document.getElementById('pass').value;
+			
 			alert('Request Exceeds Trial Limit.');
 			/*
 			if(name=="admin"&&pass=="admin")
@@ -18,7 +19,7 @@ $("#btn_login").click(function(){
 				window.location='loginverify?name='+name+'&pass='+pass;				
 				
 			}
-			
+			*/
 			$.ajax({
            type: 'GET',
            url: '/loginverify',
@@ -35,7 +36,7 @@ $("#btn_login").click(function(){
 			   
       
            },
-       });*/
+       });
 
 });
 
