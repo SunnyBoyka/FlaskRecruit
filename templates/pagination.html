@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="" />
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+        
+        <style>
+            #wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+.list-group-item-black {
+  color: #d0d3d6;
+  background-color: #353a40;
+}
+.list-group-item-black.list-group-item-action:hover, .list-group-item-black.list-group-item-action:focus {
+  color: #d0d3d6;
+  background-color: #353a40;
+}
+.list-group-item-black.list-group-item-action.active {
+  color: #fff;
+  background-color: #141619;
+  border-color: #141619;
+}
+.bg-black {
+  background-color: #353a40 !important;
+}
+.bg-orange {
+  background-color: #fa5546 !important;
+}
+.border-grey {
+  border-color: #d0d3d6 !important;
+}
+
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class=" bg-black border-end shadow-sm" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom border-secondary bg-black text-light text-center">HRIS</div>
+                <div class="container-fluid g-0">
+                <form action="">
+                  <div class="row mb-2 mt-3 justify-content-end">
+                  <div class="col-8 g-0">
+                  <input type="text" placeholder="Search..." class="form-control shadow-none border-grey bg-transparent text-white" name="search">
+                  </div>
+                  <div class="col-3 g-0">
+                  <button class="btn btn-transparent shadow-none bg-transparent border-grey text-white" type="submit"><i class="bi bi-search"></i></button>
+                  </div>
+                  </div>
+              </form>
+            </div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-lines-fill"></i> Employee Information</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-bounding-box"></i> Personal Information</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-calendar-date"></i> Payroll</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-stickies-fill"></i> Rostering</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-rolodex"></i> Employee Add/Search</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-cash-stack"></i> Pay Type</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-badge"></i> Identity Proofs</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-translate"></i> Languages</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-gear-wide-connected"></i> Position</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-cpu-fill"></i> Process</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-people-fill"></i> Users</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-check-fill"></i> Roles</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-diagram-3-fill"></i> Role Menu Mapping</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-bounding-box"></i> Assign Emps To Team</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-grid-1x2-fill"></i> Emp Category</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-code-slash"></i> Source Of WalkIn</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-x"></i> UnAssigned Employees</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-clock-history"></i> Shift Timing</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-gear-wide"></i> Payroll Setup</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-cash-coin"></i> Income And Expense</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-person-workspace"></i> Qualification</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-inbox-fill"></i> UnRecieved Offer Letters</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-bank2"></i> Bank Names</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-globe"></i> Web Login Access</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-wallet-fill"></i> View Payments</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-currency-exchange"></i> Process Salary Range</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-receipt"></i> B.G. Verification</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-calendar-plus-fill"></i> Holiday Calendar</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-cloud-plus-fill"></i> Bulk Upload Perks & Expenses</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-file-arrow-up-fill"></i> Documents Upload</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-card-list"></i> IP Address List</a>
+                    <a class="list-group-item list-group-item-action list-group-item-black p-3" href="#!"><i class="bi bi-lock-fill"></i> Change Password</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper" style="background-color: #f6f4f2;">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-orange border-0 shadow-sm">
+                    <div class="container-fluid">
+                        <button class="btn btn-transparent shadow-none" id="sidebarToggle"><span class="navbar-toggler-icon"></span></button>
+                        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0 gap-2">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="#!"><span class="fw-bold">User</span> : Ram</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#!"><span class="fw-bold">Last Login</span> : 10/13/2021</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#!"><span class="fw-bold">Employee</span> : 8823</a>
+                                </li>
+                                <hr class="d-sm-none text-light">
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-transparent shadow-none btn-sm text-light rounded-3 fw-bold" href="#!"><i class="bi bi-power"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container py-2 mt-4 bg-white shadow-sm">
+                    <h4 class="text-center fw-normal">Perks & Expenses <span class="text-danger" title="Mandatory Fields">*</span>
+                    </h4>
+                <div class="container py-2 my-3 border border-light" style="background-color: #f6f4f2;">
+                  
+                   
+                    
+                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h2 class="text-center">Attendance Editing Page</h2>
+                            <hr>
+                            <div class="row mb-1">
+                              <div class="col-sm-6">
+                              <label for="employee_code" class="form-label fw-bold">Employee Code:</label>
+                              <input type="text" name="employee_code" id="employee_code" class="form-control shadow-none" readonly>  
+                              </div>
+                              <div class="col-sm-6">
+                              <label for="attendance_date" class="form-label fw-bold">Attendance Date:</label>
+                              <input type="text" name="attendance_date" id="attendance_date" class="form-control shadow-none" readonly>  
+                              </div>
+                            </div>
+                            <div class="row mb-1">
+                              <div class="col-sm-6">
+                              <label for="attendance_status" class="form-label fw-bold">Attendance Status:</label>
+                              <select name="attendance_status" id="attendance_status" class="form-select shadow-none">
+                                <option value="dlop">DLOP</option>
+                                <option value="lhd">LHD</option>
+                                <option value="hd">HD</option>
+                              </select>  
+                              </div>
+                              <div class="col-sm-6">
+                              <label for="logged_in_as" class="form-label fw-bold">Logged In As:</label>
+                              <input type="text" name="logged_in_as" id="logged_in_as" class="form-control shadow-none" readonly>  
+                              </div>
+                            </div>
+                            <div class="row mb-1">
+                              <div class="col-sm-12">
+                              <label for="comments" class="form-label fw-bold">Comments:</label>
+                              <textarea name="comments" id="comments" rows="3" class="form-control shadow-none"></textarea> 
+                              </div>
+                            </div>
+                            <div class="row mb-1">
+                              <div class="col-sm-12">
+                              <label for="proof_upload" class="form-label fw-bold">Proof Upload:</label>
+                              <input type="file" class="form-control shadow-none" name="proof_upload" id="proof_upload">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Update Attendance</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="table-responsive">                            
+                            <table class="table table-bordered table-hover" id="table1">
+                                <thead>
+                                  <tr class="text-center align-middle table-dark">
+                                    <th>Emp Code</th>
+                                    <th>User Name</th>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Comments</th>
+                                    <th>Entry Time</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td><a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Perks</a></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11695</td>
+                                    <td>Nandini M</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>9486</td>
+                                    <td>Priyanka S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12058</td>
+                                    <td>Akanksha Biswas</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Varsha Kumari</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>500.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12060</td>
+                                    <td>Amreen Taj</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>12549</td>
+                                    <td>Sheetal H S</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>200.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10494</td>
+                                    <td>Wilson Kumar J</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>223.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>10534</td>
+                                    <td>Gowthmi R</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Arrear</td>
+                                    <td>2761.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11522</td>
+                                    <td>Annapoorna G Y</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                  <tr class="text-center">
+                                    <td>11742</td>
+                                    <td>Akhilandeshwari V</td>
+                                    <td>01-Sep-2021</td>
+                                    <td>Other Incentives</td>
+                                    <td>1000.00</td>
+                                    <td>Perks</td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+         <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Data Tables JS-->
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        
+        <script>
+          $(document).ready(function () {
+            $('#table1').DataTable({
+              "dom": 'lrtip',
+              "pageLength": 20,
+              "bLengthChange": false
+            });
+          });
+        </script>
+		
+		
+      <!--Sidebar toggling -->
+        <script>
+
+            window.addEventListener('DOMContentLoaded', event => {
+
+                const sidebarToggle = document.body.querySelector('#sidebarToggle');
+                if (sidebarToggle) {
+                    if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+                        document.body.classList.toggle('sb-sidenav-toggled');
+                    }
+                    sidebarToggle.addEventListener('click', event => {
+                        event.preventDefault();
+                        document.body.classList.toggle('sb-sidenav-toggled');
+                        localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                    });
+                }
+
+            });
+
+        </script>
+    </body>
+</html>

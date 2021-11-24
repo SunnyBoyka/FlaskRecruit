@@ -1,11 +1,16 @@
-<html>
- <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="../static/jquery-3.6.0.js"></script>
 	<!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   <link rel="stylesheet" href="../static/csscode/login.css">
-  <style>
-  
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" href="../static/csscode/login.css"> -->
+	<link rel="stylesheet" href="../static/css/bootstrap.css">
+	<style>
+		/*   
 #body
 {
     margin: 0;
@@ -13,118 +18,70 @@
     font-family: sans-serif;
    background-color: white;
     background-size: cover;
-}
+} */
+	</style>
+</head>
 
-</style>
-    </head>
-	 <body>
-	  <nav id="man">
-  <div class="container-fluid">
-    <div class="navbar-header" style="float:left";>
-    
-    </div>
-	<div>
-    
+<body>
+	<div class="d-flex flex-column min-vh-100 bg-secondary bg-opacity-10">
+		<!-- <nav id="man">
+			<div class="container-fluid">
+				<div class="navbar-header">
+
+				</div>
+			</div>
+		</nav> -->
+
+		<div class="container m-auto">
+			<h2 class="text-center text-primary mb-5 mt-4"> Welcome </h2>
+			<div class="row justify-content-center">
+				<div class="col-sm-6">
+					<div class="card px-3 py-5 shadow">
+						<div class="card-body">
+							<div class="card-title text-center mb-4 text-info">
+								<h3>Login</h3>
+							</div>
+							<!-- <div class="inputbox"> -->
+							<div class="form-floating mb-3">
+								<input type="text" id="eid"
+									class="form-control shadow-none border-0 border-bottom border-dark rounded-0"
+									placeholder="Employee ID" />
+								<label for="eid">Employee ID</label>
+								<!-- </div> -->
+							</div>
+
+							<!-- <div class="inputbox"> -->
+							<div class="form-floating mb-5">
+								<input type="password" id="pass" required=""
+									class="form-control shadow-none border-0 border-bottom border-dark rounded-0"
+									placeholder="Password" />
+								<label for="pass"> Password</label>
+								<!-- </div> -->
+							</div>
+
+
+							<!-- <div id="data"> -->
+							<div class="text-center">
+								<input type="submit" id="btn_login" value="Submit"
+									class="btn btn-info btn-lg w-100 text-light shadow-none">
+							</div>
+							<!-- </div> -->
+
+
+							<div style="display: none;">
+								<input type="text" id="data" value="{{mesge}}">
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="my-4"></div>
 	</div>
-  </div>
-</nav>
-<center>
-  <label style="text-align:center;font-size:30px;color:#1c4489;padding-top:50px"> Welcome </label>
-  </center>
-        <div class="box">
-				<h2>Login</h2>
-				
-					<div class="inputbox">
-						<input type="text" id="eid"  />
-						<label>Employee ID</label>
-			</div>
-			
-			<div class="inputbox" style="padding-bottom: 10%;">
-				
-				<select required="username" id='typeofuser' style="height:30px" class="form-control" >
-					
-					<option value="">Select type of users</option>
-					{% if data is defined %}
-					{% for i in data %}
-					<option value="{{i[0]}}">{{i[0]}}</option>
-					{% endfor %}
-					{% endif %}
-				</select>
-				
-			</div>
-			
-			<div class="inputbox" >
-					<input type="password" id="pass" required="" />
-					<label> Password</label>  
-			</div>
-		 
-			 
-			  <div id="data">
-				 <input type="submit" onclick="submit()" value="Submit">
 
-			  </div>
-    
-            
-		<div style="display: none;">
-			<input type="text" id="data" value="{{mesge}}">
-		</div>
-		
-		</div>
-		<script>
-		function myFunction()
-		{
-		var firstname=document.getElementById('eid').value;
-		localStorage.setItem("textvalues",firstname);
-		return false;
-		}
-	   function submit()
-		{
-		debugger;
-		var name=document.getElementById('eid').value;
-		var pass=document.getElementById('pass').value;
-		var typeofusers=document.getElementById('typeofuser').value;
-		if(name=="admin"&&pass=="admin")
-		{
-			window.location='masters'
+	<script src="/static/bootstrap.bundle.js"></script>
+	<script src="/static/api/restapi.js"></script>
+</body>
 
-		}
-		else
-		{
-			window.location='loginss?name='+name+'&pass='+pass+'&typeofusers='+typeofusers;
-			
-			/* $.ajax({
-                     type: 'GET',
-                    url: '/loginss',
-                                        
-                    contentType: 'application/json;charset=UTF-8',
-                    data: {
-                                        
-                         'name':name,
-						 'pass':pass,
-						 'typeofusers':typeofusers
-
-                        },
-                                        
-                    dataType:"json",
-                     success: function(data)
-					  {
-                        
-                         window.location='login'
-                     },
-                    
-					 error: function(data) {
-                                           
-                                        
-					}
-             });  */
-		}
-		var data=document.getElementById('data').value;
-		alert(data);
-		}
-		 
-		
-		</script>
-		
-	</body>
-	</html>
-	
+</html>

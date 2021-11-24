@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>CEO Process List Page</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -99,22 +99,24 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
                 <!-- Page content-->
             </div>
             </div>
-            <h4 class="mt-4 text-center">CEO View</h4>
+            <h4 class="mt-4 text-center">CEO Process Approval</h4>
             <hr>
                 <div class="container-fluid">
                     
-                    <h4 class="mt-4 text-center">Process List</h4>
+                    <!--<h4 class="mt-4 text-center">Process List</h4>-->
                     <hr>
                    
                     <table id="myTable" style="width: 100%;">
                         <tr>
                          <!--  <th colspan="2">Client Name</th>  -->
-                          <th colspan="2">Process Name</th>
                           <th colspan="2">Process ID</th>
+                          <th colspan="2">Created Date</th>
+                          <th colspan="2">Process Name</th>
                           <th colspan="2">Operations Manager</th> 
                           <th colspan="2">Target Date</th>
+                          <th colspan="2">Status</th>
                           
-                          <th colspan="2">view</th>
+                          <th colspan="2"></th>
                           
                          
                           
@@ -126,8 +128,17 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
                           <td colspan="2">{{item[1]}}</td>
                           <td colspan="2">{{item[2]}}</td>
                           <td colspan="2">{{item[3]}}</td>
+                          <td colspan="2">{{item[4]}}</td>
+                          <td colspan="2">{{item[5]}}</td>
                           
-                          <td colspan="2"><button class="btn btn-primary " id="btnSelect"><i class="far fa-eye"></i>View </button></td>
+                          <td colspan="2">
+						  {% if item[5]|string=="Pending" %}
+						  <button class="btn btn-primary" id="btnSelect"><a href="ceoprocesspage?pid={{item[0]}}" style="text-decoration:none;color:white;" target="_self"><i class="far fa-eye">View Process</i></a> </button>
+						  
+						  {% endif %}
+						  
+						  
+						  </td>
                         </tr>
                         {% endfor %}
                        
@@ -135,157 +146,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 
 
-
-
-                        <script>
-                            
-                            var pname=""
-                            var pid=""
-                            var opsmgr=""
-                            var tdate=""
-                            debugger;
-                            $(document).ready(function(){
-                            
-                                
-                                $("#myTable").on('click','#btnSelect',function(){
-                                    debugger;
-                                     var currentRow=$(this).closest("tr"); 
-                                     
-                                     
-                                     var col1=currentRow.find("td:eq(0)").text();
-                                     var col2=currentRow.find("td:eq(1)").text();
-                                     var col3=currentRow.find("td:eq(2)").text(); 
-                                     var col4=currentRow.find("td:eq(3)").text();
-                                     var data=col1+"\n"+col2+"\n"+col3+"\n"+col4
-                                     
-                                     
-                                    
-                                     pname=col1;
-                                     pid=col2;
-                                     opsmgr=col3;
-                                     tdate=col4;
-                                     
-                                    
-                                     
-                                     /* window.location='newrequisitions?cname='+cname+'&pname='+pname+'&opsmgr='+opsmgr+'&tdate='+tdate; */
-                                   
-                                      $.ajax({
-                                        type: 'GET',
-                                        url: '/ceoviewprocess',
-                                        
-                                    contentType: 'application/json;charset=UTF-8',
-                                        data: {
-                                       
-                                        'pname': pname,
-                                        'pid':pid,
-                                        'opsmgr':opsmgr,
-                                        'tdate':tdate
-                                    },
-                                        
-                                    dataType:"json",
-                                        success: function(data) {
-                                            //alert("Data Deleted Successfully");
-                                            window.location='ceoprocesspage'
-                                        },
-                                         error: function(data) {
-                                           
-                                        }
-                                    }); 
-                                });
-
-                            });
-
-</script>
-
-                            <script>
-                            
-                            var pid=""
-                            
-                            debugger;
-                            $(document).ready(function(){
-                            
-                                
-                                $("#myTable").on('click','#btnSelectreject',function(){
-                                    debugger;
-                                     var currentRow=$(this).closest("tr"); 
-                                     
-                                    
-                                     var col5=currentRow.find("td:eq(2)").text();                                                                                                                                            
-                                     pid=col5;
-                                     
-                                      $.ajax({
-                                        type: 'GET',
-                                        url: '/rejectprocess',
-                                        
-                                    contentType: 'application/json;charset=UTF-8',
-                                        data: {
-                                        
-                                        'pid':pid
-                                    },
-                                        
-                                    dataType:"json",
-                                        success: function(data) {
-                                          alert("Rejected Successfully");
-                                            window.location='ceopage'
-                                        },
-                                         error: function(data) {
-                                           
-                                        }
-                                    }); 
-                                });
-
-                            });
-                            
-
-
-
-                            </script>
-
-
-<script>
-                            
-  var pid=""
-  
-  debugger;
-  $(document).ready(function(){
-  
-      
-      $("#myTable").on('click','#btnSelectapprove',function(){
-          debugger;
-           var currentRow=$(this).closest("tr"); 
-           
-          
-           var col5=currentRow.find("td:eq(2)").text();                                                                                                                                            
-           pid=col5;
-           
-            $.ajax({
-              type: 'GET',
-              url: '/approveprocess',
-              
-          contentType: 'application/json;charset=UTF-8',
-              data: {
-              
-              'pid':pid
-          },
-              
-          dataType:"json",
-              success: function(data) {
-                alert("Approved Successfully");
-                  window.location='ceopage'
-              },
-               error: function(data) {
-                 
-              }
-          }); 
-      });
-
-  });
-  
-
-
-
-  </script>
-                      
-                      
+                  
     </body>
 </html>
