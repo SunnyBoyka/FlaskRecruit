@@ -7,7 +7,7 @@ $("#btn_login").click(function(){
 			var name=document.getElementById('eid').value;
 			var pass=document.getElementById('pass').value;
 			
-			alert('Request Exceeds Trial Limit.');
+			//alert('Request Exceeds Trial Limit.');
 			/*
 			if(name=="admin"&&pass=="admin")
 			{
