@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Process Approval Page</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -69,6 +69,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
         color: white;
                     }
 
+.subheader{
+	color:#1515a0;
+	font-weight:bolder;
+}
+
 
         </style>
     </head>
@@ -80,8 +85,8 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                      <button class="btn" ><a href='./ceopagehome'>Home</a></button>
-                      <button class="btn" ><a href='./login'>logout</a></button>
+                      <button class="btn" ><a href='ceopage'>Home</a></button>
+                      <button class="btn" ><a href='login'>Logout</a></button>
                     </div>
                   </div>
               </nav>
@@ -90,7 +95,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
             </div>
                 <div class="container-fluid">
                     
-                    <h4 class="mt-4 text-center">Process Setup</h4>
+                    <h4 class="mt-4 text-center justify-content-around font-weight-bold">Process Detail View</h4>
                     <hr>
                     <div class="row justify-content-evenly mt-4">
                         
@@ -115,142 +120,134 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
         <div class="row justify-content-around mt-2" style="padding-left:15%">
                      
-          <div class="col-lg-6"  >
+          <div class="col-lg-6">
           <div class="col">
-              <h5 class="xs-2 sm-2 text-left">Process Information</h5>
-            <div class="col-sm-8 col-10 mb-1">
-             <!--  <label for="client_name" class="form-label">Client Name</label> -->
-              {% for i in data %}
-              <!-- <input type="text"  class="form-control shadow-sm"  name="client_name" required id="client_name" placeholder="Client Name" value="{{i[0]}}"  /> -->
-            </div>
-            <div class="col-sm-8 col-10 mb-1">
-              <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
-              <label for="process_name" class="form-label">Process Name</label>
-            </div>
-            <div class="col-lg-6 col-10 mb-1">
+              <h5 class="xs-2 sm-2 text-center font-weight-bold">Process Information</h5>
+              {% for item in data %}
+             
 
-              <label  >{{i[1]}}</label>
-            </div>
-          </div>
-            </div>  
+              <div class="row">
+                <div class="col-lg-6 col-sm-12 mb-1">
+					<div class="col-lg-12 col-12 mb-1">
+						<label class="subheader">Process ID</label>
+					</div>
+					<div class="col-lg-12 col-12 mb-1">  
+						<input type="text" readonly value="{{item[0]}}" id="pid" name="pid" />
+					</div>
+				</div>
+				
+                <div class="col-lg-6 col-sm-12 mb-1">
+					<div class="col-lg-12 col-12 mb-1">
+						<label class="subheader">Process Name</label>
+					</div>
+					<div class="col-lg-12 col-12 mb-1">  
+						<input type="text" readonly value="{{item[1]}}" id="pname" name="pname" />
+					</div>
+				</div>
+              </div>
+            
 
-            <div class="col-sm-8 col-10 mb-1">
-              <div class="row">
-                <div class="col-lg-6 col-10 mb-1">
-            <label >Process ID</label>
-          </div>
-          <div class="col-lg-6 col-10 mb-1">  
-           <label id="*spaM4" for="*zigField4">{{i[2]}}</label> 
-                      </div>
-                    </div>
-                  </div> 
-            <div class="col-sm-8 col-10 mb-1">
-              <div class="row">
-                <div class="col-lg-6 col-10 mb-1">
-              <label for="ops_manager" class="form-label">OPS Manager</label>
+
+			<div class="row">
+                <div class="col-lg-6 col-sm-12 mb-1">
+					<div class="col-lg-12 col-12 mb-1">
+						<label class="subheader">OPS Manager</label>
+					</div>
+					<div class="col-lg-12 col-12 mb-1">  
+						<input type="text" readonly value="{{item[2]}}" id="opsmgr" name="opsmgr" />
+					</div>
+				</div>
+				
+                <div class="col-lg-6 col-sm-12 mb-1">
+					<div class="col-lg-12 col-12 mb-1">
+						<label class="subheader">Target Date</label>
+					</div>
+					<div class="col-lg-12 col-12 mb-1">  
+						<input type="text" readonly value="{{item[3]}}" id="tdate" name="tdate" />
+					</div>
+				</div>
             </div>
-            <div class="col-lg-6 col-10 mb-1">  
-              <label>{{i[3]}}</label>
-              
-            </div>
-          </div> 
-          </div>
-          <div class="col-sm-8 col-10 mb-1">
-            <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
-            <label for="target_date" class="form-label">Target Date</label>
-          </div>
-          <div class="col-lg-6 col-10 mb-1">  
-            <label >{{i[4]}}</label>
-          </div>   
-        </div>  
-        </div> 
+			
+            
         </div>
       </div>
         <div class="col-lg-6">
                               
-            <h5 class="xs-2 sm-2 text-left">Budget Information</h5>
+            <h5 class="xs-2 sm-2 text-left font-weight-bold">Budget Information</h5>
            
-            <div class="col">
-          <div class=" justify-content-around mt-3">
-            <!-- <div class="col-sm-8 col-10 mb-1">
-              <label for="client_name" class="form-label">Overall Budget</label>
-              <input type="text" class="form-control shadow-sm" onchange="overallbudget()" name="overall_budget" id="overall_budget" value="{{i[5]}}" placeholder="Ex : 5000000" />
-            </div>  -->
-            <div class="col-sm-8 col-10 mb-1">
-              <div class="row">
-                <div class="col-lg-6 col-10 mb-1">
-              <label for="client_name" class="form-label">Salary Budget</label>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 mb-1">
+					<div class="col-lg-12 col-12 mb-1">
+						<label class="subheader">Salary Budget</label>
+					</div>
+					<div class="col-lg-12 col-12 mb-1">  
+						<input type="text" readonly value="{{item[4]}}" id="sbudget" name="sbudget" />
+					</div>
+				</div>
+				
             </div>
-            <div class="col-lg-6 col-10 mb-1">
-              <label>{{i[6]}}</label>
-            </div>
-            </div>
-            </div>                         
-            </div>  
-          </div>
-        </div>                                   
-         
+        </div>    
 </div>
+
+
 
 
           <div class="justify-content-around mt-2"  style="padding-top:5%;padding-left:15%;">
 
            <div class="row">
-            <div class="col-lg-5" >
+            <div class="col-lg-4" >
             <div class="col">
-              <h5 class="xs-2 sm-2 text-left" >Resource Requirement Information</h5>
+              <h5 class="xs-2 sm-2 text-left font-weight-bold" >Resource Requirement Information</h5>
               <div class="col-sm-10 col-10 mb-1">
                 <div class="row" >
-               <div class="col-lg-6 col-10 mb-1">
+               <div class="col-lg-12 col-12 mb-1">
                   <label for="client_name" class="form-label"> Total Customer Service Rep</label>
                  </div>
-                 <div class="col-lg-6 col-10 mb-1">
-                  <label for="client_name" class="form-label">{{i[7]}}</label>  
+                 <div class="col-lg-12 col-12 mb-1">
+                  <input type="text" readonly value="{{item[5]}}" id="tot_csr" name="tot_csr" />  
                 </div>
                 </div>
               </div>
               <div class="col-sm-10 col-10 mb-1">
                 <div class="row" >
-                  <div class="col-lg-6 col-10 mb-1">
-                     <label for="client_name" class="form-label"> Total Reguler</label>
+                  <div class="col-lg-12 col-12 mb-1">
+                     <label for="client_name" class="form-label"> Total Regular</label>
                     </div>
-                    <div class="col-lg-6 col-10 mb-1">
-                     <label for="client_name" class="form-label">{{i[8]}}</label>  
+                    <div class="col-lg-12 col-12 mb-1">
+                  <input type="text" readonly value="{{item[6]}}" id="regular" name="regular" />  
                    </div>
                    </div>
               </div>   
               <div class="col-sm-10 col-10 mb-1">
                 
                 <div class="row" >
-                  <div class="col-lg-6 col-10 mb-1">
+                  <div class="col-lg-12 col-12 mb-1">
                      <label for="client_name" class="form-label"> Total Buffer</label>
                     </div>
-                    <div class="col-lg-6 col-10 mb-1">
-                     <label for="client_name" class="form-label">{{i[9]}}</label>  
+                    <div class="col-lg-12 col-12 mb-1">
+                  <input type="text" readonly value="{{item[7]}}" id="buffer" name="buffer" />  
                    </div>
                    </div>
               </div> 
            
           <div class="col-sm-10 col-10 mb-1">
             <div class="row">
-            <div class="col-lg-6 col-10 mb-1">
+            <div class="col-lg-12 col-12 mb-1">
               <label for="client_name" class="form-label">Total Supervisor</label>
              </div>
-             <div class="col-lg-6 col-10 mb-1">
-              <label for="client_name" class="form-label">{{i[10]}}</label>  
+             <div class="col-lg-12 col-12 mb-1"> 
+              <input type="text" readonly value="{{item[10]}}" id="tot_sup" name="tot_sup" /> 
             </div>
             </div>
           </div>
                   
           <div class="col-sm-10 col-10 mb-1">
             <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
+              <div class="col-lg-12 col-12 mb-1">
                 <label for="client_name" class="form-label">Total Team Leader</label>
                </div>
-               <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label">{{i[11]}}</label>  
+               <div class="col-lg-12 col-12 mb-1">
+              <input type="text" readonly value="{{item[13]}}" id="tot_tl" name="tot_tl" /> 
               </div>
               </div>
             
@@ -258,32 +255,32 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
           </div> 
           <div class="col-sm-10 col-10 mb-1">
             <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label">Total Assistant Manager</label>
+              <div class="col-lg-12 col-12 mb-1">
+                <label for="client_name" class="form-label">Total Manager</label>
                </div>
-               <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label">{{i[18]}}</label>  
+               <div class="col-lg-12 col-12 mb-1">
+              <input type="text" readonly value="{{item[16]}}" id="tot_mgr" name="tot_mgr" /> 
               </div>
             </div>
           </div> 
           <div class="col-sm-10 col-10 mb-1">
             <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label">Total  Manager</label>
+              <div class="col-lg-12 col-12 mb-1">
+                <label for="client_name" class="form-label">Total Assistant Manager</label>
                </div>
-               <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label">{{i[21]}}</label>  
+               <div class="col-lg-12 col-12 mb-1">
+              <input type="text" readonly value="{{item[19]}}" id="tot_amgr" name="tot_amgr" />  
               </div>
             </div>
             
           </div> 
           <div class="col-sm-10 col-10 mb-1">
             <div class="row">
-              <div class="col-lg-6 col-10 mb-1">
+              <div class="col-lg-12 col-12 mb-1">
                 <label for="client_name" class="form-label">Total  MIS</label>
                </div>
-               <div class="col-lg-6 col-10 mb-1">
-                <label for="client_name" class="form-label"> {{i[24]}}</label>  
+               <div class="col-lg-12 col-12 mb-1">
+              <input type="text" readonly value="{{item[22]}}" id="tot_mis" name="tot_mis" />  
               </div>
             </div>
           
@@ -292,17 +289,17 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
           
         </div>
       </div>
-          <div class="col-lg-7" >
+          <div class="col-lg-8" >
             <div class="row">
               <h5 class="xs-2 sm-2 text-left">Salary Range Setup</h5>
               <div class="row" style="padding-top:5px;">
               <div class="col-sm-4 col-10 mb-1" >
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label"> CSR Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[12]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[8]}}" id="csrminsal" name="csrminsal" class="col-lg-12" />  
                   </div>
                 </div>
                
@@ -310,10 +307,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">CSR Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[13]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[9]}}" id="csrmaxsal" name="csrmaxsal" class="col-lg-12" />   
                   </div>
                 </div>
                 
@@ -324,10 +321,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label">Sup. Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[14]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[11]}}" id="supminsal" name="supminsal" class="col-lg-12" />  
                   </div>
                 </div>
                 
@@ -335,10 +332,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">Sup. Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[15]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[12]}}" id="supmaxsal" name="supmaxsal" class="col-lg-12" />    
                   </div>
                 </div>
                
@@ -348,10 +345,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label">TL Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[16]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[14]}}" id="tlminsal" name="tlminsal" class="col-lg-12" /> 
                   </div>
                 </div>
                 
@@ -359,10 +356,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">TL Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[17]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[15]}}" id="tlmaxsal" name="tlmaxsal" class="col-lg-12" /> 
                   </div>
                 </div>
                 
@@ -373,10 +370,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label">Mgr. Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[19]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[17]}}" id="mgrminsal" name="mgrminsal" class="col-lg-12" /> 
                   </div>
                 </div>
                 
@@ -385,10 +382,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">Mgr. Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[20]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[18]}}" id="mgrmaxsal" name="mgrmaxsal" class="col-lg-12" /> 
                   </div>
                 </div>
                 
@@ -400,10 +397,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label">Asst.Mgr. Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[22]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[20]}}" id="amgrminsal" name="amgrminsal" class="col-lg-12" />   
                   </div>
                 </div>
               
@@ -411,10 +408,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">Asst.Mgr.  Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[23]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[21]}}" id="amgrmaxsal" name="amgrmaxsal" class="col-lg-12" />   
                   </div>
                 </div>
                
@@ -424,20 +421,20 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Minimum Salary</label>
+                    <label for="client_name" class="form-label">MIS Minimum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[25]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[23]}}" id="misminsal" name="misminsal" class="col-lg-12" />   
                   </div>
                 </div>
               </div>                                      
               <div class="col-sm-4 col-10 mb-1">
                 <div class="row">
                   <div class="col-lg-8 col-10 mb-1">
-                    <label for="client_name" class="form-label"> Maximum Salary</label>
+                    <label for="client_name" class="form-label">MIS Maximum Salary</label>
                    </div>
-                   <div class="col-lg-2 col-10 mb-1">
-                    <label for="client_name" class="form-label"> {{i[26]}}</label>  
+                   <div class="col-lg-4 col-10 mb-1">
+					<input type="text" readonly value="{{item[24]}}" id="mismaxsal" name="mismaxsal" class="col-lg-12" />  
                   </div>
                 </div>
                 
@@ -458,12 +455,12 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
             <div class="col">
             <div class="col-sm-4 col-10 mb-1">
               <label for="training" class="form-label">Training</label>
-              <input type="text" class="form-control shadow-sm"   name="training" id="training" value="{{i[18]}}" placeholder="TL Maximum Salary">
+              <input type="text" class="form-control shadow-sm"   name="training" id="training" value="{{item[18]}}" placeholder="TL Maximum Salary">
               
             </div>   
             <div class="col-sm-4 col-10 mb-1">
               <label for="quality" class="form-label">Quality</label>
-              <input type="text" class="form-control shadow-sm"   name="quality" id="quality" value="{{i[19]}}" placeholder="TL Maximum Salary">
+              <input type="text" class="form-control shadow-sm"   name="quality" id="quality" value="{{item[19]}}" placeholder="TL Maximum Salary">
               
             </div> 
           </div> 
@@ -476,13 +473,13 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
         
            <textarea rows="5" cols="70" id="content" placeholder="Please Write the Reason For Rejection Here..."></textarea>
           </div>
-           <button type="submit" onclick="submit()" class="btn btn-success" style="align-self: center;">submit</button>
+           <button class="btn btn-success" style="align-self: center;" id="btn_procreject">Submit</button>
       </div>  
 
       </div>    
 
           <div class="my-3 text-center"style="padding-top: 3%">
-            <button type="submit" onclick="approve()" class="btn btn-success col-4" >Approve</button>
+            <button class="btn btn-success col-4" id="btn_procapprove" >Approve</button>
             <button type="submit" onclick="reject()" class="btn btn-danger col-4" >Reject</button>
           </div>
 
@@ -744,6 +741,7 @@ if (sidebarToggle) {
 
 
 
+<script src="/static/api/restapi.js"></script>
  
     </body>
 </html>

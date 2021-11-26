@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Candidate Registration Page</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -211,7 +211,7 @@ font-size: 18px;
                                             <option value="">--Select Your Qualification--</option>
                                             {% if qualification is defined %}
                                             {% for i in qualification %}
-                                            <option value="{{1[0]}}">{{i[0]}}</option>
+                                            <option value="{{i[0]}}">{{i[0]}}</option>
                                             {% endfor %}
                                             {% endif %}
                                           </select>
@@ -223,7 +223,7 @@ font-size: 18px;
                                             <option value="">--Select Experience--</option>
                                             {% if experience is defined %}
                                             {% for i in experience %}
-                                            <option value="{{1[0]}}">{{i[0]}}</option>
+                                            <option value="{{i[0]}}">{{i[0]}}</option>
                                             {% endfor %}
                                             {% endif %}
                                           </select>
@@ -238,7 +238,7 @@ font-size: 18px;
                                             
                                             {% if position is defined %}
                                             {% for i in position %}
-                                            <option value="{{1[0]}}">{{i[0]}}</option>
+                                            <option value="{{i[0]}}">{{i[0]}}</option>
                                             {% endfor %}
                                             {% endif %}
                                       
@@ -253,7 +253,7 @@ font-size: 18px;
                                             <option value="">--Select Source--</option>
                                             {% if source is defined %}
                                             {% for i in source %}
-                                            <option value="{{1[0]}}">{{i[0]}}</option>
+                                            <option value="{{i[0]}}">{{i[0]}}</option>
                                             {% endfor %}
                                             {% endif %}
                                       
@@ -274,11 +274,12 @@ font-size: 18px;
 
                                       <div class="col-sm-12">
                                         <label for="target_date" class="form-label">Language</label>
-                                        <select id="Language" name="Language" class="multi_select3 col-sm-12" multiple data-live-search="true">
+                                        <select id="Language" name="Language" class="multi_select3 col-sm-12" multiple data-live-search="true" onchange="collectresselection()">
                                           <option value="English">English</option>
                                           <option value="Kannada">Kannada</option>
                                           <option value="Hindi">Hindi</option>
                                       </select>
+									  <input type="text" id="selres" name="selres" readonly />
                                       </div>  
               
                                       <div class="col-sm-12 ">
@@ -311,7 +312,7 @@ font-size: 18px;
 
                                     </div>
                                     <div class="my-3 text-center" style="padding-bottom: 6%;">
-                                      <button type="submit" class="btn btn-primary col-4" id="dataload_btnsubmit">Submit</button>
+                                      <button type="submit" class="btn btn-primary col-4" id="btn_candreg">Submit</button>
                                     </div>
                 
                                   </form>
@@ -322,6 +323,15 @@ font-size: 18px;
         </div>
 
         <script>
+		
+		function collectresselection()
+		  {
+		  debugger;
+			  var select = document.getElementById('Language');	
+			  var selected = [...select.selectedOptions]
+                    .map(option => option.value);
+			 document.getElementById('selres').value=selected;
+		  }
           function ageCalculator() {  
     var userinput = document.getElementById("dob").value;  
     var dob = new Date(userinput);  
@@ -386,24 +396,7 @@ if (sidebarToggle) {
 <script>
 
 
- $("#dataload_btnsubmit").click(function()
-{
-	debugger;
-   var form_data = new FormData($('#datatransfer')[0]);
-   //alert(form_data);
-        $.ajax({
-            type: 'POST',
-            url: '/registerss',
-            data: form_data,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                console.log('Success!');
-				alert('Data stored successfully');
-            },
-        });
-}); 
+ 
    /* function submit(){
 	debugger;
 	var fnames=document.getElementById('fname').value;
@@ -518,5 +511,6 @@ var language="";
         <script  type="text/javaScript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.js"></script>
         <script  type="text/javaScript" src=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
+<script src="/static/api/restapi.js"></script>
     </body>
 </html>

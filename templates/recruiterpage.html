@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Recruiter Candudates List</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -61,9 +61,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   }
 }
 
+
 .btn {
 padding: 10px 16px;
-background-color: #ada7a7;
+/*background-color: #ada7a7;*/
 border: #080808;
 cursor: pointer;
 font-size: 18px;
@@ -96,11 +97,11 @@ font-size: 18px;
                   
                    
                     <div id="myDIV" style="float: left;">
-                      <button class="btn btn-primary" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
-                      <button class="btn btn-primary" ><a href='./recruiterpage' >New Recruitement</a></button>
-                      <button class="btn btn-primary" ><a href='./selectedcandidates'>Selected Candidate</a></button>
-                      <button class="btn btn-primary" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
-                      <button class="btn btn-primary" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                      <button  ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      <button style="color:white;" ><a href='./recruiterpage' >New Recruitement</a></button>
+                      <button ><a href='./selectedcandidates'>Selected Candidate</a></button>
+                      <button ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
+                      <button ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
                     </div>
 
                   </div>
@@ -108,7 +109,7 @@ font-size: 18px;
                 <!-- Page content-->
             </div>
             </div>
-                <div class="container-fluid">
+                <div class="container-fluid" style="height:500px;overflow:scroll;">
                     
                     <h4 class="mt-4 text-center">New Process Candidates Requirements List</h4>
                     <hr>
@@ -116,33 +117,83 @@ font-size: 18px;
                     <table id="myTable" style="width: 100%;">
                         <tr >
                          <!--  <th colspan="2">Client Name</th>  -->
+                          <th colspan="2">Job ID</th>
                           <th colspan="2">Process Name</th>
-                          <th colspan="2">Process ID</th>
                           <th colspan="2">Operations Manager</th> 
-                          <th colspan="2">Total CSR</th>
-                          <th colspan="2">Total supervisors</th>
-                          <th colspan="2">Total Team Leader</th>
-                          <th colspan="4">Total Assistant Manager</th>
-                          <th colspan="2">Total  Manager</th>
-                          <th colspan="2">Total  MIS</th>
-                          <th colspan="2">view</th>
+                          <th colspan="2">Target Date</th> 
+                          <th colspan="2">Designation</th>
+                          <th colspan="2">Qualification</th>
+                          <th colspan="2">Experience</th>
+                          <th colspan="2">Skills</th>
+                          <th colspan="2">Shift Timing</th>
+                          <th colspan="2">Languages</th>
+                          <th colspan="2">Gender</th>
+                          <th colspan="2"></th>
                          
                           
                         </tr>
                         {% for item in data %}
                         <tr>
                           <!-- <td colspan="2">{{item[0]}}</td> -->
-                          <td colspan="2">{{item[0]}}</td>
-                          <td colspan="2">{{item[1]}}</td>
-                          <td colspan="2">{{item[2]}}</td>
-                          <td colspan="2">{{item[3]}}</td>
-                          <td colspan="2">{{item[4]}}</td>
                           <td colspan="2">{{item[5]}}</td>
-                          <td colspan="4">{{item[6]}}</td>
-                          <td colspan="2">{{item[7]}}</td>
-                          <td colspan="2">{{item[8]}}</td>
+                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2">{{item[2]}}</td>
+                          <td colspan="2">{{item[10]}}</td>
+                          <td colspan="2">{{item[6]}}</td>
+                          <td colspan="2">						  
+								{% if item[6]|string=="CSR" %}
+									{{item[15]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[24]}}
+								{% endif %}
+						  </td>
+                          <td colspan="2">	
+								{% if item[6]|string=="CSR" %}
+									{{item[16]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[25]}}
+								{% endif %}
+						  </td>
                           
-                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="fas fa-pen"></i>     ...View</buttion></td>
+                          <td colspan="2">					  
+						  
+								{% if item[6]|string=="CSR" %}
+									{{item[17]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[26]}}
+								{% endif %}
+						  </td>
+                          <td colspan="2">					  
+						  
+								{% if item[6]|string=="CSR" %}
+									{{item[18]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[27]}}
+								{% endif %}
+						  </td>
+                          <td colspan="2">					  
+						  
+								{% if item[6]|string=="CSR" %}
+									{{item[19]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[28]}}
+								{% endif %}
+						  </td>
+                          <td colspan="2">
+								{% if item[6]|string=="CSR" %}
+									{{item[20]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[29]}}
+								{% endif %}
+						  </td>
+                          
+                          <td colspan="2"><button class="btn btn-primary btnSearchCand" id="btnSearchCand">Search</button></td>
                           
                           
                         </tr>
@@ -150,7 +201,10 @@ font-size: 18px;
                         </table>
 
 
-
+				</div>
+				<div class="container-fluid" style="height:500px;overflow:scroll;" id="table_driver_history">
+				
+				</div>
 
 
                         <script>
@@ -237,6 +291,7 @@ font-size: 18px;
                             
                             </script>
                       
-                      
+  
+<script src="/static/api/restapi.js"></script>
     </body>
 </html>

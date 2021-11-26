@@ -103,17 +103,20 @@ label{
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm">
-                    <div class="container-fluid">
-                        <!-- <button class="btn btn-transparent shadow-none" id="sidebarToggle"><i class="fas fa-bars"></i></button> -->
-                        
-
-                        <div  style="float: left;padding-right: 1400px;">
-                          <button class="btn"><a href='./recruitermanagerpage'>Home</a></button> 
-                         
-                      </div>
+                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+                  <div class="container-fluid">
+                      
+                    <div id="myDIV" >
+                      <button class="" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                        <button class="" ><a href='./recruiterpage' >New Recruitement</a></button>
+                        <button class="" ><a href='./selectedcandidates'>Selected Candidate</a></button>
+                        <button class="" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
+                        <button class="" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                        <button class="" ><a href='login'>Logout</a></button>
+                     
                     </div>
-                </nav> 
+                  </div>
+              </nav> 
                 <!-- Page content-->
                 
                 <div class="container-fluid">
@@ -134,21 +137,22 @@ label{
                                         <div class="row">
                                             {% if data is defined %}
                                       <div class="col-lg-12 " style="padding-top: 10px;">
-                                        <div class="col-lg-12">
+                                        
+                                          <div class="col-lg-12">
                                             <div class="col-lg-6">
-                                        <label for="client_name" class="form-label">Operation Manager Name</label>
+                                        <label for="client_name" class="form-label">Candidate Id</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="text" id="intname" class="form-label" value="{{datanew}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                        <input type="text" id="cid" class="form-label" value="{{cid}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
                                     </div>
 
                                     </div>
-                                          <div class="col-lg-12">
+									<div class="col-lg-12">
                                             <div class="col-lg-6">
                                         <label for="client_name" class="form-label">First Name</label>
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="text" id="fname" class="form-label" value="{{data[0][0]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                        <input type="text" id="fname" class="form-label" value="{{data[0][1]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
                                     </div>
 
                                     </div>
@@ -157,7 +161,7 @@ label{
                                         <label for="client_name" class="form-label">Last Name</label> 
                                     </div>
                                     <div class="col-lg-6">
-                                        <input type="text" id="lname"  class="form-label" value="{{data[0][1]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"/> 
+                                        <input type="text" id="lname"  class="form-label" value="{{data[0][2]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"/> 
                                     </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -165,7 +169,7 @@ label{
                                         <label for="target_date" class="form-label"> Date Of Birth</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label">{{data[0][2]}}</label> 
+                                            <label for="client_name" class="form-label">{{data[0][3]}}</label> 
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -174,7 +178,7 @@ label{
                                         </div>
                                        
                                         <div class="col-lg-6">
-                                            <label for="client_name"  class="form-label"> {{data[0][3]}}</label>
+                                            <label for="client_name"  class="form-label"> {{data[0][4]}}</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -183,7 +187,7 @@ label{
                                         </div>
                                        
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label">{{data[0][4]}}</label>  
+                                            <label for="client_name" class="form-label">{{data[0][5]}}</label>  
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -192,7 +196,7 @@ label{
                                         </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="target_date" class="form-label col-lg-12"  >{{data[0][5]}}</label>
+                                            <label for="target_date" class="form-label">{{data[0][6]}}</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -202,7 +206,7 @@ label{
 
                                         
                                         <div class="col-lg-6">
-                                            <label  for="target_date" class="form-label col-lg-12"  >{{data[0][6]}}</label>
+                                            <label  for="target_date" class="form-label">{{data[0][7]}}</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -211,7 +215,7 @@ label{
                                         </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label col-lg-12">{{data[0][7]}}</label> 
+                                            <label for="client_name" class="form-label">{{data[0][8]}}</label> 
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -220,7 +224,7 @@ label{
                                         </div>
                                        
                                         <div class="col-lg-6">
-                                            <label for="client_name"  class="form-label"> {{data[0][8]}}</label>
+                                            <label for="client_name"  class="form-label"> {{data[0][9]}}</label>
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -229,7 +233,7 @@ label{
                                             </div>
                                             
                                             <div class="col-lg-6">
-                                                <label for="client_name" class="form-label">{{data[0][9]}}</label> 
+                                                <label for="client_name" class="form-label">{{data[0][10]}}</label> 
                                             </div>
                                             </div>
                                         <div class="col-lg-12">
@@ -238,7 +242,7 @@ label{
                                             </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="client_name"  class="form-label"> {{data[0][10]}}</label>
+                                            <label for="client_name"  class="form-label"> {{data[0][11]}}</label>
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -247,7 +251,7 @@ label{
                                             </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label">{{data[0][11]}}</label>
+                                            <label for="client_name" class="form-label">{{data[0][12]}}</label>
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -256,7 +260,7 @@ label{
                                             </div>
                                        
                                         <div class="col-lg-6">
-                                           <input type="text"  id="aadhar_num" class="form-label" value="{{data[0][12]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"> 
+                                           <input type="text"  id="aadhar_num" class="form-label" value="{{data[0][13]}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;"> 
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -265,7 +269,7 @@ label{
                                             </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label">{{data[0][13]}}</label> 
+                                            <label for="client_name" class="form-label">{{data[0][14]}}</label> 
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -274,7 +278,7 @@ label{
                                             </div>
                                        
                                         <div class="col-lg-6">
-                                            <label for="client_name"  class="form-label"> {{data[0][14]}}</label>
+                                            <label for="client_name"  class="form-label"> {{data[0][15]}}</label>
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -283,16 +287,7 @@ label{
                                             </div>
                                         
                                         <div class="col-lg-6">
-                                            <label for="client_name" class="form-label">{{data[0][16]}}</label> 
-                                        </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6">
-                                                <label for="target_date" class="form-label">Preferable Shift Timing </label>
-                                            </div>
-                                       
-                                        <div class="col-lg-6">
-                                            <label for="client_name"  class="form-label"> {{data[0][17]}}</label>
+                                            <label for="client_name" class="form-label">{{data[0][17]}}</label> 
                                         </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -322,6 +317,15 @@ label{
                                             <label for="client_name"  class="form-label"> {{data[0][21]}}</label>
                                         </div>
                                        </div>
+									   <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                        <label for="client_name" class="form-label">Operation Manager Name</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="intname" class="form-label" value="{{mgr}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                    </div>
+
+                                    </div>
                                       </div>
                                       <div class="col-lg-6"  style="padding-top: 10px;">
                                         
@@ -358,13 +362,13 @@ label{
                               <div style="
                               top: 20%;
                               width:100%;
-                              height: 120%;
+                              height: 95%;
                               background: rgba(240, 234, 234, 0.8);
                               box-shadow: 0 15px 25px rgb(0 0 0 / 50%);
                               margin: 0% 8%">
                               <div class="row">
                                 
-                                <iframe src="../static/resumes/{{data[0][20]}}" width="100%" height="450px">
+                                <iframe src="../static/resumes/{{data[0][20]}}" width="100%" height="600px">
                                 </iframe>
              
                                   </div> 
@@ -395,42 +399,159 @@ label{
                                 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Understands the process requirements</label>
-                                          <input type="text" class="form-control shadow-sm" name="Understands" id="Understands"/>
+										  
+								<select class="form-control shadow-sm" name="Understands" id="Understands">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label"> Job Knowledge / Work Experience </label>
-                                          <input type="text" class="form-control shadow-sm" name="workexperience" id="workexperience"/>
+										  
+										  
+								<select class="form-control shadow-sm" name="workexperience" id="workexperience">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Result Oriented/ Initiative</label>
-                                          <input type="text" class="form-control shadow-sm" name="initiative" id="initiative"/>
+									<select class="form-control shadow-sm" name="initiative" id="initiative">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
+									
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Languages Known and fluency</label>
-                                          <input type="text" class="form-control shadow-sm" name="language" id="language"/>
+								<select class="form-control shadow-sm" name="language" id="language">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                         
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Communication Skills (Speaking/Presenting)</label>
-                                          <input type="text" class="form-control shadow-sm" name="Communicationskills" id="Communicationskills"/>
+										  
+								<select class="form-control shadow-sm" name="Communicationskills" id="Communicationskills">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                         
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Personality, Listening/Empathy</label>
-                                          <input type="text" class="form-control shadow-sm" name="Personality" id="Personality"/>
+										  
+								<select class="form-control shadow-sm" name="Personality" id="Personality">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                         
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Thinks Strategically</label>
-                                          <input type="text" class="form-control shadow-sm" name="Strategically" id="Strategically"/>
+										  
+								<select class="form-control shadow-sm" name="Strategically" id="Strategically">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Team Player</label>
-                                          <input type="text" class="form-control shadow-sm" name="teamplayer" id="teamplayer"/>
+										  
+								<select class="form-control shadow-sm" name="teamplayer" id="teamplayer">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
                                     <label for="client_name" class="form-label">Flexibility to work in shifts</label>
-                                          <input type="text" class="form-control shadow-sm" name="shifts_flexibility" id="shifts_flexibility"/>
+										  
+								<select class="form-control shadow-sm" name="shifts_flexibility" id="shifts_flexibility">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1" id="reject" style="padding-top: 3%;display:none">
                                     <textarea rows="4" cols="50" id="comments" placeholder="Type the Reason For Rejection "></textarea>
@@ -441,7 +562,7 @@ label{
                         </div>
                           <div class="col-sm-10 col-10 mb-1" style="padding-top: 5%;">
                           <button type="submit" class="btn btn-success col-2" onclick="save()">Save</button> 
-                          <button type="submit" class="btn btn-primary col-2" onclick="pass()">Pass</button> 
+                          <button type="submit" class="btn btn-primary col-2" onclick="pass()">Select</button> 
                           <button type="submit" class=" btn btn-danger col-2" onclick="reject()">Reject</button>
                           
                         </div>
@@ -476,40 +597,41 @@ label{
     {
         debugger;
        
-        var adharnumb=document.getElementById('aadhar_num').value;
-        var interviewer=document.getElementById('intname').value;
-        var Understanding=document.getElementById('Understands').value;
-        var workexperience=document.getElementById('workexperience').value;
-        var initiative=document.getElementById('initiative').value;
-        var language=document.getElementById('language').value;
-        var Communicationskills=document.getElementById('Communicationskills').value;
-        var Personality=document.getElementById('Personality').value;
-        var Strategically=document.getElementById('Strategically').value;
-        var teamplayer=document.getElementById('teamplayer').value;
-        var shifts_flexibility=document.getElementById('shifts_flexibility').value;
+         var cid=document.getElementById('cid').value;
+    var interviewer=document.getElementById('intname').value;
+    var Understanding=document.getElementById('Understands').value;
+    var workexperience=document.getElementById('workexperience').value;
+    var initiative=document.getElementById('initiative').value;
+    var language=document.getElementById('language').value;
+    var Communicationskills=document.getElementById('Communicationskills').value;
+    var Personality=document.getElementById('Personality').value;
+    var Strategically=document.getElementById('Strategically').value;
+    var teamplayer=document.getElementById('teamplayer').value;
+    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
         var rejectcomments=document.getElementById('comments').value;
 
 
 
         $.ajax({
            type: 'GET',
-           url: '/statusupload',
+           url: '/statusuploadsave1',
      
        contentType: 'application/json;charset=UTF-8',
            data: {
            
-            'adharnumb':adharnumb,
-            'interviewer':interviewer,
-            'Understanding':Understanding,
-            'workexperience':workexperience,
-            'initiative':initiative,
-            'language':language,
-            'Communicationskills':Communicationskills,
-            'Personality':Personality,
-            'Strategically':Strategically,
-            'teamplayer':teamplayer,
-            'shifts_flexibility':shifts_flexibility,
-            'rejectcomments': rejectcomments
+            'cid':cid,
+        'interviewer':interviewer,
+        'Understanding':Understanding,
+        'workexperience':workexperience,
+        'initiative':initiative,
+        'language':language,
+        'Communicationskills':Communicationskills,
+        'Personality':Personality,
+        'Strategically':Strategically,
+        'teamplayer':teamplayer,
+        'shifts_flexibility':shifts_flexibility,
+		'status':'Rejected',
+        'rejectcomments': rejectcomments
 
        },
            
@@ -524,61 +646,12 @@ label{
 
 
 
-    function pass()
+function pass()
 
 {
     debugger;
    
-    var adharnumb=document.getElementById('aadhar_num').value;
-    var interviewer=document.getElementById('intname').value;
-    var Understanding=document.getElementById('Understands').value;
-    var workexperience=document.getElementById('workexperience').value;
-    var initiative=document.getElementById('initiative').value;
-    var language=document.getElementById('language').value;
-    var Communicationskills=document.getElementById('Communicationskills').value;
-    var Personality=document.getElementById('Personality').value;
-    var Strategically=document.getElementById('Strategically').value;
-    var teamplayer=document.getElementById('teamplayer').value;
-    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-
-
-
-    $.ajax({
-       type: 'GET',
-       url: '/statusuploadpass',
- 
-   contentType: 'application/json;charset=UTF-8',
-       data: {
-       
-        'adharnumb':adharnumb,
-        'interviewer':interviewer,
-        'Understanding':Understanding,
-        'workexperience':workexperience,
-        'initiative':initiative,
-        'language':language,
-        'Communicationskills':Communicationskills,
-        'Personality':Personality,
-        'Strategically':Strategically,
-        'teamplayer':teamplayer,
-        'shifts_flexibility':shifts_flexibility
-   },
-       
-   dataType:"json",
-       success: function(data) {
-        alert(data);
-        window.location='operationinterviewcandidate'
-   
-       },
-   });
-}
-
-
-function save()
-
-{
-    debugger;
-   
-    var adharnumb=document.getElementById('aadhar_num').value;
+    var cid=document.getElementById('cid').value;
     var interviewer=document.getElementById('intname').value;
     var Understanding=document.getElementById('Understands').value;
     var workexperience=document.getElementById('workexperience').value;
@@ -597,9 +670,8 @@ function save()
        url: '/statusuploadsave',
  
    contentType: 'application/json;charset=UTF-8',
-       data: {
-       
-        'adharnumb':adharnumb,
+       data: {       
+        'cid':cid,
         'interviewer':interviewer,
         'Understanding':Understanding,
         'workexperience':workexperience,
@@ -609,7 +681,58 @@ function save()
         'Personality':Personality,
         'Strategically':Strategically,
         'teamplayer':teamplayer,
-        'shifts_flexibility':shifts_flexibility
+        'shifts_flexibility':shifts_flexibility,
+		'status':'Selected'
+   },
+       
+   dataType:"json",
+       success: function(data) {
+        alert(data);
+        window.location='operationinterviewcandidate'
+   
+       },
+   });
+}
+
+
+
+function save()
+
+{
+    debugger;
+   
+    var cid=document.getElementById('cid').value;
+    var interviewer=document.getElementById('intname').value;
+    var Understanding=document.getElementById('Understands').value;
+    var workexperience=document.getElementById('workexperience').value;
+    var initiative=document.getElementById('initiative').value;
+    var language=document.getElementById('language').value;
+    var Communicationskills=document.getElementById('Communicationskills').value;
+    var Personality=document.getElementById('Personality').value;
+    var Strategically=document.getElementById('Strategically').value;
+    var teamplayer=document.getElementById('teamplayer').value;
+    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
+
+
+
+    $.ajax({
+       type: 'GET',
+       url: '/statusuploadsave',
+ 
+   contentType: 'application/json;charset=UTF-8',
+       data: {       
+        'cid':cid,
+        'interviewer':interviewer,
+        'Understanding':Understanding,
+        'workexperience':workexperience,
+        'initiative':initiative,
+        'language':language,
+        'Communicationskills':Communicationskills,
+        'Personality':Personality,
+        'Strategically':Strategically,
+        'teamplayer':teamplayer,
+        'shifts_flexibility':shifts_flexibility,
+		'status':'Saved'
    },
        
    dataType:"json",

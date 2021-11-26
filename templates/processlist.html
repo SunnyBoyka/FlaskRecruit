@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Manager Process List</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -95,10 +95,11 @@ font-size: 18px;
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                      <button class="btn btn-primary" ><a href='./operations'>Home</a></button>
-                      <button class="btn btn-primary" ><a href='./processlist' >New Process List</a></button>
-                      <button class="btn btn-primary" ><a href='./operationinterviewcandidate'>Recruitement Queue</a></button>
-                      <button class="btn btn-primary" ><a href='./savedcandidates'>Saved Candidates</a></button>
+                      <button class="" ><a href='./operations'>Home</a></button>
+                      <button class="" ><a href='./processlist' >New Process List</a></button>
+                      <button class="" ><a href='./operationinterviewcandidate'>Recruitement Queue</a></button>
+                      <button class="" ><a href='./opsavedcandidates'>Saved Candidates</a></button>
+                      <button class="" ><a href='login'>Logout</a></button>
                      
                     </div>
                   </div>
@@ -114,22 +115,22 @@ font-size: 18px;
                     <table id="myTable" style="width: 100%;">
                         <tr >
                           
-                          <th colspan="2">Process Name</th>
                           <th colspan="2">Process ID</th>
+                          <th colspan="2">Process Name</th>
                           <th colspan="2">Operations Manager</th> 
                           <th colspan="2">Target Date</th>
-                          <th colspan="2">view</th>
+                          <th colspan="2"></th>
                          
                           
                         </tr>
                         {% for item in data %}
                         <tr>
                           
+                          <td colspan="2">{{item[0]}}</td>
                           <td colspan="2">{{item[1]}}</td>
                           <td colspan="2">{{item[2]}}</td>
                           <td colspan="2">{{item[3]}}</td>
-                          <td colspan="2">{{item[4]}}</td>
-                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="far fa-eye"></i>  ...View</buttion></td>
+                          <td colspan="2"><button class="btn " id="btnSelect"><i class="far fa-eye"></i>  ...View</buttion></td>
                           
                           
                         </tr>

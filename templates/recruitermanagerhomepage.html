@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Process Creation Page</title>
+        <title>Recruitement Manager Home Page</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -18,7 +18,30 @@
 
 
 
-        <style>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
             #wrapper {
   overflow-x: hidden;
 }
@@ -92,13 +115,67 @@ font-size: 20px;
                     <div id="myDIV" >
                       <button class="btn btn-primary" ><a href='./recruitermanagerhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
                       <button class="btn btn-primary" ><a href='./recruitermanagerpage' >New Process List</a></button>
+                      <button class="btn btn-primary" ><a href='login' >Logout</a></button>
                     </div>
                   </div>
               </nav>
                 <!-- Page content-->
             </div>
             </div>
-                  
+            
+
+            <h4 class="mt-4 text-center">Candidates For Interview</h4>
+            <hr>
+                <div class="container-fluid">
+                    
+                    <!--<h4 class="mt-4 text-center">Process List</h4>-->
+                    <hr>
+                   
+                    <table id="customers" style="width: 100%;">
+                        <tr>
+                         <!--  <th colspan="2">Client Name</th>  -->
+                          <th colspan="2">Candidate ID</th>
+                          <th colspan="2">Name</th>
+                          <th colspan="2">Email</th> 
+                          <th colspan="2">Phone #</th> 
+                          <th colspan="2">Qualification</th>
+                          <th colspan="2">Experience</th>
+                          <th colspan="2">Position Applied</th>
+                          <th colspan="2">Languages Known</th>
+                          <th colspan="2"></th>
+                          
+                         
+                          
+                        </tr>
+                       
+                        {% for item in candidateslist %}
+                        <tr>
+                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2">{{item[1]}} {{item[2]}}</td>
+                          <td colspan="2">{{item[11]}}</td>
+                          <td colspan="2">{{item[12]}}</td>
+                          <td colspan="2">{{item[14]}}</td>
+                          <td colspan="2">{{item[15]}}</td>
+                          <td colspan="2">{{item[16]}}</td>
+                          <td colspan="2">{{item[18]}}</td>
+                          
+                          <td colspan="2">
+						  <button class="btn btn-primary btn_RecMgrApprove" id="btn_RecMgrApprove" onclick=RecMgrApprove({{item[0]}})>Approve</button>
+							<!--<select id="Mgr" name="Mgr">
+								<option>Allocate To</option>
+								{% for val in mgrdata %}						
+									<option>{{val[1]}}({{val[0]}})</option>
+								{% endfor %}
+								
+							</select>-->
+								
+						  </td>
+                        </tr>
+                        {% endfor %}
+                       
+                        </table>
+
+				</div>			
                                            
                     
                    
@@ -109,5 +186,6 @@ font-size: 20px;
         <!-- Core theme JS-->
        
 
+	<script src="/static/api/restapi.js"></script>
     </body>
 </html>

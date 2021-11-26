@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>New Requsition Page</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -147,7 +147,7 @@ font-size: 18px;
                         <select class="form-control shadow-sm" name="processid" id="processid">
                           
                           {% for i in data %}
-                          <option value="{{i[2]}}">{{i[2]}}</option>
+                          <option value="{{i[0]}}">{{i[0]}}</option>
                           {% endfor %}
                          
                           </select>
@@ -159,7 +159,7 @@ font-size: 18px;
                         <select class="form-control shadow-sm" name="qualification" id="tdate">
                           
                           {% for i in data %}
-                          <option value="{{i[4]}}">{{i[4]}}</option>
+                          <option value="{{i[3]}}">{{i[3]}}</option>
                           {% endfor %}
                          
                           </select>
@@ -324,9 +324,9 @@ font-size: 18px;
                           <label for="supervisor" class="form-label">Gender</label>
                           <select id="Gender" class="multi_select3" >
                             <option value=""> Select Options</option> 
-                            <option value="Male">Male only</option>
-                            <option value="Any_Gender">Any Gender</option>
-                            <option value="Female">Female Only</option>
+                            <option>Male</option>
+                            <option>Any Gender</option>
+                            <option>Female</option>
                         </select>
                         </div>   
                         
