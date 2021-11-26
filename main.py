@@ -513,20 +513,21 @@ def recruiterpage():
 
 
 opsmgr=""
-
 @app.route('/selectedcandidates')
 def selectedcandidates():
     global userid
     employeeid=userid
     global username
     employeename=username
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='localhost',database='transactrecdb',user='root',password='')
     cursor = connection.cursor()
-    sql_select_Query = "select * from candidate_register where recruiter_mgr_status='approved' "
-    print(sql_select_Query)
+    sql_Query = "select distinct tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where tblinterview.Statuss='Selected' and tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
+    
+    print(sql_Query)
     cursor.execute(sql_select_Query)
     data = cursor.fetchall()
     print(data)
+    '''
     addrnum=data[0][12]
     print(addrnum)
     sql_select_Query2 = "select Process_id from candidate_register where adhar_number='"+addrnum+"'"
@@ -544,7 +545,8 @@ def selectedcandidates():
     opsmgr=data3
     connection.close()
     cursor.close()
-    return render_template('selectedcandidates.html',data=data,data3=data3)
+    '''
+    return render_template('selectedcandidates.html',data=data)
 
 
 
