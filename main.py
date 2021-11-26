@@ -2185,7 +2185,7 @@ def reccandidateoverview1():
     aadharnum=cadharofcandidate
     global interviewername
     datanew=interviewername
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    connection = mysql.connector.connect(host='localhost',database='transactrecdb',user='root',password='')
     cursor = connection.cursor()
     
     cid=request.args['cid']
@@ -2202,12 +2202,18 @@ def reccandidateoverview1():
     cursor.execute(sql_Query)
     interviewdata=cursor.fetchall()
     print(interviewdata)
-    
-    sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
-    print(sql_Query) 
-    cursor.execute(sql_Query)
-    sal=cursor.fetchall()
-    print(sal)
+    sal=''
+    try:
+        
+        sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
+        print(sql_Query) 
+        cursor.execute(sql_Query)
+        sal=cursor.fetchall()
+        print(sal)
+    except:
+        print('')
+
+        
 
     flagger=1
     if len(interviewdata)==0:
