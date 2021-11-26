@@ -42,7 +42,7 @@ app=Flask(__name__)
 
 @app.route('/')
 def index():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT DISTINCT(Type_Of_Users) FROM `hrmsemployee`"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -55,7 +55,7 @@ def index():
 
 @app.route('/login')
 def login():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT DISTINCT(Type_Of_Users) FROM `hrmsemployee`"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -65,9 +65,27 @@ def login():
     cursor.close()
     return render_template('login.html',data=data)
 
+@app.route('/candidatepage')
+def candidatepage():
+    return render_template('candidatepage.html')
+
 @app.route('/hrhomepage')
 def hrhomepage():
-    return render_template('hrpage.html')
+    global userid
+    interviewer=userid
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    #sql_Query = "select tblcandidate_register.*,Count(*),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted';"
+    sql_Query="select tblcandidate_register.*,Count(tblinterview.Candid),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted' and tblcandidate_register.Candid in(Select cid from tblsalary_data)  group by tblinterview.Candid;"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    data=cursor.fetchall()
+    print(data)
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('hrpage.html',data=data)
+    
 
 @app.route('/hrheadpage')
 def hrheadpage():
@@ -96,7 +114,7 @@ def recruiterhomepage():
 
 @app.route('/recruitermanagerhomepage')
 def recruitermanagerhomepage():    
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT * FROM tblcandidate_register where Statuss='RecMgr'"
     #print(sql_select_Query)
     cursor = connection.cursor()
@@ -119,7 +137,7 @@ def recruitermanagerhomepage():
 @app.route('/recmgrapproval')
 def recmgrapproval():    
     cid=request.args['cid']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT * FROM tblcandidate_register where Statuss='RecMgr'"
     #print(sql_select_Query)
     cursor = connection.cursor()
@@ -156,7 +174,7 @@ def recmgrapproval():
 def interviewalloc():    
     cid=request.args['cid']
     mgr=request.args['mgr']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     
     sql_select_Query = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason) values ("+cid+",'"+mgr+"','','','','','','','','','','')"
     #print(sql_select_Query)    
@@ -175,7 +193,7 @@ def loginverify():
     passwords=request.args['pass']
     print(eid)
     print(passwords)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "select * from hrmsemployee where Eid='"+eid+"' and Pswd='"+passwords+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -243,7 +261,7 @@ def home():
 
 @app.route('/register', methods=['POST','GET'])
 def register():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = " SELECT Qualification FROM databank where Qualification<>''"
     #print(sql_select_Query)
     cursor = connection.cursor()
@@ -326,13 +344,51 @@ def candidateregister():
         stdates = request.form.get('stdate')
         print(stdates)
         prod_mas = request.files.get('cv')
+        f=prod_mas
+        print(f)
         filename = secure_filename(prod_mas.filename)
         print(filename)
-        #prod_mas.save(os.path.join("./static/Resumes/", filename))
+        try:
+            prod_mas.save(os.path.join("https://thrms.herokuapp.com/static/Resumes/", filename))
+        except:
+            print('local upload failed')
+        try:
+            import ftplib  
+            # Fill Required Information
+            HOSTNAME = "182.50.132.56"
+            USERNAME = "TransactHRMS"
+            PASSWORD = "Transact@696"
+              
+            # Connect FTP Server
+            ftp_server = ftplib.FTP(HOSTNAME, USERNAME, PASSWORD)
+              
+            # force UTF-8 encoding
+            ftp_server.encoding = "utf-8"
+              
+            # Enter File Name with Extension
+            #fileroot=os.path.dirname(os.path.abspath(__file__))
+            #print(fileroot)
+            filename = f
+            print(filename)             
+            # Read file in binary mode
+            with open(filename, "rb") as file:
+                # Command for Uploading the file "STOR filename"
+                ftp_server.storbinary(f"STOR {filename}", file)
+              
+            # Get list of files
+            ftp_server.dir()
+              
+            # Close the Connection
+            ftp_server.quit()
+        except Exception as e:
+            print('Failed to upload to ftp: '+ str(e))
+            print('FTP upload failed')
+            
+
         coletts = request.form.get('covlet')
         print(coletts)
         
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "insert into tblcandidate_register(first_name,last_name,DOB,age,gender,address1,address2,city,pincode,state,email_address,phonenumber,adhar_number,qualification,experience,Positionapplied,walk_in_with,Languages_known,startdate,cv,cover_letter,Statuss) values('"+fnames+"','"+lnames+"','"+dob+"','"+age+"','"+gen+"','"+adders1+"','"+adders2+"','"+city+"','"+pin+"','"+state+"','"+email+"','"+phnum+"','"+addrnum+"','"+quali+"','"+exper+"','"+posi+"','"+walkin+"','"+language+"','"+stdates+"','"+filename+"','"+coletts+"','Open')"
         print(sql_Query) 
@@ -350,7 +406,7 @@ def candidateregister():
 
 @app.route('/process')
 def processs():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_select_Query = "SELECT Ename FROM hrmsemployee where Type_Of_Users='Operations'"
     cursor.execute(sql_select_Query)
@@ -369,7 +425,7 @@ def processs():
 @app.route('/ceopage')
 def ceopage():
     print('hi')
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT ProcessID,CreatedDate,ProcessName,OPSManager,TargetDate,Statuss FROM tblproc_setup order by ProcessId desc" #WHERE Statuss='Pending' 
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -384,7 +440,7 @@ def ceopage():
 @app.route('/ceoprocesspage', methods =  ['GET','POST'])
 def ceoprocesspage():
     pid=request.args['pid']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT * from tblproc_setup where ProcessID='"+pid+"'"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -419,7 +475,7 @@ def ceoviewprocess():
 @app.route('/managerupdate', methods =  ['GET','POST'])
 def managerupdate():
     aadhar_num = request.args['aadhar_num']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update candidate_register set recruiter_mgr_status='Approved' where adhar_number='"+aadhar_num+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -436,7 +492,7 @@ def managerupdate():
 @app.route('/managerupdatereject', methods =  ['GET','POST'])
 def managerupdatereject():
     aadhar_num = request.args['aadhar_num']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update candidate_register set recruiter_mgr_status='Rejected' where adhar_number='"+aadhar_num+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -474,7 +530,7 @@ def searchcandidates():
     totalmgr=grtotalmgr
     global grtotalmis
     totalmis=grtotalmis
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT * from  recruiter where Process_Name='"+pname+"' and Prcess_ID='"+processid+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -501,7 +557,7 @@ def recruiterpage():
     employeename=username
     print(employeeid)
     print(employeename)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT ProcessName,ProcessID,OPSManager,tblreclist.*,recruiter.* FROM tblreclist,tblproc_setup,recruiter WHERE tblproc_setup.ProcessID=tblreclist.ProcId and recruiter.Prcess_ID=tblreclist.ProcId"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -513,13 +569,14 @@ def recruiterpage():
 
 
 opsmgr=""
+
 @app.route('/selectedcandidates')
 def selectedcandidates():
     global userid
     employeeid=userid
     global username
     employeename=username
-    connection = mysql.connector.connect(host='localhost',database='transactrecdb',user='root',password='')
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select distinct tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where tblinterview.Statuss='Selected' and tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
     
@@ -617,7 +674,7 @@ def managercandidateview():
     cquali=managerquail
     global managerexpi
     cexpi=managerexpi
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "SELECT * FROM `candidate_register` where first_name='"+cname+"' and adhar_number='"+cadhar+"' and recruiter_mgr_status='Pending' "
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -642,7 +699,7 @@ def newrequisition():
     opsmgr = gopsmgr
     global gtdate
     targetdate = gtdate
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_select_Query = "select * from tblproc_setup where  ProcessID='"+pname+"' and OPSManager='"+opsmgr+"' and TargetDate='"+targetdate+"'"
     cursor.execute(sql_select_Query)
@@ -688,7 +745,7 @@ def newrequisition():
 def processlist():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "select Ename from hrmsemployee where Eid='"+str(interviewer)+"'"
     print(sql_Query2) 
@@ -711,7 +768,7 @@ def processlist():
 def rejectprocess():
     pid=request.args['pid']
     comments=request.args['comments']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update proc_setup set statuss='reject' , comments_for_rejection='"+comments+"' where ProcessID='"+pid+"' "
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -734,7 +791,7 @@ def approveprocess():
     totmgr=request.args['totmgr']
     totamgr=request.args['totamgr']
     totmis=request.args['totmis']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update tblproc_setup set Statuss='Approved' where ProcessID='"+pid+"' "
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -860,7 +917,7 @@ def newrequisitions():
 
 @app.route('/createnewprocess', methods =  ['GET','POST'])
 def createnewprocess():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     pname = request.args['pname']
     opsmgr = request.args['opsmgr']
     targetdate = request.args['targetdate']
@@ -903,7 +960,7 @@ def createnewprocess():
 
 """ @app.route('/updatenewprocess', methods =  ['GET','POST'])
 def updatenewprocess():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cname = request.args['cname']
     pname = request.args['pname']
     pid = request.args['pid']
@@ -955,7 +1012,7 @@ def recruiterscsr():
     langs = request.args['language']
     gender = request.args['gender']
     description = request.args['description']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="select *  from recruiter  where  Process_Name='"+pname+"' and  Prcess_ID='"+pid+"'" 
     print(query)
@@ -967,7 +1024,7 @@ def recruiterscsr():
     cur.close()
     connection.close()
     if(len(data)==0):
-            connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+            connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
             cursor = connection.cursor()
             sql_Query = "insert into recruiter(Process_Name,Prcess_ID,Target_Date,Job_type,Regular,Buffer,total_CSR,CSRqualification,CSRexperience,CSRSkills,CSRShift_Timing,CSRLanguages,CSRGender,CSRdiscription) values('"+pname+"','"+pid+"','"+tdate+"','"+job_type+"','"+reguler+"','"+buffer+"','"+total_csr+"','"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')" 
             cursor.execute(sql_Query)
@@ -1004,7 +1061,7 @@ def recruiterssup():
    langs = request.args['language']
    gender = request.args['gender']
    description = request.args['description']
-   connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+   connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
    cur=connection.cursor()
    query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
    print(query)
@@ -1016,7 +1073,7 @@ def recruiterssup():
    cur.close()
    connection.close()
    if(len(data)>0):
-       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
        cursor = connection.cursor()
        sql_Query = "UPDATE recruiter SET total_SUP='"+totlsup+"', SUPjob_type='"+job_type+"',SUPqualification = '"+qualification+"',SUPexperience='"+experience+"',SUPSkills='"+skills+"',SUPShift_Timing='"+shift_timing+"',SUPLanguages='"+langs+"',SUPGender='"+gender+"',SUPdiscription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
        cursor.execute(sql_Query)
@@ -1028,7 +1085,7 @@ def recruiterssup():
        print(msg, flush=True)
        return resp
    else:
-       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
        cursor = connection.cursor()
        sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_SUP,SUPjob_type,SUPqualification,SUPexperience,SUPSkills,SUPShift_Timing,SUPLanguages,SUPGender,SUPdiscription)values('"+pname+"','"+pid+"','"+tdate+"','"+totlsup+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
        cursor.execute(sql_Query)
@@ -1058,7 +1115,7 @@ def recruiterstl():
     langs = request.args['language']
     gender = request.args['gender']
     description = request.args['description']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
     print(query)
@@ -1070,7 +1127,7 @@ def recruiterstl():
     cur.close()
     connection.close()
     if(len(data)>0):
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "UPDATE recruiter SET  total_TL='"+totle_tl+"',TLjob_type='"+job_type+"',TLqualification = '"+qualification+"',TLexperience='"+experience+"',TLSkills='"+skills+"',TLShift_Timing='"+shift_timing+"',TLLanguages='"+langs+"',TLGender='"+gender+"',TLdiscription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
         cursor.execute(sql_Query)
@@ -1082,7 +1139,7 @@ def recruiterstl():
         print(msg, flush=True)
         return resp
     else:
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_TL,TLjob_type,TLqualification,TLexperience,TLSkills,TLShift_Timing,TLLanguages,TLGender,TLdiscription)values('"+pname+"','"+pid+"','"+tdate+"','"+totle_tl+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
         cursor.execute(sql_Query)
@@ -1111,7 +1168,7 @@ def recruitersastmgr():
     langs = request.args['language']
     gender = request.args['gender']
     description = request.args['description']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
     print(query)
@@ -1123,7 +1180,7 @@ def recruitersastmgr():
     cur.close()
     connection.close()
     if(len(data)>0):
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "UPDATE recruiter SET  total_Astmgr='"+totle_astmgr+"',Astmgr_job_type='"+job_type+"',Astmgr_qualification = '"+qualification+"',Astmgr_experience='"+experience+"',Astmgr_Skills='"+skills+"',Astmgr_Shift_Timing='"+shift_timing+"',Astmgr_Languages='"+langs+"',Astmgr_Gender='"+gender+"',Astmgr_discription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
         cursor.execute(sql_Query)
@@ -1135,7 +1192,7 @@ def recruitersastmgr():
         print(msg, flush=True)
         return resp
     else:
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_Astmgr,Astmgr_job_type,Astmgr_qualification,Astmgr_experience,TLSkills,Astmgr_Shift_Timing,Astmgr_Languages,Astmgr_Gender,Astmgr_discription) values('"+pname+"','"+pid+"','"+tdate+"','"+totle_astmgr+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
         cursor.execute(sql_Query)
@@ -1167,7 +1224,7 @@ def recruitermgr():
     langs = request.args['language']
     gender = request.args['gender']
     description = request.args['description']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
     print(query)
@@ -1179,7 +1236,7 @@ def recruitermgr():
     cur.close()
     connection.close()
     if(len(data)>0):
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "UPDATE recruiter SET  total_Mgr='"+total_mgr+"',Mgr_job_type='"+job_type+"',Mgr_qualification = '"+qualification+"',Mgr_experience='"+experience+"',Mgr_Skills='"+skills+"',Mgr_Shift_Timing='"+shift_timing+"',Mgr_Languages='"+langs+"',Mgr_Gender='"+gender+"',Mgr_discription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
         print(sql_Query)
@@ -1192,7 +1249,7 @@ def recruitermgr():
         print(msg, flush=True)
         return resp
     else:
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_Mgr,Mgr_job_type,Mgr_qualification,Mgr_experience,Mgr_Skills,Mgr_Shift_Timing,Mgr_Languages,Mgr_Gender,Mgr_discription) values('"+pname+"','"+pid+"','"+tdate+"','"+total_mgr+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
         cursor.execute(sql_Query)
@@ -1221,7 +1278,7 @@ def recruitmis():
     langs = request.args['language']
     gender = request.args['gender']
     description = request.args['description']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="select *  from recruiter where Prcess_ID='"+pid+"'" 
     print(query)
@@ -1233,7 +1290,7 @@ def recruitmis():
     cur.close()
     connection.close()
     if(len(data)>0):
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "UPDATE recruiter SET  total_Mis='"+total_mis+"',Mis_job_type='"+job_type+"',Mis_qualification = '"+qualification+"',Mis_experience='"+experience+"',Mis_Skills='"+skills+"',Mis_Shift_Timing='"+shift_timing+"',Mis_Languages='"+langs+"',Mis_Gender='"+gender+"',Mis_discription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
         cursor.execute(sql_Query)
@@ -1245,7 +1302,7 @@ def recruitmis():
         print(msg, flush=True)
         return resp
     else:
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         cursor = connection.cursor()
         sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_Mis,Mis_job_type,Mis_qualification,Mis_experience,Mis_Skills,Mis_Shift_Timing,Mis_Languages,Mis_Gender,Mis_discription) values('"+pname+"','"+pid+"','"+tdate+"','"+total_mis+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
         cursor.execute(sql_Query)
@@ -1271,7 +1328,7 @@ def searchcand():
     languages= lang.split(',')
     shifts=shift.split(',')
     print(shifts)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query="SELECT * FROM tblcandidate_register where qualification = '"+qual+"' and Statuss='Open' and experience='"+exp+"' and ("
     for i in range(len(languages)):
@@ -1294,7 +1351,7 @@ def searchcand():
 @app.route('/sendtorecmgr',methods=['GET','POST'])
 def sendtorecmgr():
     cid=request.args['cid']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update tblcandidate_register set Statuss='RecMgr' where Candid='"+cid+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -1308,12 +1365,45 @@ def sendtorecmgr():
     return resp
 
 
+#Recruiter release rejected candidates
+@app.route('/releasetoqueue',methods=['GET','POST'])
+def releasetoqueue():
+    cid=request.args['cid']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    sql_select_Query = "delete from tblapproved_candidates where CandidateId='"+cid+"'"
+    print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    connection.commit()
+
+    
+    sql_select_Query = "delete from tblinterview where Candid='"+cid+"'"
+    print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    connection.commit()
+
+    
+    sql_select_Query = "update tblcandidate_register set Statuss='Open' where Candid='"+cid+"'"
+    print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    connection.commit()
+    
+    connection.close()
+    cursor.close()
+    msg="Candidate is released to candidate search pool"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
+
 #Recruiter approval
 @app.route('/recruiterapproval',methods=['GET','POST'])
 def recruiterapproval():
     cid=request.args['cid']
     mgr=request.args['mgr']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update tblcandidate_register set Statuss='Approved' where Candid='"+cid+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
@@ -1354,7 +1444,7 @@ def searchcsr():
     print(csrtotal)
     languages= csrlangs.split(',')
     shifts=csrshtis.split(',')
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if csrgends=='Any_Gender' or 'Any Gender':
@@ -1394,7 +1484,7 @@ def searchsup():
     print(suptotl)
     languages= suplang.split(',')
     shifts=supsfti.split(',')
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if supgen=='Any_Gender' or 'Any Gender':
@@ -1432,7 +1522,7 @@ def searchtl():
     print(totaltl)
     languages= tllan.split(',')
     shifts=tlshti.split(',')
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if tlgen=='Any_Gender' or 'Any Gender':
@@ -1467,7 +1557,7 @@ def searchastmgr():
     astmgrlan=request.args['astmgrlan']
     astmgrgen=request.args['astmgrgen']
     print(totalastmgr)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if astmgrgen=='Any_Gender' or 'Any Gender':
@@ -1506,7 +1596,7 @@ def searchmgr():
     mgrlan=request.args['mgrlan']
     mgrgen=request.args['mgrgen']
     print(totalmgr)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if mgrgen=='Any_Gender' or 'Any Gender':
@@ -1542,7 +1632,7 @@ def searchmis():
     mislan=request.args['mislan']
     misgen=request.args['misgen']
     print(totalmis)
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query=""
     if misgen=='Any_Gender' or 'Any Gender':
@@ -1571,7 +1661,7 @@ def searchmis():
 """ @app.route('/regdata', methods =  ['POST'])
 def regdata():
     if request.method == 'POST':
-        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
         fnames = request.form['fnames']
         print(fnames)
         lname = request.form['lname']
@@ -1632,7 +1722,7 @@ def regdata():
         cursor.close() 
         return render_template('register.html') 
 
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     fnames = request.args['fnames']
     lname = request.args['lname']
     dob = request.args['dob']
@@ -1757,7 +1847,7 @@ def candidateviewmis():
 def candidateviewdetailscsr():
     global csradhar
     adhar=csradhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1774,7 +1864,7 @@ def candidateviewdetailscsr():
 def candidateviewdetailssup():
     global supadhar
     adhar=supadhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1792,7 +1882,7 @@ def candidateviewdetailssup():
 def candidateviewdetailstl():
     global tladhar
     adhar=tladhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1808,7 +1898,7 @@ def candidateviewdetailstl():
 def candidateviewdetailsastmgr():
     global astmgradhar
     adhar=astmgradhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1826,7 +1916,7 @@ def candidateviewdetailsastmgr():
 def candidateviewdetailsmgr():
     global mgradhar
     adhar=mgradhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1845,7 +1935,7 @@ def candidateviewdetailsmgr():
 def candidateviewdetailsmis():
     global misadhar
     adhar=misadhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+adhar+"'"
     print(sql_Query) 
@@ -1860,7 +1950,7 @@ def candidateviewdetailsmis():
 
 @app.route('/recruitermanagerpage')
 def recruitermanagerpage():
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "SELECT * FROM `candidate_register` WHERE `recruiter_mgr_status`='Pending'"
     print(sql_Query) 
@@ -1890,7 +1980,7 @@ def selectedcandidateview():
 def selectedcandidateviewpage():
     global adharnumber
     cadhar=adharnumber
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "SELECT * FROM `candidate_register` where adhar_number='"+cadhar+"'"
     print(sql_Query) 
@@ -1921,7 +2011,7 @@ def opsinterview():
     aadhar_num = request.args['aadhar_num']
     global newprocessid
     processid=newprocessid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cur=connection.cursor()
     query="update candidate_register  set recruiter_mgr_status='Pending',Process_id='"+processid+"'  where   adhar_number='"+aadhar_num+"'" 
     print(query)
@@ -1952,7 +2042,7 @@ def interviewedcandidatelist():
 def viewinterviewedcandidate():
     global interviewadhar
     aadharnum=interviewadhar
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number="+aadharnum+""
     print(sql_Query) 
@@ -1968,7 +2058,7 @@ def viewinterviewedcandidate():
 def opsmanager():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "select Ename from hrmsemployee where Eid='"+interviewer+"'"
     print(sql_Query2) 
@@ -1993,7 +2083,7 @@ def processingcandidate():
     aadhar_num = request.args['aadhar_num']
     interviewername=request.args['interviewername']
     candidatename=request.args['candidatename']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "SELECT Process_id FROM `candidate_register`  where adhar_number='"+aadhar_num+"'"
     print(sql_Query) 
@@ -2017,10 +2107,10 @@ def processingcandidate():
 def operationinterviewcandidate():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     
-    sql_Query = "select tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
+    sql_Query = "select tblcandidate_register.Candid,tblcandidate_register.*,tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
@@ -2052,14 +2142,14 @@ def opscandidateinterview():
     print(msg, flush=True)
     return resp
 
-
+#Operations Candidate OverView
 @app.route('/opscandidateoverview')
 def opscandidateoverview():
     global cadharofcandidate
     aadharnum=cadharofcandidate
     global interviewername
     datanew=interviewername
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     
     cid=request.args['cid']
@@ -2069,12 +2159,160 @@ def opscandidateoverview():
     cursor.execute(sql_Query)
     data=cursor.fetchall()
     print(data)
+
+    
+    sql_Query = "select * from tblinterview where Candid="+cid+" and Interviewer='"+mgr+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    interviewdata=cursor.fetchall()
+    print(interviewdata)
+    
+    flagger=1
+    if len(interviewdata)==0:
+        flagger=0
+    else:
+        flagger=1
+
+
+
+    
     connection.commit() 
     connection.close()
     cursor.close()
-    return render_template('opscandidateoverview.html',data=data,mgr=mgr,cid=cid)
+    return render_template('opscandidateoverview.html',data=data,mgr=mgr,cid=cid,interviewdata=interviewdata,flagger=flagger)
+
+#Recruiter Candidate OverView
+@app.route('/reccandidateoverview1')
+def reccandidateoverview1():
+    global cadharofcandidate
+    aadharnum=cadharofcandidate
+    global interviewername
+    datanew=interviewername
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    
+    cid=request.args['cid']
+    mgr=request.args['mgr']
+    pname=request.args['pname']
+    sql_Query = "select * from tblcandidate_register where Candid="+cid+""
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    data=cursor.fetchall()
+    print(data)
+
+    sql_Query = "select * from tblinterview where Candid="+cid+" and Interviewer='"+mgr+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    interviewdata=cursor.fetchall()
+    print(interviewdata)
+    print(interviewdata[0][3])
+    
+    sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    sal=cursor.fetchall()
+    print(sal)
+
+    flagger=1
+    if len(interviewdata)==0:
+        flagger=0
+    else:
+        flagger=1
 
 
+    
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('reccandidateoverview1.html',data=data,mgr=mgr,cid=cid,interviewdata=interviewdata,flagger=flagger,pname=pname)
+
+#Recruiter Candidate OverView as table
+@app.route('/reccandidateoverview')
+def reccandidateoverview():
+    global cadharofcandidate
+    aadharnum=cadharofcandidate
+    global interviewername
+    datanew=interviewername
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    
+    cid=request.args['cid']
+    mgr=request.args['mgr']
+    sql_Query = "select * from tblcandidate_register where Candid="+cid+""
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    data=cursor.fetchall()
+    print(data)
+
+    
+    sql_Query = "select *, (CONVERT(Process_requirements,Decimal)+CONVERT(Work_experience,Decimal)+CONVERT(Initiative,Decimal)+CONVERT(Language_fluency,Decimal)+CONVERT(Communication_skills,Decimal)+CONVERT(Personality,Decimal)+CONVERT(Thinking_Strategy,Decimal)+CONVERT(Team_Player,Decimal)+CONVERT(Flexibility_for_shifts,Decimal)) AS Total from tblinterview where Candid="+cid+""
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    interviewdata=cursor.fetchall()
+    print(interviewdata)
+
+    
+    
+    sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    sal=cursor.fetchall()
+    sal=sal[0][0]
+    print(sal)
+
+
+    
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('reccandidateoverview.html',data=data,mgr=mgr,cid=cid,interviewdata=interviewdata,maxsal=sal)
+
+#HR OPS Candidate OverView as table
+@app.route('/hrcandidateoverview')
+def hrcandidateoverview():
+    global cadharofcandidate
+    aadharnum=cadharofcandidate
+    global interviewername
+    datanew=interviewername
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    
+    cid=request.args['cid']
+    mgr=request.args['mgr']
+    sql_Query = "select * from tblcandidate_register where Candid="+cid+""
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    data=cursor.fetchall()
+    print(data)
+
+    
+    sql_Query = "select *, (CONVERT(Process_requirements,Decimal)+CONVERT(Work_experience,Decimal)+CONVERT(Initiative,Decimal)+CONVERT(Language_fluency,Decimal)+CONVERT(Communication_skills,Decimal)+CONVERT(Personality,Decimal)+CONVERT(Thinking_Strategy,Decimal)+CONVERT(Team_Player,Decimal)+CONVERT(Flexibility_for_shifts,Decimal)) AS Total from tblinterview where Candid="+cid+""
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    interviewdata=cursor.fetchall()
+    print(interviewdata)
+
+    
+    
+    sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    sal=cursor.fetchall()
+    sal=sal[0][0]
+    print(sal)
+
+    
+    sql_Query = "select * from tblsalary_data where Pname='"+str(interviewdata[0][3])+"'"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    saltbldata=cursor.fetchall()
+
+
+    
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('hrcandidateoverview.html',data=data,mgr=mgr,cid=cid,interviewdata=interviewdata,maxsal=sal,saltbldata=saltbldata)
 
 
 @app.route('/statusupload')
@@ -2091,7 +2329,7 @@ def statusupload():
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
     rejectcomments=request.args['rejectcomments']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "insert into assessment(candidateadharnum,interviewername,process_requirements,work_experience,Initiative,language_fluency,communication_skills,personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,status,comments_for_rejection) values('"+adharnumb+"','"+interviewer+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','rejected','"+rejectcomments+"')"
     print(sql_Query) 
@@ -2110,6 +2348,16 @@ def statusupload():
 
 
 
+@app.route('/proceedsendemail')
+def proceedsendemail():
+    email = request.args['email']
+    msg="Data stored successfully"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
+
+
 @app.route('/statusuploadpass')
 def statusuploadpass():
     adharnumb = request.args['adharnumb']
@@ -2123,7 +2371,7 @@ def statusuploadpass():
     Strategically=request.args['Strategically']
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "insert into assessment(candidateadharnum,interviewername,process_requirements,work_experience,Initiative,language_fluency,communication_skills,personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,status) values('"+adharnumb+"','"+interviewer+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','Passed')"
     print(sql_Query) 
@@ -2139,6 +2387,67 @@ def statusuploadpass():
     print(msg, flush=True)
     return resp
 
+#Recruiter Candidate Assessment Select, Save
+@app.route('/recstatusuploadsave')
+def recstatusuploadsave():
+    cid = request.args['cid']
+    intname=request.args['interviewer']
+    Understanding=request.args['Understanding']
+    workexperience=request.args['workexperience']
+    initiative=request.args['initiative']
+    language = request.args['language']
+    Communicationskills=request.args['Communicationskills']
+    Personality=request.args['Personality']
+    Strategically=request.args['Strategically']
+    teamplayer=request.args['teamplayer']
+    shifts_flexibility=request.args['shifts_flexibility']
+    comments=request.args['comments']
+    status=request.args['status']
+    pname=request.args['pname']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    sql_Query2 = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Statuss,Comments,Rejection_reason,Pname) values ("+cid+",'"+intname+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','"+status+"','"+comments+"','','"+pname+"')"
+    
+    print(sql_Query2) 
+    cursor.execute(sql_Query2)
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    msg="Assessment has been recorded"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
+#Recruiter Candidate Reject
+@app.route('/recstatusuploadsave1')
+def recstatusuploadsave1():
+    cid = request.args['cid']
+    intname=request.args['interviewer']
+    Understanding=request.args['Understanding']
+    workexperience=request.args['workexperience']
+    initiative=request.args['initiative']
+    language = request.args['language']
+    Communicationskills=request.args['Communicationskills']
+    Personality=request.args['Personality']
+    Strategically=request.args['Strategically']
+    teamplayer=request.args['teamplayer']
+    shifts_flexibility=request.args['shifts_flexibility']
+    comments=request.args['comments']
+    status=request.args['status']
+    pname=request.args['pname']
+    rejectcomments=request.args['rejectcomments']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    sql_Query2 = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Statuss,Comments,Rejection_reason,Pname) values ("+cid+",'"+intname+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','"+status+"','"+comments+"','"+rejectcomments+"','"+pname+"')"
+    print(sql_Query2) 
+    cursor.execute(sql_Query2)
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    msg="Assessment has been recorded"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
 
 #Candidate Select, Save
 @app.route('/statusuploadsave')
@@ -2154,10 +2463,11 @@ def statusuploadsave():
     Strategically=request.args['Strategically']
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
+    comments=request.args['comments']
     status=request.args['status']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
-    sql_Query2 = "update tblinterview set Process_requirements='"+Understanding+"',Work_experience='"+workexperience+"',Initiative='"+initiative+"',Language_fluency='"+language+"',Communication_skills='"+Communicationskills+"',Personality='"+Personality+"',Thinking_Strategy='"+Strategically+"',Team_Player='"+teamplayer+"',Flexibility_for_shifts='"+shifts_flexibility+"',Statuss='"+status+"' where Candid="+cid+" and Interviewer='"+intname+"'"
+    sql_Query2 = "update tblinterview set Process_requirements='"+Understanding+"',Work_experience='"+workexperience+"',Initiative='"+initiative+"',Language_fluency='"+language+"',Communication_skills='"+Communicationskills+"',Personality='"+Personality+"',Thinking_Strategy='"+Strategically+"',Team_Player='"+teamplayer+"',Flexibility_for_shifts='"+shifts_flexibility+"',Statuss='"+status+"',Comments='"+comments+"' where Candid="+cid+" and Interviewer='"+intname+"'"
     print(sql_Query2) 
     cursor.execute(sql_Query2)
     connection.commit() 
@@ -2167,6 +2477,7 @@ def statusuploadsave():
     resp = make_response(json.dumps(msg))
     print(msg, flush=True)
     return resp
+
 
 #Candidate Reject
 @app.route('/statusuploadsave1')
@@ -2182,11 +2493,12 @@ def statusuploadsave1():
     Strategically=request.args['Strategically']
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
+    comments=request.args['comments']
     status=request.args['status']
     rejectcomments=request.args['rejectcomments']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
-    sql_Query2 = "update tblinterview set Process_requirements='"+Understanding+"',Work_experience='"+workexperience+"',Initiative='"+initiative+"',Language_fluency='"+language+"',Communication_skills='"+Communicationskills+"',Personality='"+Personality+"',Thinking_Strategy='"+Strategically+"',Team_Player='"+teamplayer+"',Flexibility_for_shifts='"+shifts_flexibility+"',Statuss='"+status+"',Rejection_reason='"+rejectcomments+"' where Candid="+cid+" and Interviewer='"+intname+"'"
+    sql_Query2 = "update tblinterview set Process_requirements='"+Understanding+"',Work_experience='"+workexperience+"',Initiative='"+initiative+"',Language_fluency='"+language+"',Communication_skills='"+Communicationskills+"',Personality='"+Personality+"',Thinking_Strategy='"+Strategically+"',Team_Player='"+teamplayer+"',Flexibility_for_shifts='"+shifts_flexibility+"',Statuss='"+status+"',Rejection_reason='"+rejectcomments+"',Comments='"+comments+"' where Candid="+cid+" and Interviewer='"+intname+"'"
     print(sql_Query2) 
     cursor.execute(sql_Query2)
     connection.commit() 
@@ -2197,11 +2509,13 @@ def statusuploadsave1():
     print(msg, flush=True)
     return resp
 
+
+#Recruiter Saved Candidates List
 @app.route('/savedcandidatesnew')
 def savedcandidatesnew():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select distinct tblcandidate_register.Candid,tblcandidate_register.* from tblcandidate_register,tblapproved_candidates where  tblapproved_candidates.CandidateId=tblcandidate_register.Candid"
     print(sql_Query) 
@@ -2220,11 +2534,14 @@ def savedcandidatesnew():
     cursor.close()
     return render_template('savedcandidatesnew.html',candidateslist=data,mgrdata=mgrdata)
 
+
+
+#Operations Saved candidates List
 @app.route('/opsavedcandidates')
 def opsavedcandidates():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "select Ename from hrmsemployee where Eid='"+str(interviewer)+"'"
     print(sql_Query2) 
@@ -2232,7 +2549,7 @@ def opsavedcandidates():
     data2=cursor.fetchall()
     print(data2)
     data2=data2[0][0]
-    sql_Query = "select  distinct tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where  tblinterview.Statuss='Saved' and  tblcandidate_register.Candid=tblinterview.Candid"
+    sql_Query = "select  distinct tblcandidate_register.Candid,tblcandidate_register.*,tblinterview.Interviewer from tblinterview,tblcandidate_register where  tblinterview.Statuss='Saved' and  tblcandidate_register.Candid=tblinterview.Candid"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
@@ -2242,12 +2559,55 @@ def opsavedcandidates():
     cursor.close()
     return render_template('opsavedcandidates.html',data=data)
 
+#Recruiter Shortlisted candidates List
+@app.route('/recshortlistedcandidates')
+def recshortlistedcandidates():
+    global userid
+    interviewer=userid
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    #sql_Query = "select tblcandidate_register.*,Count(*),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted';"
+    sql_Query="select tblcandidate_register.*,Count(tblinterview.Candid),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted' group by tblinterview.Candid;"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    data=cursor.fetchall()
+    print(data)
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    return render_template('recshortlistedcandidates.html',data=data)
+
+
+
+#Recruiter save salary data
+@app.route('/savesalarydata')
+def savesalarydata():
+    global userid
+    interviewer=userid    
+    cid = request.args['cid']
+    ctc = request.args['ctc']
+    grosssal = request.args['grosssal']
+    netsal = request.args['netsal']
+    pname = request.args['pname']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cursor = connection.cursor()
+    sql_Query = "insert into tblsalary_data(CTC,Grosssal,Netsal,cid,Pname,Pid) values('"+ctc+"','"+grosssal+"', '"+netsal+"', '"+cid+"', '"+pname+"', '')"
+    print(sql_Query) 
+    cursor.execute(sql_Query)
+    connection.commit() 
+    connection.close()
+    cursor.close()
+    msg="Salary information has been updated"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
 
 @app.route('/savedcandidates')
 def savedcandidates():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "select Ename from hrmsemployee where Eid='"+str(interviewer)+"'"
     print(sql_Query2) 
@@ -2266,28 +2626,29 @@ def savedcandidates():
     return render_template('savedcandidates.html',data=data)
 
 
-
+#Recruiter Rejected Candidates List
 @app.route('/rejectedcandidates')
 def rejectedcandidates():
     global userid
     interviewer=userid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
-    sql_Query2 = "select Ename from hrmsemployee where Eid='"+str(interviewer)+"'"
-    print(sql_Query2) 
-    cursor.execute(sql_Query2)
-    data2=cursor.fetchall()
-    print(data2)
-    data2=data2[0][0]
-    sql_Query = "select * from interviewed_candidate_list where  status='Rejected'"
+    sql_Query = "select  distinct tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where  tblinterview.Statuss='Rejected' and  tblcandidate_register.Candid=tblinterview.Candid"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
     print(data)
-    connection.commit() 
+
+    sql_select_Query = "SELECT Eid,Ename FROM hrmsemployee where Type_Of_Users='Operations'"
+    #print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    mgrdata = cursor.fetchall()
+    #print(qualification)
+
     connection.close()
     cursor.close()
-    return render_template('rejectedcandidates.html',data=data,data2=data2)
+    return render_template('rejectedcandidates.html',candidateslist=data,mgrdata=mgrdata)
 
 
 
@@ -2339,7 +2700,7 @@ def viewsavedcandidateslist():
     global newinterviewer
     interviewer=newinterviewer
     global newprocessid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+aadharnum+"'"
     print(sql_Query) 
@@ -2371,7 +2732,7 @@ def viewsavedcandidateslistnew():
     global newinterviewer
     interviewer=newinterviewer
     global newprocessid
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number='"+aadharnum+"'"
     print(sql_Query) 
@@ -2409,7 +2770,7 @@ def rejectstatusupload():
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
     rejectcomments=request.args['rejectcomments']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "update  assessment set  status='rejected' where interviewername='"+interviewer+"' and candidateadharnum='"+adharnumb+"'"
     print(sql_Query) 
@@ -2439,7 +2800,7 @@ def alterstatusuploadpass():
     Strategically=request.args['Strategically']
     teamplayer=request.args['teamplayer']
     shifts_flexibility=request.args['shifts_flexibility']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "update  assessment set  status='rejected' where interviewername='"+interviewer+"' and candidateadharnum='"+adharnumb+"'"
     print(sql_Query) 
@@ -2461,7 +2822,7 @@ def inserttothecandidatelist():
     aadhar_num = request.args['aadhar_num']
     interviewer=request.args['interviewer']
     canme=request.args['canme']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "SELECT Process_id FROM `candidate_register` where adhar_number='"+aadhar_num+"' "
     print(sql_Query) 
@@ -2514,7 +2875,7 @@ def viewrejectedcandidateslist():
     aadharnum=rejectedcaadhar
     global rejectedinterview
     datanew=rejectedinterview
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select * from candidate_register where adhar_number="+aadharnum+""
     print(sql_Query) 
@@ -2542,7 +2903,7 @@ def moveprocess():
     adharnumb = request.args['adharnumb']
     interviewer=request.args['interviewer']
     fname=request.args['fname']
-    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696') 
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query = "select Process_id from candidate_register where adhar_number='"+adharnumb+"'"
     print(sql_Query) 
@@ -2564,3 +2925,7 @@ def moveprocess():
 
 
 
+    
+
+
+#connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
