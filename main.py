@@ -2202,7 +2202,6 @@ def reccandidateoverview1():
     cursor.execute(sql_Query)
     interviewdata=cursor.fetchall()
     print(interviewdata)
-    print(interviewdata[0][3])
     
     sql_Query = "select CSRMaxSal from tblproc_setup where ProcessName='"+str(interviewdata[0][3])+"'"
     print(sql_Query) 
