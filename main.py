@@ -350,7 +350,8 @@ def candidateregister():
         print(filename)
         try:
             prod_mas.save(os.path.join("https://thrms.herokuapp.com/static/Resumes/", filename))
-        except:
+        except Exception as e:
+            print('Failed to upload to local: '+ str(e))
             print('local upload failed')
         try:
             import ftplib  
