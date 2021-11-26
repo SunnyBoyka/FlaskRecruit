@@ -344,10 +344,7 @@ def candidateregister():
         stdates = request.form.get('stdate')
         print(stdates)
         prod_mas = request.files.get('cv')
-        f=prod_mas
-        print(f)
         filename = secure_filename(prod_mas.filename)
-        print(filename)
         try:
             prod_mas.save(os.path.join("./static/Resumes/", filename))
         except Exception as e:
