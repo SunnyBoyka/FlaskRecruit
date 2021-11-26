@@ -328,7 +328,7 @@ def candidateregister():
         prod_mas = request.files.get('cv')
         filename = secure_filename(prod_mas.filename)
         print(filename)
-        prod_mas.save(os.path.join("./static/Resumes/", filename))
+        #prod_mas.save(os.path.join("./static/Resumes/", filename))
         coletts = request.form.get('covlet')
         print(coletts)
         
