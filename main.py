@@ -365,9 +365,7 @@ def candidateregister():
               
             # Enter File Name with Extension
             #fileroot=os.path.dirname(os.path.abspath(__file__))
-            #print(fileroot)
-            filename = f
-            print(filename)             
+            #print(fileroot)            
             # Read file in binary mode
             with open(filename, "rb") as file:
                 # Command for Uploading the file "STOR filename"
