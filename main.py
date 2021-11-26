@@ -2185,7 +2185,7 @@ def reccandidateoverview1():
     aadharnum=cadharofcandidate
     global interviewername
     datanew=interviewername
-    connection = mysql.connector.connect(host='localhost',database='transactrecdb',user='root',password='')
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     
     cid=request.args['cid']
