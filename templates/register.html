@@ -113,7 +113,7 @@ font-size: 18px;
                         
 
                         <div  style="float: left;padding-right: 1400px;">
-                          <button class="btn"><a href='./home'>Home</a></button> 
+                          <button class="btn"><a href='./login'>Home</a></button> 
                          
                       </div>
                     </div>
@@ -131,7 +131,7 @@ font-size: 18px;
 
                                       >
                                       <h4 class="mt-4 text-center" style="padding-top: 2%;">
-                                        Candidate Job Application</h4>
+                                        Candidate Registration</h4>
                                       <br>
                                       <div class="row justify-content-around mt-2">
                                         <div class="col-sm-3"></div>
@@ -163,12 +163,12 @@ font-size: 18px;
                                           </select>
                                       </div>  
                                       <div class="col-sm-12">
-                                        <label for="target_date" class="form-label">Current Address</label>
+                                        <label for="target_date" class="form-label">Present Address</label>
                                         <textarea class="form-control shadow-sm" rows="4" cols="50" name="address1" id="address1" placeholder="Address 1"></textarea>
                                       </div>
 
                                       <div class="col-sm-12">
-                                        <label for="target_date" class="form-label">Street Address</label>
+                                        <label for="target_date" class="form-label">Permanent Address</label>
                                         <textarea class="form-control shadow-sm" rows="4" cols="50" name="address2" id="address2" placeholder="Address 2"></textarea>
                                       </div>
 
@@ -186,6 +186,20 @@ font-size: 18px;
                                             <label for="client_name" class="form-label">State</label>
                                             <input type="text" class="form-control shadow-sm" name="state" id="state" placeholder="Type Here...">
                                           </div> 
+                                        </div>  
+                                      </div>
+									  
+									  
+                                      <div class="col-sm-12">
+                                          <div class="row">
+                                        <div class="col-sm-6 col-10 mb-1">
+                                            <label for="client_name" class="form-label">Referred By</label>
+                                            <input type="text" class="form-control shadow-sm" name="refby" id="refby" placeholder="Type Here...">
+                                          </div>
+                                          <div class="col-sm-6 col-10 mb-1">
+                                            <label for="client_name" class="form-label">Emp. Code</label>
+                                            <input type="text" class="form-control shadow-sm" name="ecode" id="ecode" placeholder="Type Here...">
+                                          </div>  
                                         </div>  
                                       </div>
 
@@ -274,7 +288,7 @@ font-size: 18px;
 
                                       <div class="col-sm-12">
                                         <label for="target_date" class="form-label">Language</label>
-                                        <select id="Language" name="Language" class="multi_select3 col-sm-12" multiple data-live-search="true" onchange="collectresselection()">
+                                        <select id="Language" name="Language" class="multi_select3 col-sm-12" multiple data-live-search="true" onchange="collectresselection()" title="Select Language">
                                           <option value="English">English</option>
                                           <option value="Kannada">Kannada</option>
                                           <option value="Hindi">Hindi</option>
@@ -289,7 +303,7 @@ font-size: 18px;
 
                                       <div class="col-sm-12 ">
                                         <label for="target_date" class="form-label"> Upload CV</label>
-                                        <input type="file"  class=" form-control shadow-sm" name="cv" id="cv"   accept="application/pdf"/>
+                                        <input type="file"  class=" form-control shadow-sm" name="cv" id="cv"   accept=".pdf"/>
                                       </div>
 
 
@@ -502,7 +516,24 @@ var language="";
         });
 	
       }*/
+	debugger;
+var today = new Date();
+var dd = today.getDate();
+dd=parseInt(dd);
+dd=dd;
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear()-18;
 
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("dob").setAttribute("max", today);
 </script>  
 
 

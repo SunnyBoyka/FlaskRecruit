@@ -326,6 +326,15 @@ label{
                                     </div>
 
                                     </div>
+									   <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                        <label for="client_name" class="form-label">Process Name</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="pname" class="form-label" value="{{pname}}" style="background: rgba(240, 234, 234, 0.8);border: none;font-size:15px;font-weight:bold;">
+                                    </div>
+
+                                    </div>
                                       </div>
                                       <div class="col-lg-6"  style="padding-top: 10px;">
                                         
@@ -381,7 +390,7 @@ label{
                           </div>
                           <div class="col-lg-6 " style="padding-top: 4%;float:left" >
                             <h4 class="mt-4 text-center" style="padding-top: 2%;">
-                                Assessment Form</h4>
+                                Recruiter Assessment Form</h4>
                             <br>
                             <div class="row justify-content-around mt-2">
                           <div class="col-sm-12">
@@ -614,20 +623,21 @@ label{
     var Strategically=document.getElementById('Strategically').value;
     var teamplayer=document.getElementById('teamplayer').value;
     var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
-        var rejectcomments=document.getElementById('rejcomments').value;
+    var comments=document.getElementById('comments').value;
+    var rejectcomments=document.getElementById('rejcomments').value;
+    var pname=document.getElementById('pname').value;
 
 
 
         $.ajax({
            type: 'GET',
-           url: '/statusuploadsave1',
+           url: '/recstatusuploadsave1',
      
        contentType: 'application/json;charset=UTF-8',
            data: {
            
             'cid':cid,
-        'interviewer':interviewer,
+        'interviewer':'Recruiter',
         'Understanding':Understanding,
         'workexperience':workexperience,
         'initiative':initiative,
@@ -639,14 +649,15 @@ label{
         'shifts_flexibility':shifts_flexibility,
 		'status':'Rejected',
 		'comments':comments,
-        'rejectcomments': rejectcomments
+        'rejectcomments': rejectcomments,
+        'pname': pname
 
        },
            
        dataType:"json",
            success: function(data) {
             alert(data);
-            window.location='operationinterviewcandidate'
+            window.location='recruiterpage'
        
            },
        });
@@ -670,18 +681,19 @@ function pass()
     var Strategically=document.getElementById('Strategically').value;
     var teamplayer=document.getElementById('teamplayer').value;
     var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
+    var comments=document.getElementById('comments').value;
+    var pname=document.getElementById('pname').value;
 
 
 
     $.ajax({
        type: 'GET',
-       url: '/statusuploadsave',
+       url: '/recstatusuploadsave',
  
    contentType: 'application/json;charset=UTF-8',
        data: {       
         'cid':cid,
-        'interviewer':interviewer,
+        'interviewer':'Recruiter',
         'Understanding':Understanding,
         'workexperience':workexperience,
         'initiative':initiative,
@@ -692,13 +704,14 @@ function pass()
         'teamplayer':teamplayer,
         'shifts_flexibility':shifts_flexibility,		
 		'comments':comments,
-		'status':'Shortlisted'
+		'status':'Shortlisted',
+        'pname': pname
    },
        
    dataType:"json",
        success: function(data) {
         alert(data);
-        window.location='operationinterviewcandidate'
+        window.location='recruiterpage'
    
        },
    });
@@ -722,18 +735,19 @@ function save()
     var Strategically=document.getElementById('Strategically').value;
     var teamplayer=document.getElementById('teamplayer').value;
     var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
+    var comments=document.getElementById('comments').value;
+    var pname=document.getElementById('pname').value;
 
 
 
     $.ajax({
        type: 'GET',
-       url: '/statusuploadsave',
+       url: '/recstatusuploadsave',
  
    contentType: 'application/json;charset=UTF-8',
        data: {       
         'cid':cid,
-        'interviewer':interviewer,
+        'interviewer':'Recruiter',
         'Understanding':Understanding,
         'workexperience':workexperience,
         'initiative':initiative,
@@ -744,19 +758,20 @@ function save()
         'teamplayer':teamplayer,
         'shifts_flexibility':shifts_flexibility,
 		'comments':comments,
-		'status':'Saved'
+		'status':'Saved',
+        'pname': pname
    },
        
    dataType:"json",
        success: function(data) {
         alert(data);
-        window.location='operationinterviewcandidate'
+        window.location='recruiterpage'
    
        },
    });
 }
 
-
+	
 {% if flagger==1 %}
 
 document.getElementById('Understands').value="{{interviewdata[0][3]}}";

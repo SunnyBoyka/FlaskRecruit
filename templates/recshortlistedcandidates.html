@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Operations Interview List</title>
+        <title>Recruiter Shortlisted List</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -94,11 +94,12 @@ font-size: 18px;
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                      <button class="" ><a href='./operations' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
-                      <button class="" ><a href='./processlist' >New Process List</a></button>
-                      <button class="" ><a href='./operationinterviewcandidate'>Recruitement Queue</a></button>
-                      <button class="" ><a href='./savedcandidates'>Saved Candidates</a></button>
-                      <button class="" ><a href='./login'>Logout</a></button>
+                      <button class="" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      <button class="" ><a href='./recruiterpage' >New Recruitement</a></button>
+                      <button class="" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
+                      <button class="" ><a href='./recshortlistedcandidates'>Shortlisted Candidates</a></button>
+                      <button class="" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                      <button class="" ><a href='login'>Logout</a></button>
                      
                     </div>
                   </div>
@@ -108,7 +109,7 @@ font-size: 18px;
             </div>
                 <div class="container-fluid">
                     
-                    <h4 class="mt-4 text-center">Saved Candidates List</h4>
+                    <h4 class="mt-4 text-center">Shortlisted Candidates List</h4>
                     <hr>
                    
                     <table id="myTable" style="width: 100%;">
@@ -116,12 +117,12 @@ font-size: 18px;
                           
                           <th colspan="2">Candidate ID</th>
                           <th colspan="2">Name</th>
-                          <th colspan="2">Email</th> 
                           <th colspan="2">Phone #</th> 
                           <th colspan="2">Qualification</th>
                           <th colspan="2">Experience</th>
                           <th colspan="2">Position Applied</th>
-                          <th colspan="2">Languages Known</th>
+                          <th colspan="2">Rounds</th>
+                          <th colspan="2">Last Interviewed By</th>
                           <th colspan="2">View</th>
                          
                           
@@ -129,15 +130,15 @@ font-size: 18px;
                         {% for item in data %}
                         <tr>
                           
-                          <td colspan="2">{{item[1]}}</td>
-                          <td colspan="2">{{item[2]}} {{item[3]}}</td>
+                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2">{{item[1]}} {{item[2]}}</td>
                           <td colspan="2">{{item[12]}}</td>
-                          <td colspan="2">{{item[13]}}</td>
+                          <td colspan="2">{{item[14]}}</td>
                           <td colspan="2">{{item[15]}}</td>
                           <td colspan="2">{{item[16]}}</td>
-                          <td colspan="2">{{item[17]}}</td>
-                          <td colspan="2">{{item[19]}}</td>
-                          <td colspan="2"><a class="btn" href="opscandidateoverview?cid={{item[1]}}&mgr={{item[24]}}" id="btnSelect"><i class="far fa-eye"></i> View</a></td>
+                          <td colspan="2">{{item[23]}}</td>
+                          <td colspan="2">{{item[24]}}</td>
+                          <td colspan="2"><a class="btn" href="reccandidateoverview?cid={{item[0]}}&mgr={{item[24]}}" id="btnSelect"><i class="far fa-eye"></i> View</a></td>
                           
                           
                         </tr>

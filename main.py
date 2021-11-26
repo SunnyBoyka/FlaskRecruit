@@ -1399,6 +1399,7 @@ def releasetoqueue():
 def recruiterapproval():
     cid=request.args['cid']
     mgr=request.args['mgr']
+    pname=request.args['pname']
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     sql_select_Query = "update tblcandidate_register set Statuss='Approved' where Candid='"+cid+"'"
     print(sql_select_Query)
@@ -1413,7 +1414,7 @@ def recruiterapproval():
     connection.commit()
 
     
-    sql_select_Query = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason) values ("+cid+",'"+mgr+"','','','','','','','','','','')"
+    sql_select_Query = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason,Pname) values ("+cid+",'"+mgr+"','','','','','','','','','','','"+pname+"')"
     #print(sql_select_Query)    
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)

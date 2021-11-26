@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>Recruiter Rejected Candidates</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -63,7 +63,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 .btn {
 padding: 10px 16px;
-background-color: #ada7a7;
 border: #080808;
 cursor: pointer;
 font-size: 18px;
@@ -95,11 +94,12 @@ font-size: 18px;
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                        <button class="btn btn-primary" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
-                        <button class="btn btn-primary" ><a href='./recruiterpage' >New Recruitement</a></button>
-                        <button class="btn btn-primary" ><a href='./selectedcandidates'>Selected Candidate</a></button>
-                        <button class="btn btn-primary" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
-                        <button class="btn btn-primary" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                      <button class="" ><a href='./recruiterhomepage' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      <button class="" ><a href='./recruiterpage' >New Recruitement</a></button>
+                      <button class="" ><a href='./savedcandidatesnew'>Approved Candidates</a></button>
+                      <button class="" ><a href='./recshortlistedcandidates'>Shortlisted Candidates</a></button>
+                      <button class="" ><a href='./rejectedcandidates'>Rejected Candidates</a></button>
+                      <button class="" ><a href='login'>Logout</a></button>
                         
                      
                     </div>
@@ -108,38 +108,58 @@ font-size: 18px;
                 <!-- Page content-->
             </div>
             </div>
-                <div class="container-fluid">
+               <div class="container-fluid">
                     
-                    <h4 class="mt-4 text-center">Process List</h4>
+                    <h4 class="mt-4 text-center">Rejected Candidates List</h4>
                     <hr>
                    
                     <table id="myTable" style="width: 100%;">
                         <tr >
                           
-                          <th colspan="2">candidatename</th>
-                          <th colspan="2">candidateaadhaarnum</th>
-                          <th colspan="2">Interviewer</th> 
-                          <th colspan="2">process_id</th>
-                          <th colspan="2">view</th>
+                          <th colspan="2">Candidate ID</th>
+                          <th colspan="2">Name</th>
+                          <th colspan="2">Email</th> 
+                          <th colspan="2">Phone #</th> 
+                          <th colspan="2">Qualification</th>
+                          <th colspan="2">Experience</th>
+                          <th colspan="2">Position Applied</th>
+                          <th colspan="2">Languages Known</th>
+                          <th colspan="2">Assign To</th>
+                          <th colspan="2"></th>
                          
                           
                         </tr>
-                        {% for item in data %}
+                        {% for item in candidateslist %}
                         <tr>
-                          
                           <td colspan="2">{{item[0]}}</td>
-                          <td colspan="2">{{item[1]}}</td>
-                          <td colspan="2">{{data2}}</td>
-                          <td colspan="2">{{item[3]}}</td>
-                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="far fa-eye"></i>  ...View</buttion></td>
+                          <td colspan="2">{{item[2]}} {{item[3]}}</td>
+                          <td colspan="2">{{item[12]}}</td>
+                          <td colspan="2">{{item[13]}}</td>
+                          <td colspan="2">{{item[15]}}</td>
+                          <td colspan="2">{{item[16]}}</td>
+                          <td colspan="2">{{item[17]}}</td>
+                          <td colspan="2">{{item[19]}}</td>
                           
-                          
+                          <td colspan="2">
+							<!--
+							<select id="Mgr" name="Mgr">
+								<option>Allocate To</option>
+								{% for val in mgrdata %}						
+									<option>{{val[1]}}({{val[0]}})</option>
+								{% endfor %}
+								
+							</select>
+							-->
+							
+						  <button class="btn btn-primary btn_allocation" id="btn_allocation" onclick="RejectedRelease({{item[0]}})">Re-Consider</button>
+								
+						  </td>
                         </tr>
                         {% endfor %}
                         </table>
 
 
-
+				</div>
 
 
                         <script>
@@ -181,7 +201,7 @@ font-size: 18px;
                                    
                                       $.ajax({
                                         type: 'GET',
-                                        url: '/viewrejectedcandidates',
+                                        url: '/viewsavedcandidatesnew',
                                         
                                     contentType: 'application/json;charset=UTF-8',
                                         data: {
@@ -195,7 +215,7 @@ font-size: 18px;
                                     dataType:"json",
                                         success: function(data) {
                                             //alert("Data Deleted Successfully");
-                                            window.location='viewrejectedcandidateslist'
+                                            window.location='viewsavedcandidateslistnew'
                                         },
                                          error: function(data) {
                                            
@@ -208,5 +228,6 @@ font-size: 18px;
                             </script>
                       
                       
+	<script src="/static/api/restapi.js"></script>
     </body>
 </html>

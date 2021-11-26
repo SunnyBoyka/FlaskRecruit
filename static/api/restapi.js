@@ -285,6 +285,9 @@ $(".btnSearchCand").click(function(){
 			var shift=$tds[8].innerText;
 			var lang=$tds[9].innerText;
 			var gen=$tds[10].innerText;
+			var mgr=$tds[2].innerText;
+			var pname=$tds[1].innerText;
+			//mgr="'"+mgr+"'";
 			  $.ajax({
                                         type: 'GET',
                                         url: '/searchcand',
@@ -312,9 +315,9 @@ $(".btnSearchCand").click(function(){
 					var mydiv=document.getElementById("table_driver_history");
 						mydiv.innerHTML ="";
 						var body="";
-						var header="<h4 class='mt-4 text-center'>Matched Candidates List</h4><table style='border:solid black; width: 100%;'><thead style='background-color:black;border:solid;'><tr><th> Candidate Id </th><th> First Name </th><th> Last Name </th><th> Phone number </th><th> Aadhar Number  </th><th>  Qualification </th><th> Experience </th><th> Languages  </th><th>       </th> <th>       </th> </tr></thead><tbody>";
+						var header="<h4 class='mt-4 text-center'>Matched Candidates List</h4><table style='border:solid black; width: 100%;'><thead style='background-color:black;border:solid;'><tr><th> Candidate Id </th><th> First Name </th><th> Last Name </th><th> Phone number </th><th> Aadhar Number  </th><th>  Qualification </th><th> Experience </th><th> Languages  </th><th>       </th> <th>       </th><th>       </th> </tr></thead><tbody>";
 						for (var i=0; i<details.length; i++){
-								  body+="<tr><td>" + details[i][0] + "</td><td>" + details[i][1] + "</td><td>" +details[i][2] + "</td><td>" + details[i][12]+ "</td><td>" + details[i][13]+ "</td><td>" + details[i][14]+ "</td><td>" + details[i][15]+ "</td><td>" + details[i][18]+"</td><td><button class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datafetcher("+details[i][0]+")'>Approval </button></td><td><button class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datapproval("+details[i][0]+")'>Submit </button></td></tr>";
+								  body+="<tr><td>" + details[i][0] + "</td><td>" + details[i][1] + "</td><td>" +details[i][2] + "</td><td>" + details[i][12]+ "</td><td>" + details[i][13]+ "</td><td>" + details[i][14]+ "</td><td>" + details[i][15]+ "</td><td>" + details[i][18]+"</td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datafetcher("+details[i][0]+")'>Approval Request </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datapproval("+details[i][0]+",\""+mgr+"\");'>Schedule Interview </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='recmgrview("+details[i][0]+",\""+mgr+"\",\""+pname+"\");'>View Candidate </button></td></tr>";
 					  }
 					  mydiv.innerHTML=header+body+"</tbody></table>";
 						//tablebuilder(newdata);	
@@ -357,7 +360,7 @@ function candreg(data)
 
 
 //Allocate Interview
-function datafetcher(data)
+function datafetcher(cid)
 {
 	debugger;
 	$.ajax({
@@ -366,7 +369,7 @@ function datafetcher(data)
      
        contentType: 'application/json;charset=UTF-8',
            data: {           
-           'cid': data
+           'cid': cid
        },
            
        dataType:"json",
@@ -379,17 +382,17 @@ function datafetcher(data)
        });
 }
 
-function datapproval(data)
+
+function RejectedRelease(cid)
 {
 	debugger;
 	$.ajax({
            type: 'GET',
-           url: '/recruiterapproval',
+           url: '/releasetoqueue',
      
        contentType: 'application/json;charset=UTF-8',
            data: {           
-           'cid': data,
-		   'mgr':'Bopanna C K'
+           'cid': cid
        },
            
        dataType:"json",
@@ -400,6 +403,35 @@ function datapproval(data)
       
            },
        });
+}
+
+function datapproval(cid,mgr)
+{
+	debugger;
+	$.ajax({
+           type: 'GET',
+           url: '/recruiterapproval',
+     
+       contentType: 'application/json;charset=UTF-8',
+           data: {           
+           'cid': cid,
+		   'mgr':mgr
+       },
+           
+       dataType:"json",
+           success: function(logindata) {
+			   alert(logindata);
+				window.location='recruiterpage';
+			   
+      
+           },
+       });
+}
+
+//Recruiter view data
+function recmgrview(cid,mgr,pname)
+{
+	window.location="reccandidateoverview1?cid="+cid+"&mgr="+mgr+"&pname="+pname;
 }
 
 

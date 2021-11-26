@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Operations Candidate View</title>
+        <title>Recruiter Candidate Overview</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -25,7 +25,30 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
           <!-- //Default-JavaScript-File -->
-        <style>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
             #wrapper {
   overflow-x: hidden;
 }
@@ -379,210 +402,97 @@ label{
                   </div >
                       
                           </div>
-                          <div class="col-lg-6 " style="padding-top: 4%;float:left" >
-                            <h4 class="mt-4 text-center" style="padding-top: 2%;">
-                                Assessment Form</h4>
-                            <br>
-                            <div class="row justify-content-around mt-2">
-                          <div class="col-sm-12">
-                              <div style="
-                              top: 20%;
-                              width:90%;
-                              height: 105%;
-                              background: rgba(240, 234, 234, 0.8);
-                              box-shadow: 0 15px 25px rgb(0 0 0 / 50%);
-                              margin: 0% 8%">
-                        
+						  
+                          <div class="col-lg-12 col-md-12 col-xs-12" style="margin-bottom:20px;">
+						  <h2>Candidate Assesments Information</h2>
+						  
+								 <table id="customers" style="width: 100%;">
+                        <tr >
+                         <!--  <th colspan="2">Client Name</th>  -->
+                          <th colspan="2">SI. No.</th>
+                          <th colspan="2">Interviewer</th>
+                          <th colspan="2">Process Requirements</th>
+                          <th colspan="2">Work Experience</th> 
+                          <th colspan="2">Initiative</th> 
+                          <th colspan="2">Languages Fluency</th>
+                          <th colspan="2">Communication Skills</th>
+                          <th colspan="2">Personality</th>
+                          <th colspan="2">Thinks Strategically</th>
+                          <th colspan="2">Team Player</th>
+                          <th colspan="2">Flexibility </th>
+                          <th colspan="2" style="color:black;">Total Score</th>
                          
-                        <div >
-                            <div>
+                          
+                        </tr>
+                        {% for item in interviewdata %}
+                        <tr>
+                          <!-- <td colspan="2">{{item[0]}}</td> -->
+                          <td colspan="2"> {{loop.index}}</td>
+                          <td colspan="2">{{item[2]}}</td>
+                          <td colspan="2">{{item[4]}}</td>
+                          <td colspan="2">{{item[5]}}</td>
+                          <td colspan="2">{{item[6]}}</td>
+                          <td colspan="2">{{item[7]}}</td>
+                          <td colspan="2">{{item[8]}}</td>
+                          <td colspan="2">{{item[9]}}</td>
+                          <td colspan="2">{{item[10]}}</td>
+                          <td colspan="2">{{item[11]}}</td>
+                          <td colspan="2">{{item[12]}}</td>
+                          <td colspan="2">{{item[16]}}</td>
+                          
+                        </tr>
+                        {% endfor %}
+                        </table>
+						
+						  <h2>Average Score : <label id="percentage" name="percentage" style="font-size:30px;"></label></h2>
+								
+						  </div>
+						  
+						  
+						  <div class="col-lg-6 " style="padding-top: 4%;float:left" >
+                            
+						  <h2>Salary Details</h2>
+                            <br>
                                 
                                   <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Understands the process requirements</label>
+                                    <label for="client_name" class="form-label">Process Name</label>
 										  
-								<select class="form-control shadow-sm" name="Understands" id="Understands">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
+								<input type="text" class="form-control shadow-sm" name="pname" value="{{interviewdata[0][3]}}" id="pname" readonly />
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label"> Job Knowledge / Work Experience </label>
+                                    <label for="client_name" class="form-label">Max Salary</label>
 										  
-										  
-								<select class="form-control shadow-sm" name="workexperience" id="workexperience">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
+								<input type="text" class="form-control shadow-sm" name="maxsal" value="{{maxsal}}" id="maxsal" readonly />
                                   </div> 
                                   <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Result Oriented/ Initiative</label>
-									<select class="form-control shadow-sm" name="initiative" id="initiative">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
-									
-                                  </div> 
-                                  <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Languages Known and fluency</label>
-								<select class="form-control shadow-sm" name="language" id="language">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
-                                  </div> 
-                        
-                                  <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Communication Skills (Speaking/Presenting)</label>
+                                    <label for="client_name" class="form-label">CTC (Discussed)</label>
 										  
-								<select class="form-control shadow-sm" name="Communicationskills" id="Communicationskills">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
+								<input type="text" class="form-control shadow-sm" name="ctc" id="ctc" onchange="checksal()" />
                                   </div> 
-                        
+                                
+								  
+                                
                                   <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Personality, Listening/Empathy</label>
+                                    <label for="client_name" class="form-label">Gross Salary (Discussed)</label>
 										  
-								<select class="form-control shadow-sm" name="Personality" id="Personality">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
+								<input type="text" class="form-control shadow-sm" name="grosssal" id="grosssal" onchange="checksal()" />
                                   </div> 
-                        
+								  
                                   <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Thinks Strategically</label>
+                                    <label for="client_name" class="form-label">Net Salary (Discussed)</label>
 										  
-								<select class="form-control shadow-sm" name="Strategically" id="Strategically">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
+								<input type="text" class="form-control shadow-sm" name="netsal" id="netsal" onchange="checksal()" />
                                   </div> 
-                                  <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Team Player</label>
-										  
-								<select class="form-control shadow-sm" name="teamplayer" id="teamplayer">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
-                                  </div> 
-                                  <div class="col-sm-10 col-10 mb-1">
-                                    <label for="client_name" class="form-label">Flexibility to work in shifts</label>
-										  
-								<select class="form-control shadow-sm" name="shifts_flexibility" id="shifts_flexibility">
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-										<option>10</option>
-									</select>
-                                  </div> 
-								   
-                                  <div class="col-sm-10 col-10 mb-1">
-                                    <label for="comments" class="form-label">Comments</label>
-										  
-								<textarea rows="3" id="comments" class="form-control shadow-sm" name="comments" placeholder="Comments "></textarea>
-                                  </div> 
-                                  <div class="col-sm-10 col-10 mb-1" id="reject" style="padding-top: 3%;display:none">
-                                    <textarea rows="4" id="rejcomments" placeholder="Type the Reason For Rejection "></textarea>
-                        
-                                      </textarea>
-                                      <button type="submit" class="btn btn-success col-2" onclick="submit()">submit</button> 
-                                  </div>
-                        </div>
+                                
                           <div class="col-sm-10 col-10 mb-1" style="padding-top: 5%;">
-                          <button type="submit" class="btn btn-success col-2" onclick="save()">Save</button> 
-                          <button type="submit" class="btn btn-primary col-2" onclick="pass()">Shortlist</button> 
-                          <button type="submit" class=" btn btn-danger col-2" onclick="reject()">Reject</button>
+                          <button type="submit" class="btn btn-success col-2" onclick="savedata()">Save Data</button> 
+                          <button type="button" class="btn btn-primary col-2" onclick="cleardata()">Clear</button>
                           
                         </div>
                         </div>
                           
-                            
-                        </div>    
-                        </div >
                         
                         
-                          </div>
-                         
-                        
-                        </div>
                         
                         </div>
                          </div>
@@ -590,188 +500,88 @@ label{
               </div>
 
 <script>
-               
-           function reject()
-        {
-            debugger;
-            document.getElementById('reject').style.display='block'
-        }   
-
-
-        function submit()
+function checksal()
+{
+	var maxsal=parseInt(document.getElementById('maxsal').value);
+	var ctc=parseInt(document.getElementById('ctc').value);
+	var netsal=parseInt(document.getElementById('netsal').value);
+	var grosssal=parseInt(document.getElementById('grosssal').value);
+	if(ctc>maxsal)
+	{
+		alert('CTC cannot exceed maximum salary');
+		document.getElementById('ctc').value="";
+	}
+	if(grosssal>ctc)
+	{
+		alert('Gross salary cannot exceed CTC salary');
+		document.getElementById('grosssal').value="";
+	}
+	if(netsal>grosssal)
+	{
+		alert('Net salary cannot exceed Gross salary');
+		document.getElementById('netsal').value="";
+	}
+}
+  function savedata()
 
     {
         debugger;
        
-         var cid=document.getElementById('cid').value;
-    var interviewer=document.getElementById('intname').value;
-    var Understanding=document.getElementById('Understands').value;
-    var workexperience=document.getElementById('workexperience').value;
-    var initiative=document.getElementById('initiative').value;
-    var language=document.getElementById('language').value;
-    var Communicationskills=document.getElementById('Communicationskills').value;
-    var Personality=document.getElementById('Personality').value;
-    var Strategically=document.getElementById('Strategically').value;
-    var teamplayer=document.getElementById('teamplayer').value;
-    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
-        var rejectcomments=document.getElementById('rejcomments').value;
+         var pname=document.getElementById('pname').value;
+    var netsal=document.getElementById('netsal').value;
+    var grosssal=document.getElementById('grosssal').value;
+    var ctc=document.getElementById('ctc').value;
+    var cid=document.getElementById('cid').value;
 
 
 
         $.ajax({
            type: 'GET',
-           url: '/statusuploadsave1',
+           url: '/savesalarydata',
      
        contentType: 'application/json;charset=UTF-8',
            data: {
            
             'cid':cid,
-        'interviewer':interviewer,
-        'Understanding':Understanding,
-        'workexperience':workexperience,
-        'initiative':initiative,
-        'language':language,
-        'Communicationskills':Communicationskills,
-        'Personality':Personality,
-        'Strategically':Strategically,
-        'teamplayer':teamplayer,
-        'shifts_flexibility':shifts_flexibility,
-		'status':'Rejected',
-		'comments':comments,
-        'rejectcomments': rejectcomments
-
+        'ctc':ctc,
+        'grosssal':grosssal,
+        'netsal':netsal,
+        'pname':pname
        },
            
        dataType:"json",
            success: function(data) {
             alert(data);
-            window.location='operationinterviewcandidate'
+            window.location='recruiterpage'
        
            },
        });
     }
+	
+	
+              
+debugger;
+var rowcount = document.getElementById("customers").rows.length;
 
-
-
-function pass()
-
-{
-    debugger;
-   
-    var cid=document.getElementById('cid').value;
-    var interviewer=document.getElementById('intname').value;
-    var Understanding=document.getElementById('Understands').value;
-    var workexperience=document.getElementById('workexperience').value;
-    var initiative=document.getElementById('initiative').value;
-    var language=document.getElementById('language').value;
-    var Communicationskills=document.getElementById('Communicationskills').value;
-    var Personality=document.getElementById('Personality').value;
-    var Strategically=document.getElementById('Strategically').value;
-    var teamplayer=document.getElementById('teamplayer').value;
-    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
-
-
-
-    $.ajax({
-       type: 'GET',
-       url: '/statusuploadsave',
+var i=0,j=0;
+var val=0;
  
-   contentType: 'application/json;charset=UTF-8',
-       data: {       
-        'cid':cid,
-        'interviewer':interviewer,
-        'Understanding':Understanding,
-        'workexperience':workexperience,
-        'initiative':initiative,
-        'language':language,
-        'Communicationskills':Communicationskills,
-        'Personality':Personality,
-        'Strategically':Strategically,
-        'teamplayer':teamplayer,
-        'shifts_flexibility':shifts_flexibility,		
-		'comments':comments,
-		'status':'Shortlisted'
-   },
-       
-   dataType:"json",
-       success: function(data) {
-        alert(data);
-        window.location='operationinterviewcandidate'
-   
-       },
-   });
-}
-
-
-
-function save()
-
-{
-    debugger;
-   
-    var cid=document.getElementById('cid').value;
-    var interviewer=document.getElementById('intname').value;
-    var Understanding=document.getElementById('Understands').value;
-    var workexperience=document.getElementById('workexperience').value;
-    var initiative=document.getElementById('initiative').value;
-    var language=document.getElementById('language').value;
-    var Communicationskills=document.getElementById('Communicationskills').value;
-    var Personality=document.getElementById('Personality').value;
-    var Strategically=document.getElementById('Strategically').value;
-    var teamplayer=document.getElementById('teamplayer').value;
-    var shifts_flexibility=document.getElementById('shifts_flexibility').value;
-        var comments=document.getElementById('comments').value;
-
-
-
-    $.ajax({
-       type: 'GET',
-       url: '/statusuploadsave',
+for(i=1; i<rowcount;i++){
  
-   contentType: 'application/json;charset=UTF-8',
-       data: {       
-        'cid':cid,
-        'interviewer':interviewer,
-        'Understanding':Understanding,
-        'workexperience':workexperience,
-        'initiative':initiative,
-        'language':language,
-        'Communicationskills':Communicationskills,
-        'Personality':Personality,
-        'Strategically':Strategically,
-        'teamplayer':teamplayer,
-        'shifts_flexibility':shifts_flexibility,
-		'comments':comments,
-		'status':'Saved'
-   },
-       
-   dataType:"json",
-       success: function(data) {
-        alert(data);
-        window.location='operationinterviewcandidate'
+	var colcount = document.getElementById("customers").rows[i].cells.length;
+	 
+	for(j=11; j<colcount;j++){
+	 
+		var totnum=document.getElementById("customers").rows[i].cells.item(j).innerHTML;
+	 
+		val=val+parseInt(totnum);
+	 
+	}
    
-       },
-   });
 }
+var avgPercent=((val/(rowcount-1))/90)*100;
 
-
-{% if flagger==1 %}
-
-document.getElementById('Understands').value="{{interviewdata[0][3]}}";
-document.getElementById('workexperience').value="{{interviewdata[0][4]}}";
-document.getElementById('initiative').value="{{interviewdata[0][5]}}";
-document.getElementById('language').value="{{interviewdata[0][6]}}";
-document.getElementById('Communicationskills').value="{{interviewdata[0][7]}}";
-document.getElementById('Personality').value="{{interviewdata[0][8]}}";
-document.getElementById('Strategically').value="{{interviewdata[0][9]}}";
-document.getElementById('teamplayer').value="{{interviewdata[0][10]}}";
-document.getElementById('shifts_flexibility').value="{{interviewdata[0][11]}}";
-document.getElementById('comments').value="{{interviewdata[0][12]}}";
-
-{% endif %}
-
+   document.getElementById("percentage").innerHTML=Math.round(avgPercent)+" %";
   
 </script>
     

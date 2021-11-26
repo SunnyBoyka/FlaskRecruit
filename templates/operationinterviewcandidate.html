@@ -94,11 +94,11 @@ font-size: 18px;
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                      <button class="" ><a href='./operations' ><i class="fa fa-home" aria-hidden="true">Home</i> </a></button>
+                      <button class="" ><a href='./operations'>Home</a></button>
                       <button class="" ><a href='./processlist' >New Process List</a></button>
                       <button class="" ><a href='./operationinterviewcandidate'>Recruitement Queue</a></button>
-                      <button class="" ><a href='./savedcandidates'>Saved Candidates</a></button>
-                      <button class="" ><a href='./login'>Logout</a></button>
+                      <button class="" ><a href='./opsavedcandidates'>Saved Candidates</a></button>
+                      <button class="" ><a href='login'>Logout</a></button>
                      
                     </div>
                   </div>
@@ -122,7 +122,7 @@ font-size: 18px;
                           <th colspan="2">Experience</th>
                           <th colspan="2">Position Applied</th>
                           <th colspan="2">Languages Known</th>
-                          <th colspan="2">view</th>
+                          <th colspan="2">View</th>
                          
                           
                         </tr>
@@ -137,7 +137,7 @@ font-size: 18px;
                           <td colspan="2">{{item[16]}}</td>
                           <td colspan="2">{{item[17]}}</td>
                           <td colspan="2">{{item[19]}}</td>
-                          <td colspan="2"><a class="btn" href="opscandidateoverview?cid={{item[1]}}&mgr=Bopanna C K" id="btnSelect"><i class="far fa-eye"></i> View</a></td>
+                          <td colspan="2"><a class="btn" href="opscandidateoverview?cid={{item[1]}}&mgr={{item[24]}}" id="btnSelect"><i class="far fa-eye"></i> View</a></td>
                           
                           
                         </tr>

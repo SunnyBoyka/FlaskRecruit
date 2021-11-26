@@ -256,7 +256,7 @@ li {
                   <input type="text" class="form-control shadow-sm" name="overall_budget" id="CSR" placeholder="CSR Head Count" style="display:none"/>
                 </div>
                 <div class="col-sm-10 col-10 mb-1">
-                  <input type="text" class="form-control shadow-sm"  name="regular" id="regular" placeholder="Regular Head Count" onchange="checkcsrcount()" style="display:none"/>
+                  <input type="text" class="form-control shadow-sm"  name="regular" id="regular" placeholder="Regular Head Count"  style="display:none"/>
                 </div>
                 <div class="col-sm-10 col-10 mb-1">
                   <input type="text" class="form-control shadow-sm"  name="buffer" id="buffer" placeholder="Buffer Head Count" style="display:none" onchange="checkcsrcount()"/>
@@ -555,10 +555,12 @@ li {
 				 else if(buffer>tot_csr)
 				 {
 					alert("Buffer count cannot exceed total CSR count");
+					document.getElementById('buffer').value="";
 				 }
 				 else if(tcsr>tot_csr || tcsr<tot_csr)
 				 {
 					alert("Regular + Buffer should be equal to total CSR count");
+					document.getElementById('buffer').value="";
 				 }
 				 
 			}
