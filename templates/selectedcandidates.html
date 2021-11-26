@@ -117,25 +117,29 @@ font-size: 18px;
                    
                     <table id="myTable" style="width: 100%;">
                         <tr >
-                         <!--  <th colspan="2">Client Name</th>  -->
-                          <th colspan="2">Candidate Name</th>
-                          <th colspan="2">Candidate Aadhaar CardNumber </th>
-                          <th colspan="2">Candidate Qualification</th> 
-                          <th colspan="2">Candidate Experience</th>
                           
-                          <th colspan="2">view</th>
+                          <th colspan="2">Candidate ID</th>
+                          <th colspan="2">Name</th>
+                          <th colspan="2">Email</th> 
+                          <th colspan="2">Phone #</th> 
+                          <th colspan="2">Qualification</th>
+                          <th colspan="2">Experience</th>
+                          <th colspan="2">Position Applied</th>
+                          <th colspan="2">Languages Known</th>
                          
                           
                         </tr>
                         {% for item in data %}
                         <tr>
-                          <!-- <td colspan="2">{{item[0]}}</td> -->
-                          <td colspan="2">{{item[0]}}</td>
+                          
+                          <td colspan="2">{{item[1]}}</td>
+                          <td colspan="2">{{item[2]}} {{item[3]}}</td>
                           <td colspan="2">{{item[12]}}</td>
                           <td colspan="2">{{item[13]}}</td>
-                          <td colspan="2">{{item[14]}}</td>
-                          
-                          <td colspan="2"><buttion class="btn " id="btnSelect"><i class="fas fa-pen"></i>     ...View</buttion></td>
+                          <td colspan="2">{{item[15]}}</td>
+                          <td colspan="2">{{item[16]}}</td>
+                          <td colspan="2">{{item[17]}}</td>
+                          <td colspan="2">{{item[19]}}</td>
                           
                           
                         </tr>
