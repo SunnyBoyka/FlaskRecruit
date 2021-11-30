@@ -577,7 +577,7 @@ def selectedcandidates():
     sql_Query = "select distinct tblcandidate_register.Candid,tblcandidate_register.* from tblinterview,tblcandidate_register where tblinterview.Statuss='Selected' and tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
     
     print(sql_Query)
-    cursor.execute(sql_select_Query)
+    cursor.execute(sql_Query)
     data = cursor.fetchall()
     print(data)
     '''
