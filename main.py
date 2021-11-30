@@ -2466,6 +2466,7 @@ def recstatusuploadsave():
     comments=request.args['comments']
     status=request.args['status']
     pname=request.args['pname']
+    mgr=request.args['mgr']
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Statuss,Comments,Rejection_reason,Pname) values ("+cid+",'"+intname+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','"+status+"','"+comments+"','','"+pname+"')"
@@ -2474,6 +2475,9 @@ def recstatusuploadsave():
 
     if intname=='Recruiter':
         sql_Query2 = "update tblcandidate_register set Statuss='HR Shortlist'  where Candid="+cid+""
+        print(sql_Query2) 
+        cursor.execute(sql_Query2)
+        sql_Query2 = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason) values ("+cid+",'"+mgr+"','','','','','','','','','','')"
         print(sql_Query2) 
         cursor.execute(sql_Query2)
 
