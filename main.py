@@ -734,7 +734,9 @@ def newrequisition():
     cursor.execute(sql_select_Query3)
     Experiences = cursor.fetchall()
     print("--------------------------------------------")
-    jobtype=''
+   
+    jobtype=[]
+    '''
     try:
             
         sql_select_Query3="SELECT Job_type FROM recruiter where Prcess_ID='"+procid+"'"
@@ -746,18 +748,32 @@ def newrequisition():
         print(jobtype)
     except:
         print('No Job Type')
+    '''
     
     connection.close()
     cursor.close()
     
     totalcsr=data[0][5]
+    if totalcsr!='':
+        jobtype.append("Customer Service Representative")
+        
     reguler=data[0][6]
     buffer=data[0][7]
     Supervisor=data[0][10]
+    if Supervisor!='':
+        jobtype.append("Supervisor")
     tl=data[0][13]
+    if tl!='':
+        jobtype.append("Team Lead")
     astmgr=data[0][19]
+    if astmgr!='':
+        jobtype.append("Asst. Manager")
     mgr=data[0][16]
+    if mgr!='':
+        jobtype.append("Manager")
     mis=data[0][22]
+    if mis!='':
+        jobtype.append("MIS")
     return render_template('newrequisition.html',jobtype=jobtype,totalcsr=totalcsr,reguler=reguler,buffer=buffer,Supervisor=Supervisor,tl=tl,skills=skills,Qualifications=Qualifications,Experiences=Experiences,astmgr=astmgr,mgr=mgr,mis=mis,shift_timing=shift_timing,languages=languages,data=data)
 
 
