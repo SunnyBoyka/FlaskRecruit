@@ -2351,7 +2351,7 @@ def reccandidateoverview():
     print(data)
 
     
-    sql_Query = "select *, (CONVERT(Process_requirements,Decimal)+CONVERT(Work_experience,Decimal)+CONVERT(Initiative,Decimal)+CONVERT(Language_fluency,Decimal)+CONVERT(Communication_skills,Decimal)+CONVERT(Personality,Decimal)+CONVERT(Thinking_Strategy,Decimal)+CONVERT(Team_Player,Decimal)+CONVERT(Flexibility_for_shifts,Decimal)) AS Total from tblinterview where Candid="+cid+""
+    sql_Query = "select *, (CONVERT(Process_requirements,Decimal)+CONVERT(Work_experience,Decimal)+CONVERT(Initiative,Decimal)+CONVERT(Language_fluency,Decimal)+CONVERT(Communication_skills,Decimal)+CONVERT(Personality,Decimal)+CONVERT(Thinking_Strategy,Decimal)+CONVERT(Team_Player,Decimal)+CONVERT(Flexibility_for_shifts,Decimal)) AS Total from tblinterview where Candid="+cid+" and Initiative<>''"
     print(sql_Query) 
     cursor.execute(sql_Query)
     interviewdata=cursor.fetchall()
