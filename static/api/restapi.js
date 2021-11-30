@@ -231,37 +231,29 @@ $("#btn_procapprove").click(function(){
 $("#btn_procreject").click(function(){
 		
 			debugger;
-			var name=document.getElementById('eid').value;
-			var pass=document.getElementById('pass').value;
-			/*
-			if(name=="admin"&&pass=="admin")
-			{
-				window.location='masters'
-
-			}
-			else
-			{
-				window.location='loginverify?name='+name+'&pass='+pass;				
-				
-			}
-			*/
-			$.ajax({
-           type: 'GET',
-           url: '/loginverify',
-     
-       contentType: 'application/json;charset=UTF-8',
-           data: {           
-           'name': name,
-           'pass': pass
-       },
-           
-       dataType:"json",
-           success: function(logindata) {
-			   logindatacheck(logindata);
-			   
-      
-           },
-       });
+			var pid=document.getElementById('pid').value;
+			var comments=document.getElementById('content').value;
+			
+			 $.ajax({
+                type: 'GET',
+                url: '/rejectprocess',
+                
+            contentType: 'application/json;charset=UTF-8',
+                data: {
+                
+                'pid':pid,
+				'comments':comments
+            },
+                
+            dataType:"json",
+                success: function(data) {
+                  alert(data);
+                    window.location='ceopage'
+                },
+                 error: function(data) {
+                   
+                }
+            }); 
 
 });
 
@@ -317,7 +309,7 @@ $(".btnSearchCand").click(function(){
 						var body="";
 						var header="<h4 class='mt-4 text-center'>Matched Candidates List</h4><table style='border:solid black; width: 100%;'><thead style='background-color:black;border:solid;'><tr><th> Candidate Id </th><th> First Name </th><th> Last Name </th><th> Phone number </th><th> Aadhar Number  </th><th>  Qualification </th><th> Experience </th><th> Languages  </th><th>       </th> <th>       </th><th>       </th> </tr></thead><tbody>";
 						for (var i=0; i<details.length; i++){
-								  body+="<tr><td>" + details[i][0] + "</td><td>" + details[i][1] + "</td><td>" +details[i][2] + "</td><td>" + details[i][12]+ "</td><td>" + details[i][13]+ "</td><td>" + details[i][14]+ "</td><td>" + details[i][15]+ "</td><td>" + details[i][18]+"</td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datafetcher("+details[i][0]+")'>Approval Request </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datapproval("+details[i][0]+",\""+mgr+"\");'>Schedule Interview </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='recmgrview("+details[i][0]+",\""+mgr+"\",\""+pname+"\");'>View Candidate </button></td></tr>";
+								  body+="<tr><td>" + details[i][0] + "</td><td>" + details[i][1] + "</td><td>" +details[i][2] + "</td><td>" + details[i][12]+ "</td><td>" + details[i][13]+ "</td><td>" + details[i][14]+ "</td><td>" + details[i][15]+ "</td><td>" + details[i][18]+"</td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datafetcher("+details[i][0]+")'>Approval Request </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='datapproval("+details[i][0]+",\""+mgr+"\",\""+pname+"\");'>Schedule Interview </button></td><td><button style='font-size:10px;' class='btn btn-primary allocateinterview' id='allocateinterview' onclick='recmgrview("+details[i][0]+",\""+mgr+"\",\""+pname+"\");'>View Candidate </button></td></tr>";
 					  }
 					  mydiv.innerHTML=header+body+"</tbody></table>";
 						//tablebuilder(newdata);	
@@ -400,12 +392,13 @@ function RejectedRelease(cid)
 			   alert(logindata);
 				window.location='recruiterpage';
 			   
+			   
       
            },
        });
 }
 
-function datapproval(cid,mgr)
+function datapproval(cid,mgr,pname)
 {
 	debugger;
 	$.ajax({
@@ -415,7 +408,8 @@ function datapproval(cid,mgr)
        contentType: 'application/json;charset=UTF-8',
            data: {           
            'cid': cid,
-		   'mgr':mgr
+		   'mgr':mgr,
+		   'pname':pname
        },
            
        dataType:"json",

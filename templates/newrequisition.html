@@ -101,8 +101,9 @@ font-size: 18px;
                   <div class="container-fluid">
                       
                     <div id="myDIV" >
-                     <button class="btn" ><a href='./operations'>Home</a></button>
-                     <button class="btn" ><a href='./processlist'> Process List</a></button>
+                     <button class="" ><a href='./operations'>Home</a></button>
+                     <button class="" ><a href='./processlist'> Process List</a></button>
+                     <button class="" ><a href='login'>Logout</a></button>
                       <!--<button class="btn active"><a href='./newrequisition'>Process List </a></button> -->
                     </div>
                   </div>
@@ -133,37 +134,21 @@ font-size: 18px;
                        -->
                       <div class="col-sm-3 col-10 mb-1">
                         <label for="client_name" class="form-label">Process Name</label>
-                        <select class="form-control shadow-sm" name="qualification" id="pname">
-                          {% if data is defined %}
+                        <input type="text" class="form-control shadow-sm" name="pname" id="pname" value="{{data[0][1]}}" readonly />
                          
-                        {% for i in data %}
-                        <option value="{{i[1]}}">{{i[1]}}</option>
-                        {% endfor %}
-                        
-                        </select>
                       </div> 
                       <div class="col-sm-3 col-10 mb-1">
                         <label for="target_date" class="form-label">Process ID</label>
-                        <select class="form-control shadow-sm" name="processid" id="processid">
-                          
-                          {% for i in data %}
-                          <option value="{{i[0]}}">{{i[0]}}</option>
-                          {% endfor %}
-                         
-                          </select>
+						
+                        <input type="text" class="form-control shadow-sm" name="processid" id="processid" value="{{data[0][0]}}" readonly />
                           
                           
                       </div>    
                       <div class="col-sm-3 col-10 mb-1">
                         <label for="target_date" class="form-label">Target Date</label>
-                        <select class="form-control shadow-sm" name="qualification" id="tdate">
-                          
-                          {% for i in data %}
-                          <option value="{{i[3]}}">{{i[3]}}</option>
-                          {% endfor %}
-                         
-                          </select>
-                          {% endif %}
+						
+						
+                        <input type="text" class="form-control shadow-sm" name="tdate" id="tdate" value="{{data[0][3]}}" readonly />
                           
                       </div>                                       
                     </div>
@@ -182,8 +167,8 @@ font-size: 18px;
                         <div class="col-sm-6  mb-1">
                         <select class="form-control shadow-sm" name="Job Name" id="job_type" onchange='checkval(this.value)'>
                          <option hidden selected>Choose an Option</option>
-                         {% for i in data3 %}
-                         <option value="{{i[3]}}">{{i[3]}}</option>
+                         {% for i in jobtype %}
+                         <option value="{{i}}">{{i}}</option>
                          {% endfor %}
                          
                         </select>
@@ -194,8 +179,8 @@ font-size: 18px;
                         <div class="col-sm-6 col-10 mb-1">
                         <select class="form-control shadow-sm" name="qualification" id="qualification">
                          <option hidden selected>Choose an Option</option>
-                         {% for i in data3 %}
-                         <option value="{{i[1]}}">{{i[1]}}</option>
+                         {% for item in Qualifications %}
+                         <option value="{{item[0]}}">{{item[0]}}</option>
                          {% endfor %}
                         </select>
                       </div>   
@@ -203,10 +188,10 @@ font-size: 18px;
                         <label for="qualification" class="form-label">Experience</label>
                         </div>
                         <div class="col-sm-6 col-10 mb-1">
-                        <select class="form-control shadow-sm" name="qualification" id="experience">
+                        <select class="form-control shadow-sm" name="experience" id="experience">
                          <option hidden selected>Choose an Option</option>
-                         {% for i in data3 %}
-                         <option value="{{i[2]}}">{{i[2]}}</option>
+                         {% for item in Experiences %}
+                         <option value="{{item[0]}}">{{item[0]}}</option>
                          {% endfor %}
                         </select>
                       </div>  
@@ -248,7 +233,7 @@ font-size: 18px;
 
                                   <div id='visastmgr' style='display:none' >
                                     <div class="col-sm-6 col-10 mb-1">
-                                      <label for="qualification" class="form-label">Assitent Manager Required </label>
+                                      <label for="qualification" class="form-label">Assitant Manager Required </label>
                                       </div>
                                       <div class="col-sm-6 col-10 mb-1">
                                         <input type="text" class="form-label"  id="astmge" value="{{astmgr}}" />
@@ -291,8 +276,8 @@ font-size: 18px;
                         <div class="col-sm-4  mb-1">
                           <label for="supervisor" class="form-label">Skills</label>
                           <select id="Skills" class="multi_select" multiple data-live-search="true">
-                            {% for i in  data3 %}
-                            <option value="{{i[0]}}">{{i[0]}}</option>
+                            {% for item in  skills %}
+                            <option value="{{item[0]}}">{{item[0]}}</option>
                             {% endfor %}
                            
                         </select>
@@ -301,8 +286,8 @@ font-size: 18px;
                         <div class="col-sm-4  mb-1">
                           <label for="supervisor" class="form-label">Shift Timing </label>
                           <select id="Shift_Timing" class="multi_select2" multiple data-live-search="true">
-                            {% for i in  data3 %}
-                            <option value="{{i[4]}}">{{i[4]}}</option>
+                            {% for item in  shift_timing %}
+                            <option value="{{item[0]}}">{{item[0]}}</option>
                             {% endfor %}
                         </select>
                         </div>   
@@ -313,8 +298,8 @@ font-size: 18px;
                           <label for="supervisor" class="form-label">Language</label>
                            
                           <select id="Language" class="multi_select3" multiple data-live-search="true">
-                            {% for i in  data3 %}
-                            <option value="{{i[6]}}">{{i[6]}}</option>
+                            {% for item in  languages %}
+                            <option value="{{item[0]}}">{{item[0]}}</option>
                             {% endfor %}
                         </select>
                         </div>  
@@ -611,6 +596,7 @@ var pid=document.getElementById('processid').value
            'pname': pname,
            'pid':pid,
            'tdate': tdate,
+           'ctype': 'CSR',
            'job_type':job_type,
            'total_csr':totalcsr,
            'buffer':buffer,
@@ -722,6 +708,7 @@ var pid=document.getElementById('processid').value
                     'pid':pid , 
                     'pname': pname,
                     'tdate': tdate,
+					'ctype': 'Supervisor',
                     'totalsup':totalsup,
                     'job_type':supjob_type,
                     'qualification':supqualification,
@@ -832,6 +819,7 @@ var pid=document.getElementById('processid').value
                       'pid':pid , 
                     'pname': pname,
                     'tdate': tdate,
+					'ctype': 'Team Lead',
                     'totletl':tl,
                     'job_type':job_type,
                     'qualification':qualification,
@@ -941,6 +929,7 @@ var pid=document.getElementById('processid').value
                     'pid':pid , 
                     'pname': pname,
                     'tdate': tdate,
+					'ctype': 'Asst. Manager',
                   'job_type':job_type,
                   'countofastmgr':countofastmgr,
                   'qualification':qualification,
@@ -1052,6 +1041,7 @@ var pid=document.getElementById('processid').value
                     'pid':pid , 
                     'pname': pname,
                     'tdate': tdate,
+					'ctype': 'Manager',
                   'job_type':job_type,
                   'countofmgr':countofmgr,
                   'qualification':qualification,
@@ -1159,6 +1149,7 @@ var pid=document.getElementById('processid').value
                     'pid':pid , 
                     'pname': pname,
                     'tdate': tdate,
+					'ctype': 'MIS',
                   'job_type':job_type,
                   'countofmis':countofmis,
                   'qualification':qualification,

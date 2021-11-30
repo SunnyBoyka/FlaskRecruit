@@ -139,17 +139,9 @@ font-size: 18px;
                           <td colspan="2">{{item[5]}}</td>
                           <td colspan="2">{{item[0]}}</td>
                           <td colspan="2">{{item[2]}}</td>
-                          <td colspan="2">{{item[10]}}</td>
+                          <td colspan="2">{{item[11]}}</td>
                           <td colspan="2">{{item[6]}}</td>
                           <td colspan="2">						  
-								{% if item[6]|string=="CSR" %}
-									{{item[15]}}
-								{% endif %}
-								{% if item[6]|string=="Supervisor" %}
-									{{item[24]}}
-								{% endif %}
-						  </td>
-                          <td colspan="2">	
 								{% if item[6]|string=="CSR" %}
 									{{item[16]}}
 								{% endif %}
@@ -157,9 +149,7 @@ font-size: 18px;
 									{{item[25]}}
 								{% endif %}
 						  </td>
-                          
-                          <td colspan="2">					  
-						  
+                          <td colspan="2">	
 								{% if item[6]|string=="CSR" %}
 									{{item[17]}}
 								{% endif %}
@@ -191,6 +181,16 @@ font-size: 18px;
 								{% endif %}
 								{% if item[6]|string=="Supervisor" %}
 									{{item[29]}}
+								{% endif %}
+						  </td>
+                          
+                          <td colspan="2">					  
+						  
+								{% if item[6]|string=="CSR" %}
+									{{item[21]}}
+								{% endif %}
+								{% if item[6]|string=="Supervisor" %}
+									{{item[30]}}
 								{% endif %}
 						  </td>
                           

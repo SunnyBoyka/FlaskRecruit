@@ -422,7 +422,7 @@ def processs():
 def ceopage():
     print('hi')
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-    sql_select_Query = "SELECT ProcessID,CreatedDate,ProcessName,OPSManager,TargetDate,Statuss FROM tblproc_setup order by ProcessId desc" #WHERE Statuss='Pending' 
+    sql_select_Query = "SELECT ProcessID,CreatedDate,ProcessName,OPSManager,TargetDate,Statuss FROM tblproc_setup where Statuss<>'Rejected' order by ProcessId desc" #WHERE Statuss='Pending' 
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     newdata = cursor.fetchall()
@@ -554,7 +554,7 @@ def recruiterpage():
     print(employeeid)
     print(employeename)
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-    sql_select_Query = "SELECT ProcessName,ProcessID,OPSManager,tblreclist.*,recruiter.* FROM tblreclist,tblproc_setup,recruiter WHERE tblproc_setup.ProcessID=tblreclist.ProcId and recruiter.Prcess_ID=tblreclist.ProcId"
+    sql_select_Query = "SELECT ProcessName,ProcessID,OPSManager,tblreclist.*,recruiter.* FROM tblreclist,tblproc_setup,recruiter WHERE tblreclist.Statuss='Open' and tblproc_setup.ProcessID=tblreclist.ProcId and recruiter.Prcess_ID=tblreclist.ProcId"
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     data = cursor.fetchall()
@@ -687,6 +687,7 @@ def managercandidateview():
 
 @app.route('/newrequisition') 
 def newrequisition():
+    '''
     global gpname 
     pname= gpname
     global gpid
@@ -695,18 +696,53 @@ def newrequisition():
     opsmgr = gopsmgr
     global gtdate
     targetdate = gtdate
+    '''
+    procid = request.args['procid']
+    
+    global userid
+    interviewer=userid
+    
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
-    sql_select_Query = "select * from tblproc_setup where  ProcessID='"+pname+"' and OPSManager='"+opsmgr+"' and TargetDate='"+targetdate+"'"
+    sql_select_Query = "select * from tblproc_setup where ProcessID='"+procid+"' and OPSManager in (select Ename from hrmsemployee where Eid='"+str(interviewer)+"')"
     cursor.execute(sql_select_Query)
     data = cursor.fetchall()
     print(sql_select_Query)
     print(data)
-    sql_select_Query3="SELECT * FROM databank"
+    
+    sql_select_Query3="SELECT skill FROM databank where skill<>''"
     cursor.execute(sql_select_Query3)
-    data3 = cursor.fetchall()
+    skills = cursor.fetchall()
     print("--------------------------------------------")
-    print(data3)
+    
+    sql_select_Query3="SELECT shift_types FROM databank where shift_types<>''"
+    cursor.execute(sql_select_Query3)
+    shift_timing = cursor.fetchall()
+    print("--------------------------------------------")
+    
+    sql_select_Query3="SELECT language FROM databank where language<>''"
+    cursor.execute(sql_select_Query3)
+    languages = cursor.fetchall()
+    print("--------------------------------------------")
+    
+    sql_select_Query3="SELECT Qualification FROM databank where Qualification<>''"
+    cursor.execute(sql_select_Query3)
+    Qualifications = cursor.fetchall()
+    print("--------------------------------------------")
+    
+    sql_select_Query3="SELECT Experience FROM databank where Experience<>''"
+    cursor.execute(sql_select_Query3)
+    Experiences = cursor.fetchall()
+    print("--------------------------------------------")
+
+    
+    sql_select_Query3="SELECT Job_type FROM recruiter where Prcess_ID='"+procid+"'"
+    cursor.execute(sql_select_Query3)
+    jobtype = cursor.fetchall()
+    jobtype=jobtype[0][0]
+    jobtype=jobtype.split(',')
+    print("--------------------------------------------")
+    print(jobtype)
     
     connection.close()
     cursor.close()
@@ -719,20 +755,7 @@ def newrequisition():
     astmgr=data[0][19]
     mgr=data[0][16]
     mis=data[0][22]
-    print(totalcsr)
-    print(reguler)
-    print(buffer)
-    print(Supervisor)
-    print(tl)
-    skills=data3[0][0]
-    data2=data3[0][3]
-    print("---------------------------------------------------")
-    print(data2)
-    shift_timing=data[0][4]
-    Qualifications=data[0][1]
-    Experiences=data3[0][2]
-    languages=data[0][6]
-    return render_template('newrequisition.html',data=data,totalcsr=totalcsr,reguler=reguler,buffer=buffer,Supervisor=Supervisor,tl=tl,data3=data3,skills=skills,Qualifications=Qualifications,Experiences=Experiences,astmgr=astmgr,mgr=mgr,mis=mis,shift_timing=shift_timing,languages=languages)
+    return render_template('newrequisition.html',jobtype=jobtype,totalcsr=totalcsr,reguler=reguler,buffer=buffer,Supervisor=Supervisor,tl=tl,skills=skills,Qualifications=Qualifications,Experiences=Experiences,astmgr=astmgr,mgr=mgr,mis=mis,shift_timing=shift_timing,languages=languages,data=data)
 
 
 
@@ -759,25 +782,25 @@ def processlist():
     return render_template('processlist.html',data=data)
 
 
-
+#Process rejection by CEO
 @app.route('/rejectprocess',methods =  ['GET','POST'])
 def rejectprocess():
     pid=request.args['pid']
     comments=request.args['comments']
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-    sql_select_Query = "update proc_setup set statuss='reject' , comments_for_rejection='"+comments+"' where ProcessID='"+pid+"' "
+    sql_select_Query = "update tblproc_setup set Statuss='Rejected' , RejectionComments='"+comments+"' where ProcessID='"+pid+"' "
     print(sql_select_Query)
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     connection.commit()
     connection.close()
     cursor.close()
-    msg="Data stored successfully"
+    msg="Process rejected successfully"
     resp = make_response(json.dumps(msg))
     print(msg, flush=True)
     return resp
 
-
+#Process approval by CEO
 @app.route('/approveprocess',methods =  ['GET','POST'])
 def approveprocess():
     pid=request.args['pid']
@@ -834,42 +857,42 @@ def approveprocess():
 
     for i in range(totcsr):
         tid="CSR"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','CSR','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','CSR','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)
    
     for i in range(totsup):
         tid="Sup"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Supervisor','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Supervisor','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)    
    
     for i in range(tottl):
         tid="TL"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Team Lead','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Team Lead','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)   
    
     for i in range(totmgr):
         tid="Mgr"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Manager','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Manager','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)   
    
     for i in range(totamgr):
         tid="AMgr"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Asst. Manager','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','Asst. Manager','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)  
    
     for i in range(totmis):
         tid="MIS"+str(i+1)
-        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','MIS','Open')"
+        sql_select_Query = "insert into tblreclist(ProcId,Taskid,Designation,Statuss) values ("+pid+",'"+tid+"','MIS','Pending')"
         print(sql_select_Query)
         cursor = connection.cursor()
         cursor.execute(sql_select_Query)  
@@ -1015,7 +1038,13 @@ def recruiterscsr():
     cur.execute(query)
     data=cur.fetchall()
     print(data)
+    
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
     connection.commit()
+    
     print(len(data))
     cur.close()
     connection.close()
@@ -1033,7 +1062,7 @@ def recruiterscsr():
             print(msg, flush=True)
             return resp
     else:
-        msg="alredy registerd"      
+        msg="Task Creation Done"    
         resp=make_response(json.dumps(msg))
         return resp
     
@@ -1044,53 +1073,59 @@ def recruiterscsr():
 
 @app.route('/recruitsup', methods =  ['GET','POST'])
 def recruiterssup():
-   pname = request.args['pname']
-   tdate = request.args['tdate']
-   pid = request.args['pid']
-   print(pid)
-   totlsup=request.args['totalsup']
-   job_type = request.args['job_type']
-   qualification = request.args['qualification']
-   experience = request.args['experience']
-   skills = request.args['skills']
-   shift_timing= request.args['shift_timing']
-   langs = request.args['language']
-   gender = request.args['gender']
-   description = request.args['description']
-   connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-   cur=connection.cursor()
-   query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
-   print(query)
-   cur.execute(query)
-   data=cur.fetchall()
-   print(data)
-   connection.commit()
-   print(len(data))
-   cur.close()
-   connection.close()
-   if(len(data)>0):
-       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-       cursor = connection.cursor()
-       sql_Query = "UPDATE recruiter SET total_SUP='"+totlsup+"', SUPjob_type='"+job_type+"',SUPqualification = '"+qualification+"',SUPexperience='"+experience+"',SUPSkills='"+skills+"',SUPShift_Timing='"+shift_timing+"',SUPLanguages='"+langs+"',SUPGender='"+gender+"',SUPdiscription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
-       cursor.execute(sql_Query)
-       connection.commit()
-       connection.close()
-       cursor.close() 
-       msg="Data stored successfully"
-       resp = make_response(json.dumps(msg))
-       print(msg, flush=True)
-       return resp
-   else:
-       connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-       cursor = connection.cursor()
-       sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_SUP,SUPjob_type,SUPqualification,SUPexperience,SUPSkills,SUPShift_Timing,SUPLanguages,SUPGender,SUPdiscription)values('"+pname+"','"+pid+"','"+tdate+"','"+totlsup+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
-       cursor.execute(sql_Query)
-       connection.commit()
-       connection.close()
-       cursor.close() 
-       msg="registerd successfully"
-       resp=make_response(json.dumps(msg))
-       return resp
+    pname = request.args['pname']
+    tdate = request.args['tdate']
+    pid = request.args['pid']
+    print(pid)
+    totlsup=request.args['totalsup']
+    job_type = request.args['job_type']
+    qualification = request.args['qualification']
+    experience = request.args['experience']
+    skills = request.args['skills']
+    shift_timing= request.args['shift_timing']
+    langs = request.args['language']
+    gender = request.args['gender']
+    description = request.args['description']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    cur=connection.cursor()
+    query="select *  from recruiter   where   Prcess_ID='"+pid+"'" 
+    print(query)
+    cur.execute(query)
+    data=cur.fetchall()
+    print(data)
+
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
+    connection.commit()
+    print(len(data))
+    cur.close()
+    connection.close()
+    if(len(data)>0):        
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+        cursor = connection.cursor()
+        sql_Query = "UPDATE recruiter SET total_SUP='"+totlsup+"', SUPjob_type='"+job_type+"',SUPqualification = '"+qualification+"',SUPexperience='"+experience+"',SUPSkills='"+skills+"',SUPShift_Timing='"+shift_timing+"',SUPLanguages='"+langs+"',SUPGender='"+gender+"',SUPdiscription='"+description+"' WHERE Prcess_ID = '"+pid+"'" 
+        cursor.execute(sql_Query)
+        connection.commit()
+        connection.close()
+        cursor.close() 
+        msg="Data stored successfully"
+        resp = make_response(json.dumps(msg))
+        print(msg, flush=True)
+        return resp
+    else:
+        
+        connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+        cursor = connection.cursor()
+        sql_Query = "insert into recruiter (Process_Name,Prcess_ID,Target_Date,total_SUP,SUPjob_type,SUPqualification,SUPexperience,SUPSkills,SUPShift_Timing,SUPLanguages,SUPGender,SUPdiscription)values('"+pname+"','"+pid+"','"+tdate+"','"+totlsup+"', '"+job_type+"', '"+qualification+"','"+experience+"','"+skills+"','"+shift_timing+"','"+langs+"','"+gender+"','"+description+"')"
+        cursor.execute(sql_Query)
+        connection.commit()
+        connection.close()
+        cursor.close() 
+        msg="Task Creation Done"
+        resp=make_response(json.dumps(msg))
+        return resp
 
 
 
@@ -1118,6 +1153,13 @@ def recruiterstl():
     cur.execute(query)
     data=cur.fetchall()
     print(data)
+    
+
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
+    
     connection.commit()
     print(len(data))
     cur.close()
@@ -1142,7 +1184,7 @@ def recruiterstl():
         connection.commit()
         connection.close()
         cursor.close() 
-        msg="registerd sucessfully"
+        msg="Task Creation Done"
         resp=make_response(json.dumps(msg))
         return resp
 
@@ -1171,6 +1213,13 @@ def recruitersastmgr():
     cur.execute(query)
     data=cur.fetchall()
     print(data)
+    
+
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
+    
     connection.commit()
     print(len(data))
     cur.close()
@@ -1195,7 +1244,7 @@ def recruitersastmgr():
         connection.commit()
         connection.close()
         cursor.close() 
-        msg="alredy registerd"
+        msg="Task Creation Done"     
         resp=make_response(json.dumps(msg))
         return resp
 
@@ -1227,6 +1276,11 @@ def recruitermgr():
     cur.execute(query)
     data=cur.fetchall()
     print(data)
+    
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
     connection.commit()
     print(len(data))
     cur.close()
@@ -1252,7 +1306,7 @@ def recruitermgr():
         connection.commit()
         connection.close()
         cursor.close() 
-        msg="alredy registerd"
+        msg="Task Creation Done"     
         resp=make_response(json.dumps(msg))
         return resp
 
@@ -1281,6 +1335,12 @@ def recruitmis():
     cur.execute(query)
     data=cur.fetchall()
     print(data)
+    
+
+    ctype = request.args['ctype']    
+    query="update tblreclist set Statuss='Open' where  Designation='"+ctype+"' and  ProcId='"+pid+"'" 
+    print(query)
+    cur.execute(query)
     connection.commit()
     print(len(data))
     cur.close()
@@ -1305,7 +1365,7 @@ def recruitmis():
         connection.commit()
         connection.close()
         cursor.close() 
-        msg="alredy registerd"
+        msg="Task Creation Done"
         resp=make_response(json.dumps(msg))
         return resp
 
@@ -1415,7 +1475,7 @@ def recruiterapproval():
 
     
     sql_select_Query = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason,Pname) values ("+cid+",'"+mgr+"','','','','','','','','','','','"+pname+"')"
-    #print(sql_select_Query)    
+    print(sql_select_Query)    
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
     connection.commit()
@@ -2107,7 +2167,7 @@ def operationinterviewcandidate():
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     
-    sql_Query = "select tblcandidate_register.Candid,tblcandidate_register.*,tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
+    sql_Query = "select tblcandidate_register.Candid,tblcandidate_register.*,tblinterview.Interviewer from tblinterview,tblcandidate_register where (tblcandidate_register.Statuss='Approved' or tblcandidate_register.Statuss='HR Shortlist')  and tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Initiative=''"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
@@ -2197,7 +2257,7 @@ def reccandidateoverview1():
     data=cursor.fetchall()
     print(data)
 
-    sql_Query = "select * from tblinterview where Candid="+cid+" and Interviewer='"+mgr+"'"
+    sql_Query = "select * from tblinterview where Candid="+cid+" and Interviewer='Recruiter'"
     print(sql_Query) 
     cursor.execute(sql_Query)
     interviewdata=cursor.fetchall()
@@ -2409,9 +2469,15 @@ def recstatusuploadsave():
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     sql_Query2 = "insert into tblinterview(Candid,Interviewer,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Statuss,Comments,Rejection_reason,Pname) values ("+cid+",'"+intname+"','"+Understanding+"','"+workexperience+"','"+initiative+"','"+language+"','"+Communicationskills+"','"+Personality+"','"+Strategically+"','"+teamplayer+"','"+shifts_flexibility+"','"+status+"','"+comments+"','','"+pname+"')"
-    
     print(sql_Query2) 
     cursor.execute(sql_Query2)
+
+    if intname=='Recruiter':
+        sql_Query2 = "update tblcandidate_register set Statuss='HR Shortlist'  where Candid="+cid+""
+        print(sql_Query2) 
+        cursor.execute(sql_Query2)
+
+    
     connection.commit() 
     connection.close()
     cursor.close()

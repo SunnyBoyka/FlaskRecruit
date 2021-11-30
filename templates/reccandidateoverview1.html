@@ -581,7 +581,7 @@ label{
                                   </div>
                         </div>
                           <div class="col-sm-10 col-10 mb-1" style="padding-top: 5%;">
-                          <button type="submit" class="btn btn-success col-2" onclick="save()">Save</button> 
+                          <!--<button type="submit" class="btn btn-success col-2" onclick="save()">Save</button> -->
                           <button type="submit" class="btn btn-primary col-2" onclick="pass()">Shortlist</button> 
                           <button type="submit" class=" btn btn-danger col-2" onclick="reject()">Reject</button>
                           
@@ -779,16 +779,16 @@ function save()
 	
 {% if flagger==1 %}
 
-document.getElementById('Understands').value="{{interviewdata[0][3]}}";
-document.getElementById('workexperience').value="{{interviewdata[0][4]}}";
-document.getElementById('initiative').value="{{interviewdata[0][5]}}";
-document.getElementById('language').value="{{interviewdata[0][6]}}";
-document.getElementById('Communicationskills').value="{{interviewdata[0][7]}}";
-document.getElementById('Personality').value="{{interviewdata[0][8]}}";
-document.getElementById('Strategically').value="{{interviewdata[0][9]}}";
-document.getElementById('teamplayer').value="{{interviewdata[0][10]}}";
-document.getElementById('shifts_flexibility').value="{{interviewdata[0][11]}}";
-document.getElementById('comments').value="{{interviewdata[0][12]}}";
+document.getElementById('Understands').value="{{interviewdata[0][4]}}";
+document.getElementById('workexperience').value="{{interviewdata[0][5]}}";
+document.getElementById('initiative').value="{{interviewdata[0][6]}}";
+document.getElementById('language').value="{{interviewdata[0][7]}}";
+document.getElementById('Communicationskills').value="{{interviewdata[0][8]}}";
+document.getElementById('Personality').value="{{interviewdata[0][9]}}";
+document.getElementById('Strategically').value="{{interviewdata[0][10]}}";
+document.getElementById('teamplayer').value="{{interviewdata[0][11]}}";
+document.getElementById('shifts_flexibility').value="{{interviewdata[0][12]}}";
+document.getElementById('comments').value="{{interviewdata[0][13]}}";
 
 {% endif %}
 
