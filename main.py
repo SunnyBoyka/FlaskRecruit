@@ -734,15 +734,18 @@ def newrequisition():
     cursor.execute(sql_select_Query3)
     Experiences = cursor.fetchall()
     print("--------------------------------------------")
-
-    
-    sql_select_Query3="SELECT Job_type FROM recruiter where Prcess_ID='"+procid+"'"
-    cursor.execute(sql_select_Query3)
-    jobtype = cursor.fetchall()
-    jobtype=jobtype[0][0]
-    jobtype=jobtype.split(',')
-    print("--------------------------------------------")
-    print(jobtype)
+    jobtype=''
+    try:
+            
+        sql_select_Query3="SELECT Job_type FROM recruiter where Prcess_ID='"+procid+"'"
+        cursor.execute(sql_select_Query3)
+        jobtype = cursor.fetchall()
+        jobtype=jobtype[0][0]
+        jobtype=jobtype.split(',')
+        print("--------------------------------------------")
+        print(jobtype)
+    except:
+        print('No Job Type')
     
     connection.close()
     cursor.close()
