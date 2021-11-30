@@ -128,9 +128,9 @@ font-size: 18px;
                          
                           
                         </tr>
-                        {% for item in candidateslist %}
+                        {% for item in data %}
                         <tr>
-                          <td colspan="2">{{item[0]}}</td>
+                          <td colspan="2" id="cid" name="cid">{{item[0]}}</td>
                           <td colspan="2">{{item[2]}} {{item[3]}}</td>
                           <td colspan="2">{{item[12]}}</td>
                           <td colspan="2">{{item[13]}}</td>
@@ -140,15 +140,17 @@ font-size: 18px;
                           <td colspan="2">{{item[19]}}</td>
                           
                           <td colspan="2">
-							<select id="Mgr" name="Mgr">
+							<select id="mgr" class="mgr" name="mgr">
 								<option>Allocate To</option>
 								{% for val in mgrdata %}						
-									<option>{{val[1]}}({{val[0]}})</option>
+									<option value="{{val[1]}}">{{val[1]}}({{val[0]}})</option>
 								{% endfor %}
 								
 							</select>
 							
-						  <button class="btn btn-primary btn_allocation" id="btn_allocation" onclick="IntrvwAllocation({{item[0]}},'Bopanna C K')">Allocate</button>
+						  <button class="btn btn-primary btn_interviewallocation" id="btn_allocation">Allocate</button>
+							<br/>
+							<label id="mgrnm"></label>
 								
 						  </td>
                         </tr>
@@ -222,9 +224,74 @@ font-size: 18px;
                             });
                             
                             
-                            </script>
-                      
-                      
-	<script src="/static/api/restapi.js"></script>
+
+$(document).ready(function() {
+$(".mgr").change(function(){
+	debugger;
+    var $row = $(this).closest("tr");    // Find the row
+    var $tds=  $row.find("td");  // Find the text
+    var $mgr=  $row.find("select");
+    var $mgrnm=  $row.find("label");
+	$mgrnm[0].innerHTML=$mgr[0].value;
+	
+	
+});
+});
+
+
+
+
+
+//interview allocation from recruiter
+$(".btn_interviewallocation").click(function(){
+	debugger;
+	
+    var $row = $(this).closest("tr");    // Find the row
+    var $tds=  $row.find("td");  // Find the text
+	var cid=$tds[0].innerText;
+	var pname='';
+	var mgr=$tds[8].innerText;
+	mgr=mgr.split('\n');
+	var len=mgr.length-1
+	mgr=mgr[len];
+	$.ajax({
+           type: 'GET',
+           url: '/interviewallocation',
+     
+       contentType: 'application/json;charset=UTF-8',
+           data: {           
+           'cid': cid,
+		   'mgr':mgr,
+		   'pname':pname
+       },
+           
+       dataType:"json",
+           success: function(logindata) {
+			   alert(logindata);
+				window.location='savedcandidatesnew';
+			   
+      
+           },
+           failure: function(logindata) {
+			   tester(logindata);
+			   alert('hhh');
+			   alert(logindata);
+			   
+      
+           },
+       });
+});
+
+function tester(data)
+{
+	debugger;
+	alert(data);
+}
+	
+	
+</script>
+                     
+       
+<script src="/static/api/restapi.js"></script>   
     </body>
 </html>

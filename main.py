@@ -187,6 +187,31 @@ def interviewalloc():
     return render_template('savedcandidatesnew.html')
 
 
+
+
+
+#Interview Allocation Approval
+@app.route('/interviewallocation')
+def interviewallocation():    
+    cid=request.args['cid']
+    mgr=request.args['mgr']
+    pname=request.args['pname']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    
+    sql_select_Query = "insert into tblinterview(Candid,Interviewer,Pname,Process_requirements,Work_experience,Initiative,Language_fluency,Communication_skills,Personality,Thinking_Strategy,Team_Player,Flexibility_for_shifts,Rejection_reason) values ("+cid+",'"+mgr+"','"+pname+"','','','','','','','','','','')"
+    print(sql_select_Query)    
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    connection.commit()
+    
+    connection.close()
+    cursor.close()
+    msg="Interview has been allocated"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
+
 @app.route('/loginverify',methods=['GET','POST'])
 def loginverify():
     eid=request.args['name']
@@ -2614,7 +2639,7 @@ def savedcandidatesnew():
     data=cursor.fetchall()
     print(data)
 
-    sql_select_Query = "SELECT Eid,Ename FROM hrmsemployee where Type_Of_Users='Operations'"
+    sql_select_Query = "SELECT Eid,Ename FROM hrmsemployee"# where Type_Of_Users='Operations'
     #print(sql_select_Query)
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)
@@ -2623,7 +2648,7 @@ def savedcandidatesnew():
 
     connection.close()
     cursor.close()
-    return render_template('savedcandidatesnew.html',candidateslist=data,mgrdata=mgrdata)
+    return render_template('savedcandidatesnew.html',data=data,mgrdata=mgrdata)
 
 
 
@@ -2658,15 +2683,23 @@ def recshortlistedcandidates():
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
     cursor = connection.cursor()
     #sql_Query = "select tblcandidate_register.*,Count(*),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted';"
-    sql_Query="select tblcandidate_register.*,Count(tblinterview.Candid),tblinterview.Interviewer from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted' group by tblinterview.Candid;"
+    sql_Query="select tblcandidate_register.*,Count(tblinterview.Candid),tblinterview.Interviewer,tblinterview.Pname from tblinterview,tblcandidate_register where tblcandidate_register.Candid=tblinterview.Candid and tblinterview.Statuss='Shortlisted' group by tblinterview.Candid;"
     print(sql_Query) 
     cursor.execute(sql_Query)
     data=cursor.fetchall()
     print(data)
+
+    sql_select_Query = "SELECT Eid,Ename FROM hrmsemployee"# where Type_Of_Users='Operations'
+    #print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    mgrdata = cursor.fetchall()
+    #print(qualification)
+    
     connection.commit() 
     connection.close()
     cursor.close()
-    return render_template('recshortlistedcandidates.html',data=data)
+    return render_template('recshortlistedcandidates.html',data=data,mgrdata=mgrdata)
 
 
 
