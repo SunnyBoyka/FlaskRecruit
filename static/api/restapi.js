@@ -478,3 +478,36 @@ function IntrvwAllocation(Cid,Mgr)
        });
 }
 
+
+
+
+//Reject Process
+$("#btn_procresend").click(function(){
+		
+			debugger;
+			var pid=document.getElementById('pid').value;
+			
+			 $.ajax({
+                type: 'GET',
+                url: '/resendprocess',
+                
+            contentType: 'application/json;charset=UTF-8',
+                data: {
+                
+                'pid':pid
+            },
+                
+            dataType:"json",
+                success: function(data) {
+                  alert(data);
+                    window.location='rejprocesslist'
+                },
+                 error: function(data) {
+                   
+                }
+            }); 
+
+});
+
+
+

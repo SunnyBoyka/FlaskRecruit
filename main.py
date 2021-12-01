@@ -99,7 +99,7 @@ def operations():
 
 @app.route('/quality')
 def quality():
-    return render_template('quality.html')
+    return render_template('operations.html')
 
 
 @app.route('/ceopagehome')
@@ -442,7 +442,7 @@ def processs():
     return render_template('process.html',data=data,data2=data2)
 
 
-
+#Ceo Process list page
 @app.route('/ceopage')
 def ceopage():
     print('hi')
@@ -455,6 +455,21 @@ def ceopage():
     connection.close()
     cursor.close()
     return render_template('ceopage.html',newdata=newdata)
+
+
+#HR Head rejected Process list page
+@app.route('/rejprocesslist')
+def rejprocesslist():
+    print('hi')
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    sql_select_Query = "SELECT ProcessID,CreatedDate,ProcessName,OPSManager,TargetDate,Statuss FROM tblproc_setup where Statuss='Rejected' order by ProcessId desc" #WHERE Statuss='Pending' 
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    newdata = cursor.fetchall()
+    print(newdata)
+    connection.close()
+    cursor.close()
+    return render_template('rejprocesslist.html',newdata=newdata)
 
 
 
@@ -470,6 +485,19 @@ def ceoprocesspage():
     connection.close()
     cursor.close()
     return render_template('ceoprocesspage.html',data=data)
+
+@app.route('/hrprocesspage', methods =  ['GET','POST'])
+def hrprocesspage():
+    pid=request.args['pid']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    sql_select_Query = "SELECT * from tblproc_setup where ProcessID='"+pid+"'"
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    data = cursor.fetchall()
+    print(data)
+    connection.close()
+    cursor.close()
+    return render_template('hrprocesspage.html',data=data)
 
 
 
@@ -844,6 +872,23 @@ def rejectprocess():
     print(msg, flush=True)
     return resp
 
+#Process resend by HR
+@app.route('/resendprocess',methods =  ['GET','POST'])
+def resendprocess():
+    pid=request.args['pid']
+    connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
+    sql_select_Query = "update tblproc_setup set Statuss='Pending' where ProcessID='"+pid+"' "
+    print(sql_select_Query)
+    cursor = connection.cursor()
+    cursor.execute(sql_select_Query)
+    connection.commit()
+    connection.close()
+    cursor.close()
+    msg="Process updated successfully"
+    resp = make_response(json.dumps(msg))
+    print(msg, flush=True)
+    return resp
+
 #Process approval by CEO
 @app.route('/approveprocess',methods =  ['GET','POST'])
 def approveprocess():
@@ -1009,7 +1054,7 @@ def createnewprocess():
     today = date.today()
     tdate = today.strftime("%d-%b-%Y")
     #print("d4 =", d4)
-    sql_Query = "insert into tblproc_setup(ProcessName,OPSManager,TargetDate,SalaryBudget,TotCSR,Regular,Buffer,CSRMinSal,CSRMaxSal,Supervisor,SupMinSal,SupMaxSal,TeamLeader,TLMinSal,TLMaxSal,Managers,MgrMinSal,MgrMaxSal,AsstMgrs,AsstMinSal,AsstMaxSal,MIS,MISMinSal,MISMaxSal,Statuss,RejectionComments,CreatedDate) values('"+pname+"','"+opsmgr+"','"+targetdate+"','"+salarybudget+"','"+tot_csr+"','"+regular+"','"+buffer+"','"+csr_min+"','"+csr_max+"','"+tot_sup+"','"+sup_min+"','"+sup_max+"','"+tot_tl+"','"+tl_min+"','"+tl_max+"','"+tot_astmgr+"','"+ast_max+"','"+ast_min+"','"+tot_mgr+"','"+mgr_min+"','"+mgr_max+"','"+tot_mis+"','"+mis_min+"','"+mis_max+"','Pending','','"+tdate+"')"
+    sql_Query = "insert into tblproc_setup(ProcessName,OPSManager,TargetDate,SalaryBudget,TotCSR,Regular,Buffer,CSRMinSal,CSRMaxSal,Supervisor,SupMinSal,SupMaxSal,TeamLeader,TLMinSal,TLMaxSal,AsstMgrs,AsstMinSal,AsstMaxSal,Managers,MgrMinSal,MgrMaxSal,MIS,MISMinSal,MISMaxSal,Statuss,RejectionComments,CreatedDate) values('"+pname+"','"+opsmgr+"','"+targetdate+"','"+salarybudget+"','"+tot_csr+"','"+regular+"','"+buffer+"','"+csr_min+"','"+csr_max+"','"+tot_sup+"','"+sup_min+"','"+sup_max+"','"+tot_tl+"','"+tl_min+"','"+tl_max+"','"+tot_astmgr+"','"+ast_max+"','"+ast_min+"','"+tot_mgr+"','"+mgr_min+"','"+mgr_max+"','"+tot_mis+"','"+mis_min+"','"+mis_max+"','Pending','','"+tdate+"')"
     print(sql_Query)    
     cursor.execute(sql_Query)
     connection.commit() 
