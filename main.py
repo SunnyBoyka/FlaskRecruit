@@ -876,8 +876,28 @@ def rejectprocess():
 @app.route('/resendprocess',methods =  ['GET','POST'])
 def resendprocess():
     pid=request.args['pid']
+    tot_csr=request.args['tot_csr']
+    regular=request.args['regular']
+    buffer=request.args['buffer']
+    csrminsal=request.args['csrminsal']
+    csrmaxsal=request.args['csrmaxsal']
+    tot_sup=request.args['tot_sup']
+    supminsal=request.args['supminsal']
+    supmaxsal=request.args['supmaxsal']
+    tot_tl=request.args['tot_tl']
+    tlminsal=request.args['tlminsal']
+    tlmaxsal=request.args['tlmaxsal']
+    tot_mgr=request.args['tot_mgr']
+    mgrminsal=request.args['mgrminsal']
+    mgrmaxsal=request.args['mgrmaxsal']
+    tot_amgr=request.args['tot_amgr']
+    amgrminsal=request.args['amgrminsal']
+    amgrmaxsal=request.args['amgrmaxsal']
+    tot_mis=request.args['tot_mis']
+    misminsal=request.args['misminsal']
+    mismaxsal=request.args['mismaxsal']
     connection = mysql.connector.connect(host='sg2nlmysql15plsk.secureserver.net',database='transacthrmsdb',user='transactroot',password='Tran@696')
-    sql_select_Query = "update tblproc_setup set Statuss='Pending' where ProcessID='"+pid+"' "
+    sql_select_Query = "update tblproc_setup set Statuss='Pending',TotCSR='"+tot_csr+"',Regular='"+regular+"',Buffer='"+buffer+"',CSRMinSal='"+csrminsal+"',CSRMaxSal='"+csrmaxsal+"',Supervisor='"+tot_sup+"',SupMinSal='"+supminsal+"',SupMaxSal='"+supmaxsal+"',TeamLeader='"+tot_tl+"',TLMinSal='"+tlminsal+"',TLMaxSal='"+tlmaxsal+"',Managers='"+tot_mgr+"',MgrMinSal='"+mgrminsal+"',MgrMaxSal='"+mgrmaxsal+"',AsstMgrs='"+tot_amgr+"',AsstMinSal='"+amgrminsal+"',AsstMaxSal='"+amgrmaxsal+"',MIS='"+tot_mis+"',MISMinSal='"+misminsal+"',MISMaxSal='"+mismaxsal+"' where ProcessID='"+pid+"'"
     print(sql_select_Query)
     cursor = connection.cursor()
     cursor.execute(sql_select_Query)

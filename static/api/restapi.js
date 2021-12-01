@@ -483,6 +483,26 @@ function IntrvwAllocation(Cid,Mgr)
 
 //Reject Process
 $("#btn_procresend").click(function(){
+var tot_csr=document.getElementById('tot_csr').value;
+var regular=document.getElementById('regular').value;
+var buffer=document.getElementById('buffer').value;
+var tot_sup=document.getElementById('tot_sup').value;
+var tot_tl=document.getElementById('tot_tl').value;
+var tot_mgr=document.getElementById('tot_mgr').value;
+var tot_amgr=document.getElementById('tot_amgr').value;
+var tot_mis=document.getElementById('tot_mis').value;
+var csrminsal=document.getElementById('csrminsal').value;
+var csrmaxsal=document.getElementById('csrmaxsal').value;
+var supminsal=document.getElementById('supminsal').value;
+var supmaxsal=document.getElementById('supmaxsal').value;
+var tlminsal=document.getElementById('tlminsal').value;
+var tlmaxsal=document.getElementById('tlmaxsal').value;
+var mgrminsal=document.getElementById('mgrminsal').value;
+var mgrmaxsal=document.getElementById('mgrmaxsal').value;
+var amgrminsal=document.getElementById('amgrminsal').value;
+var amgrmaxsal=document.getElementById('amgrmaxsal').value;
+var misminsal=document.getElementById('misminsal').value;
+var mismaxsal=document.getElementById('mismaxsal').value;
 		
 			debugger;
 			var pid=document.getElementById('pid').value;
@@ -494,7 +514,28 @@ $("#btn_procresend").click(function(){
             contentType: 'application/json;charset=UTF-8',
                 data: {
                 
-                'pid':pid
+                'pid':pid,
+				'tot_csr':tot_csr,
+				'regular':regular,
+				'buffer':buffer,
+				'tot_sup':tot_sup,
+				'tot_tl':tot_tl,
+				'tot_mgr':tot_mgr,
+				'tot_amgr':tot_amgr,
+				'tot_mis':tot_mis,
+				'csrminsal':csrminsal,
+				'csrmaxsal':csrmaxsal,
+				'supminsal':supminsal,
+				'supmaxsal':supmaxsal,
+				'tlminsal':tlminsal,
+				'tlmaxsal':tlmaxsal,
+				'mgrminsal':mgrminsal,
+				'mgrmaxsal':mgrmaxsal,
+				'amgrminsal':amgrminsal,
+				'amgrmaxsal':amgrmaxsal,
+				'misminsal':misminsal,
+				'mismaxsal':mismaxsal
+				
             },
                 
             dataType:"json",
